@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { generateSignUpOTP, signUp } from "../actions/authActions";
-import {  toast } from "sonner";
+import { toast } from "sonner";
 const initialState = {
   isUserLoggedIn: false,
   isUserLoggedIn: true,
@@ -33,7 +33,7 @@ const authSlice = createSlice({
       state.isError = true;
 
       //some toast msg will come here
-      toast.error(action?.payload?.message);
+      toast.error(action?.payload?.message || "Please try again");
     });
     //All sign up fns ends here.
 
@@ -55,7 +55,7 @@ const authSlice = createSlice({
       state.isError = true;
 
       //some toast msg will come here
-      toast.error(action?.payload);
+      toast.error(action?.payload || "Please try again");
     });
   },
 });
