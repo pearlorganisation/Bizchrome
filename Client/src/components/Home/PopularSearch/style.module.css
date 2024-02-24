@@ -1,0 +1,17 @@
+.stroke {
+  font-size: 60px;
+  -webkit-text-stroke-width: 2.5px;
+  -webkit-text-stroke-color: #000000;
+  -webkit-text-fill-color: #ffffff;
+  letter-spacing: 4px;
+  font-family: Arial Black, Gadget, sans-serif;
+}
+
+.stroke2 {
+  font-size: 48px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000000;
+  -webkit-text-fill-color: #ffffff;
+  letter-spacing: 4px;
+  font-family: Arial Black, Gadget, sans-serif;
+}
