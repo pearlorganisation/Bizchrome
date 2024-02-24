@@ -15,7 +15,7 @@ const Home = () => {
       <PopularSearch />
       <Connntion />
       <FeatureJobs />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <TrustedBy />
     </div>
   );
