@@ -33,7 +33,8 @@ const authSlice = createSlice({
       state.isError = true;
 
       //some toast msg will come here
-      toast.error(action?.payload?.message || "Please try again");
+          console.log("Action payla", action);
+      toast.error(action?.payload || "Please try again");
     });
     //All sign up fns ends here.
 
@@ -55,6 +56,7 @@ const authSlice = createSlice({
       state.isError = true;
 
       //some toast msg will come here
+      console.log("Action payla",action)
       toast.error(action?.payload || "Please try again");
     });
   },

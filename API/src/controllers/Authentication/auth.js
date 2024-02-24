@@ -32,10 +32,9 @@ export const signUp = async (req, res) => {
         success: 1,
         message: "Account created successfully, Continue with login",
       });
-    console.log(req.body);
   } catch (error) {
     res.status(400).json({
-      message: error?.message || "internal server error",
+      message: error || "Internal server error",
       status: false,
     });
   }
