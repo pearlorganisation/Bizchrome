@@ -1,6 +1,7 @@
 import logo from "../../../assets/Images/Biz-chrome-logo.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LoginOptionsModal from "../../Modals/LoginOptionsModal";
 
 const dropdownNavs = [
   {
@@ -322,23 +323,14 @@ const Header = () => {
                   </li>
                 );
               })}
-              <div className="flex-1 items-center justify-end gap-x-6 space-y-3 md:flex md:space-y-0">
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    className="block py-3 text-center text-gray-700 hover:text-indigo-600 border rounded-lg md:border-none"
-                  >
-                    Log in
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    className="block py-3 px-4 font-medium text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow md:inline"
-                  >
-                    Sign in
-                  </a>
-                </li>
+              <div class="hidden lg:block">
+                <button
+                  type="button"
+                  class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Login / Register
+                </button>
               </div>
             </ul>
           </div>
@@ -352,6 +344,10 @@ const Header = () => {
       ) : (
         ""
       )}
+      <LoginOptionsModal
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+      />
     </>
   );
 };
