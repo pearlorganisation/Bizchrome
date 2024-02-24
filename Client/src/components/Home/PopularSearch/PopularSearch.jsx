@@ -12,9 +12,26 @@ const PopularSearch = () => {
 
       {
         [`#4188ff`, `#7be382`, `#800080`, `	#ffcad9`, `	#5100ba`].map(item => {
-          return <div className={`h-[22rem] card rounded-lg border-2 hover:border-[#4188ff] transition-all hover:cursor-pointer flex flex-col justify-between px-6 py-8 group`}>
+          console.log("item::", item)
+          return <div className={`h-[22rem] card  rounded-lg relative  ring-2 ring-gray-200 overflow-x-hidden  hover:ring-[#4188ff] transition-all hover:cursor-pointer flex flex-col justify-between px-6 py-8 group`}>
+            <style jsx>{`
+      .stroke2 {
+        font-size: 58px;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #e8e8e8;
+        -webkit-text-fill-color: #ffffff;
+        letter-spacing: 4px;
+        font-family: Arial Black, Gadget, sans-serif;
+        
+      }
+      .group:hover > .strokeH{
+        -webkit-text-stroke-color: #4188ff;
+        -webkit-text-stroke-width: 2px;
+      }
+    
 
-            <p className={`${style.stroke2} absolute`}>WORK FROM HOME JOBS</p>
+    `}</style>
+            <p className={`stroke2 absolute bottom-[7rem] strokeH group-hover:translate-x-[4rem] transition-all translate-x-[10rem] text-nowrap overflow-hidden`}>WORK FROM HOME JOBS</p>
             <div className='space-y-2'>
               <p>TRENDING AT #1</p>
               <p className='text-xl font-bold'>Work From Home Jobs</p>
