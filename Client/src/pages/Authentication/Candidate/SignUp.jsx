@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 // React hook form
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -9,10 +9,18 @@ import {
 } from "../../../features/actions/authActions";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [userMetaData, setUserMetaData] = useState();
 
-  const { signUpOtpGenerated } = useSelector((store) => store.auth);
+  const { signUpOtpGenerated, isUserCreated, isLoading } = useSelector(
+    (store) => store.auth
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isUserCreated) navigate("/candidate-login");
+  }, [isUserCreated]);
 
   const {
     register,
@@ -31,8 +39,6 @@ const SignUp = () => {
   const onSubmit = (data) => {
     // e.preventDefault();
     try {
-      console.log("Hello");
-      console.log("This is data", data);
       const { email, password, username } = data;
       const payload = {
         email,
@@ -439,9 +445,25 @@ const SignUp = () => {
               <button
                 type="submit"
                 class="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
+                disabled={signUpOtpGenerated}
                 // onClick={userSignUp}
               >
-                Sign Up
+                {isLoading ? (
+                  !signUpOtpGenerated ? (
+                    <div
+                      className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-danger motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status"
+                    >
+                      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                        Loading...
+                      </span>
+                    </div>
+                  ) : (
+                    `Sign Up`
+                  )
+                ) : (
+                  `Sign Up`
+                )}
               </button>
             </div>
           </form>
@@ -468,10 +490,23 @@ const SignUp = () => {
                   name="username"
                   placeholder="Fill in the OTP receive on mail"
                   class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                  {...registerOTP("otp", { required: true })}
+                  {...registerOTP("otp", {
+                    min: {
+                      value: 100000,
+                      message: "OTP can not be more than 6 digits",
+                    },
+                    max: {
+                      value: 999999,
+                      message: "OTP can not be more than 6 digits",
+                    },
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  })}
                 />
-                {errors.otp && (
-                  <span className="text-red-500">This field is required</span>
+                {errorsOTP.otp && (
+                  <span className="text-red-500">{errorsOTP.otp.message}</span>
                 )}
               </div>
               <div>
@@ -480,7 +515,18 @@ const SignUp = () => {
                   class="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
                   // onClick={userSignUp}
                 >
-                  Verify OTP
+                  {isLoading ? (
+                    <div
+                      className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-danger motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status"
+                    >
+                      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                        Loading...
+                      </span>
+                    </div>
+                  ) : (
+                    `Verify OTP`
+                  )}
                 </button>
               </div>
             </form>
