@@ -17,6 +17,10 @@ import SendOtp from "./pages/Authentication/Candidate/SendOtp";
 import Pricing from "./components/Home/Pricing/Pricing";
 import useAuth from "./helper/authHelper";
 
+import WorkFromHomeJobs from "./components/Jobs/WorkFromHomeJobs";
+
+
+
 const App = () => {
   const { isUserLoggedIn } = useAuth();
   const router = createBrowserRouter([
@@ -80,6 +84,10 @@ const App = () => {
             <h2>Not logged in</h2>
           ),
         },
+        {
+          path: "/jobs/wfh-jobs",
+          element: <WorkFromHomeJobs />
+        }
       ],
     },
   ]);
