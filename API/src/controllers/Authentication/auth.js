@@ -4,6 +4,7 @@ import { otpModel } from "../../models/Authentication/signupOtpMode.js";
 import { sendSignUpOtpMail } from "../../utils/MailTemplates/signupMail.js";
 import { saveAccessTokenToCookie } from "../../utils/TokenMangement/accessTokenManagement.js";
 import jwt from "jsonwebtoken";
+import { profileCalculations } from "../../utils/ProfileCalculations/profileCalculations.js";
 
 //Declarations
 // const jwt = JsonWebTokenError
@@ -23,7 +24,6 @@ export const signUp = async (req, res) => {
         status: false,
       });
     }
-
     // Deleting the otp from model
     await otpModel.findOneAndDelete({ email, otp });
     //Hashing the password with bcrypt
@@ -89,13 +89,19 @@ export const userLogin = async (req, res) => {
   try {
     const { email, password } = req?.body;
     let user = await userModel.findOne({ email });
-    const verifyPassword = await bcrypt.compare(password, user?.password);
+    const verifyPassword = await bcrypt.compare(password, user?.password || '');
     if (!verifyPassword) {
       return res.status(400).json({
         message: "Email id and password combination is wrong",
         status: false,
       });
     }
+    //Profile calculations
+
+    profileCalculations(user);
+
+    //
+
     //append cookies from here
     const accessToken = jwt.sign(
       {

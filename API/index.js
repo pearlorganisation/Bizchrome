@@ -34,11 +34,14 @@ app.use(
 
 
 app.use(express.json());
+
+
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "APP is running successfully.",
   });
 });
+
 app.use("/api/v1/auth", authRoutes);
 // allows us to access the env file data
 dotenv.config();

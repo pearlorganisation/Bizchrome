@@ -2,6 +2,7 @@ import logo from "../../../assets/Images/Biz-chrome-logo.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoginOptionsModal from "../../Modals/LoginOptionsModal";
+import { useSelector } from "react-redux";
 
 const dropdownNavs = [
   {
@@ -152,6 +153,7 @@ const dropdownNavs = [
 ];
 
 const Header = () => {
+  const { isUserLoggedIn } = useSelector((store) => store.auth);
   const [state, setState] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drapdownState, setDrapdownState] = useState({
@@ -327,9 +329,11 @@ const Header = () => {
                 <button
                   type="button"
                   class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => {
+                    return setIsModalOpen(true);
+                  }}
                 >
-                  Login / Register
+                  {isUserLoggedIn ? `Profile` : `Login/Register`}
                 </button>
               </div>
             </ul>

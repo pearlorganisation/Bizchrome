@@ -1,11 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../features/actions/authActions";
 const Login = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const { isLoading, isUserLoggedIn } = useSelector((store) => store.auth);
   const {
     register,
     handleSubmit,
@@ -22,6 +23,15 @@ const Login = () => {
       throw error;
     }
   };
+
+  //Navigating
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      navigate("/");
+    }
+  }, [isUserLoggedIn]);
+
+  //
 
   return (
     <div class="bg-gray-100 flex justify-center items-center h-screen">
@@ -318,7 +328,18 @@ const Login = () => {
             type="submit"
             class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
           >
-            Login
+            {isLoading ? (
+              <div
+                className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-danger motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            ) : (
+              `Login`
+            )}
           </button>
         </form>
         {/* <!-- Sign up  Link --> */}

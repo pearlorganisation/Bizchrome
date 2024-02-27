@@ -16,13 +16,17 @@ const userSchema = new mongoose.Schema(
     },
     dob: {
       type: Date,
+      default: null,
       // required:[true,"Date of birth is required"]
     },
     mobile: {
+      default: null,
+
       type: Number,
     },
     location: {
       type: String,
+      default: null,
     },
     password: {
       type: String,
@@ -30,30 +34,30 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
+      default: null,
       // required:[true,"Gender is required"],
       enum: ["MALE", "FEMALE", "OTHERS"],
     },
     education: {
-      highestQualification: String,
-      degree: String,
-      specialization: String,
+      highestQualification: { type: String, default: null },
+      degree: { type: String, default: null },
+      specialization: { type: String, default: null },
     },
     experience: [
       {
-        jobRole: String,
-        jobTitle: String,
-        department: String,
-        role: String,
-        company: String,
-        skills: String,
-        currentlyWorking: Boolean,
-        noticePeriod: Number,
+        jobRole: { type: String, default: null },
+        jobTitle: { type: String, default: null },
+        department: { type: String, default: null },
+        role: { type: String, default: null },
+        company: { type: String, default: null },
+        skills: { type: String, default: null },
+        currentlyWorking: { type: Boolean, default: null },
+        noticePeriod: { type: Number, default: null },
       },
     ],
-    language: String,
-    workType: String,
+    language: { type: String, default: null },
+    workType: { type: String, default: null },
   },
-  { timestamps: true }
+  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
 );
-
-export const userModel = mongoose.model('user',userSchema,'user')
+export const userModel = mongoose.model("user", userSchema, "user");
