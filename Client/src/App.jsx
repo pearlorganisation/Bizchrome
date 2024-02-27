@@ -18,6 +18,7 @@ import Pricing from "./components/Home/Pricing/Pricing";
 import useAuth from "./helper/authHelper";
 
 import WorkFromHomeJobs from "./components/Jobs/WorkFromHomeJobs";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 
 
@@ -87,6 +88,10 @@ const App = () => {
         {
           path: "/jobs/wfh-jobs",
           element: <WorkFromHomeJobs />
+        },
+        {
+          path: "/test",
+          element: <UserProfile />
         }
       ],
     },
