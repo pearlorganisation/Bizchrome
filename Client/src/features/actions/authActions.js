@@ -13,6 +13,7 @@ export const signUp = createAsyncThunk(
       });
       return response?.data;
     } catch (error) {
+      console.log("Error in otp", error);
       return rejectWithValue(error);
     }
   }
@@ -24,6 +25,24 @@ export const generateSignUpOTP = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await instance.post("/auth/signupOtp", payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+//To login
+export const userLogin = createAsyncThunk(
+  "/login",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await instance.post("/auth/userLogin", payload, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",

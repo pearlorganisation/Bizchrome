@@ -13,84 +13,16 @@ import Forget from "./pages/Authentication/Candidate/Forget.jsx";
 import { Provider } from "react-redux";
 import OtpVarfication from "./pages/Authentication/Candidate/OtpVarfication.jsx";
 import store from "./Store/configureStore.js";
-import SendOtp from "./pages/Authentication/Candidate/SendOtp.jsx";
-import Pricing from "./components/Home/Pricing/Pricing.jsx";
+
 
 //Simulation of context api
 // const { loggedInUserData, isUserLoggedIn } = useAuth();
 //
-const isUserLoggedIn = false
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/candidate-login",
-        element: <Login />,
-      },
-      {
-        path: "/candidate-signup",
-        element: <SignUp />,
-      },
-      {
-        path: "/business-signup",
-        element: <BusinessSignup />,
-      },
-      {
-        path: "/business-login",
-        element: <BusinessLogin />,
-      },
-      {
-        path: "/investor-login",
-        element: <LoginAsInvestor />,
-      },
-
-      {
-        path: "/forget",
-        element: <Forget />,
-      },
-
-      {
-        path: "/otpVarfication",
-        element: <OtpVarfication />,
-      },
-
-      {
-        path: "/sendOtp",
-        element: <SendOtp />,
-      },
-      {
-        path: "/pricing",
-        element: <Pricing />,
-      },
-      {
-        path: "/dashboard",
-
-        element: isUserLoggedIn ? (
-          <>
-            {" "}
-            <h2>Logged in</h2>{" "}
-          </>
-        ) : (
-          <h2>Not logged in</h2>
-        ),
-      },
-    ],
-  },
-]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <App />
     </Provider>
   </React.StrictMode>
 );
