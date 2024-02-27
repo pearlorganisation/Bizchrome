@@ -3,7 +3,6 @@ import { generateSignUpOTP, signUp, userLogin } from "../actions/authActions";
 import { toast } from "sonner";
 const initialState = {
   isUserLoggedIn: false,
-  isUserLoggedIn: false,
   isLoading: false,
   isError: false,
   userMetaData: [],
@@ -71,6 +70,7 @@ const authSlice = createSlice({
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isError = false;
+      state.isUserLoggedIn = true;
       state.userMetaData = action?.payload?.data;
       // state.signUpOtpGenerated = true;
 
