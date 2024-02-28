@@ -567,7 +567,7 @@ const WorkFromHomeJobs = () => {
 
                   <div
                     id="accordian-all-departments"
-                    className={isAllDepartmentsOpen ? "" : "hidden"}
+                    className={isAllDepartmentsOpen ? ""  : "hidden"}
                     aria-labelledby="accordion-flush-heading-1"
                   >
                     <div>
