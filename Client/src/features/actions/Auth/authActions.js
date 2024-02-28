@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { instance } from "../../services/axiosInterceptors";
+import { instance } from "../../../services/axiosInterceptors";
 export const signUp = createAsyncThunk(
   "/signUp",
   async (payload, { rejectWithValue }) => {

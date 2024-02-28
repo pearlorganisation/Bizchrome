@@ -2,8 +2,10 @@ import { mongoConnect } from "./src/configs/mongoDB.js";
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./src/routes/Authentication/auth.js";
+
+import locationRoutes from "./src/routes/Location/findLocation.js";
 import chalk from "chalk";
-import cors from 'cors'
+import cors from "cors";
 
 const app = express();
 
@@ -28,13 +30,9 @@ app.use(
   )
 );
 
-
 //
 
-
-
 app.use(express.json());
-
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -42,7 +40,12 @@ app.get("/", (req, res) => {
   });
 });
 
+// ++++++++++++++++++++Routes Section starts from here++++++++
+//Auth routes
 app.use("/api/v1/auth", authRoutes);
+
+//Find Location Routes
+app.use("/api/v1/location", locationRoutes);
 // allows us to access the env file data
 dotenv.config();
 

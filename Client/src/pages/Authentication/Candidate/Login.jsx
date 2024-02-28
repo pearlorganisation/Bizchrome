@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../../features/actions/authActions";
+import { userLogin } from "../../../features/actions/Auth/authActions";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, isUserLoggedIn } = useSelector((store) => store.auth);
-
 
   const {
     register,
@@ -16,8 +15,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-
-  
   const onSubmit = async (data) => {
     try {
       const { email, password } = data;

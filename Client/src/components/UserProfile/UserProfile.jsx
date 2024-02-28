@@ -1,7 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { findLocation } from "../../features/actions/Common/findLocationAction";
+import Loader from "./Loader";
 
 export default function UserProfile() {
+  const { isFetchLocationDataLoading, isFetchLocationError, locationData } =
+    useSelector((store) => store.location);
+  const dispatch = useDispatch();
+  console.log("THisi slocationDdata", locationData);
+
+
+//
+const func = ()=>{}
+
+
+  //Get Geolocation
+  const getLocation = () => {
+    // Check if geolocation is available in the browser
+    if ("geolocation" in navigator) {
+      // Get the user's current location
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          // The user's latitude and longitude are in position.coords.latitude and position.coords.longitude
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+          const payload = { latitude, longitude };
+          dispatch(findLocation(payload));
+        },
+        function (error) {
+          // Handle errors, if any
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              alert("User denied the request for geolocation.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              alert("Location information is unavailable.");
+              break;
+            case error.TIMEOUT:
+              alert("The request to get user location timed out.");
+              break;
+            case error.UNKNOWN_ERROR:
+              alert("An unknown error occurred.");
+              break;
+          }
+        }
+      );
+    } else {
+      console.error("Geolocation is not available in this browser.");
+    }
+  };
+
   return (
     <div className="flex" style={{ width: "100%", height: "1000px" }}>
       <div
@@ -219,22 +271,88 @@ export default function UserProfile() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </div>
           <div
-            className="w-1/2 my-5 flex justify-center "
-            style={{ background: "rgb(242, 248, 253)" }}
+            className="w-1/2 my-5 mx-auto text-center flex justify-center "
+            style={{
+              background: `${
+                isFetchLocationDataLoading ? `White` : "rgb(242, 248, 253)"
+              }`,
+            }}
           >
-            Please share your current location
+            {isFetchLocationDataLoading ? (
+              <Loader />
+            ) : locationData.length === 0 ? (
+              "Please share your current location"
+            ) : (
+              locationData?.cityName + ", " + locationData?.countryName
+            )}
           </div>
           <div className="my-5 flex justify-center">
             This will help us find the best jobs for you in your current city
           </div>
           <hr />
         </div>
-        <div className="flex justify-center w-full my-10 ">
+        <div
+          className={`flex justify-center w-full my-5  ${
+            locationData.length == 0 || "hidden"
+          }`}
+        >
           <button
-            className="h-10 flex justify-center px-52 text-white align-center "
+            className={`h-10 px-52 text-white align-center `}
             style={{ background: "rgb(31, 130, 104)" }}
+            onClick={getLocation}
           >
-            Pick Curent Location
+            <div className={`flex font-bold  `}>
+              <span className="mx-2">
+                <svg
+                  width="25"
+                  height="24"
+                  viewBox="0 0 25 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  color="#fff"
+                >
+                  <path
+                    d="M12.5 8C10.29 8 8.5 9.79 8.5 12C8.5 14.21 10.29 16 12.5 16C14.71 16 16.5 14.21 16.5 12C16.5 9.79 14.71 8 12.5 8ZM21.44 11C20.98 6.83 17.67 3.52 13.5 3.06V2C13.5 1.45 13.05 1 12.5 1C11.95 1 11.5 1.45 11.5 2V3.06C7.33 3.52 4.02 6.83 3.56 11H2.5C1.95 11 1.5 11.45 1.5 12C1.5 12.55 1.95 13 2.5 13H3.56C4.02 17.17 7.33 20.48 11.5 20.94V22C11.5 22.55 11.95 23 12.5 23C13.05 23 13.5 22.55 13.5 22V20.94C17.67 20.48 20.98 17.17 21.44 13H22.5C23.05 13 23.5 12.55 23.5 12C23.5 11.45 23.05 11 22.5 11H21.44ZM12.5 19C8.63 19 5.5 15.87 5.5 12C5.5 8.13 8.63 5 12.5 5C16.37 5 19.5 8.13 19.5 12C19.5 15.87 16.37 19 12.5 19Z"
+                    fill="#fff"
+                  ></path>
+                </svg>
+              </span>
+              <span className="font">Pick Curent Location</span>
+            </div>
+          </button>
+        </div>
+        <div
+          className={`flex justify-center w-full font-medium ${
+            !locationData.length == 0 && "hidden"
+          }`}
+        >
+          <button
+            className={`h-10 px-52 text-white align-center ${
+              locationData.length == 0 || "hidden"
+            } `}
+            style={{
+              border: "1px solid rgb(31, 130, 104) ",
+              color: "rgb(31, 130, 104)",
+            }}
+          >
+            Search Manually
+          </button>
+        </div>
+        <div
+          className={`my-5 flex justify-center w-full font-medium ${
+            locationData.length == 0 && "hidden"
+          }`}
+          style={{ color: "white" }}
+        >
+          <button
+            className="h-10 px-52 text-white align-center "
+            style={{
+              color: "white",
+              background: "rgb(31, 130, 104)",
+            }}
+            onClick={func}
+          >
+            Next
           </button>
         </div>
       </div>
