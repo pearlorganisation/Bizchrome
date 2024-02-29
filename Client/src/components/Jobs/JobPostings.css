@@ -9,13 +9,12 @@
     flex: 0 0 auto;
     padding: 5px;
     display: block;
-    fill: #000;
-    stroke: #000;
+    fill: #036e39;
+    stroke: #036e39;
   }
   
   .icon svg { 
-    --size: 12px;
-    
+    --size: 15px;
     fill: inherit;
     min-height: var(--size);
     min-width:  var(--size);
