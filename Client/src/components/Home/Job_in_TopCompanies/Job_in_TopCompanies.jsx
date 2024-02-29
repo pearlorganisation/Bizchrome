@@ -16,16 +16,19 @@ const Job_in_TopCompanies = () => {
     <>
       <div className="h-dvh flex items-center bg-[#F4F2F6] ">
         <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
-          freeMode={true}
-          pagination={{
-            clickable: true,
+          breakpoints={{
+            320: {
+              slidesPerView: 1, // Show 1 slide per view on screens wider than or equal to 320px (typically mobile phones)
+            },
+            768: {
+              slidesPerView: 2, // Show 2 slides per view on screens wider than or equal to 768px (typically tablets)
+            },
+            1024: {
+              slidesPerView: 3, // Show 3 slides per view on screens wider than or equal to 1024px (typically desktops)
+            },
           }}
-          modules={[FreeMode, Pagination]}
-          className="mySwiper  "
+          // Other Swiper settings...
         >
-
           <SwiperSlide className="F4F2F6 w-fit flex items-center justify-center group py-6">
             <div className="w-[400px] h-[25rem]  bg-[#fff] rounded-lg hover:cursor-pointer hover:shadow-lg  mx-auto transition-all">
               <div className="p-5">

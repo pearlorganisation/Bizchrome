@@ -233,7 +233,7 @@ const Header = () => {
               state ? "block" : "hidden"
             }`}
           >
-            <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+            <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0 justify-end">
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx} className="font-bold text-base">
@@ -323,7 +323,8 @@ const Header = () => {
                   </li>
                 );
               })}
-              <div class="hidden lg:block">
+
+              <div className="hidden lg:block">
                 <button
                   type="button"
                   class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
