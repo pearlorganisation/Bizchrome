@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { generateSignUpOTP, signUp, userLogin } from "../actions/authActions";
+import {
+  generateSignUpOTP,
+  signUp,
+  userLogin,
+} from "../actions/Auth/authActions";
 import { toast } from "sonner";
 const initialState = {
   isUserLoggedIn: false,

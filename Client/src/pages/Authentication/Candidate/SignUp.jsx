@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import {
   generateSignUpOTP,
   signUp,
-} from "../../../features/actions/authActions";
+} from "../../../features/actions/Auth/authActions";
 
 const SignUp = () => {
   const navigate = useNavigate();

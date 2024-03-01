@@ -1,0 +1,13 @@
+.custom_loader {
+  width:12px;
+  height:12px;
+  background: #766DF4;
+  border-radius: 50%;
+  box-shadow: 20px 0 #766DF422,-20px 0 #766DF4;
+  animation:d5 1s infinite linear alternate;
+}
+@keyframes d5 {
+    0% {box-shadow: 20px 0 #766DF4,-20px 0 #766DF422;background: #766DF4}
+    33%{box-shadow: 20px 0 #766DF4,-20px 0 #766DF422;background: #766DF422}
+    66%{box-shadow: 20px 0 #766DF422,-20px 0 #766DF4;background: #766DF422}
+}

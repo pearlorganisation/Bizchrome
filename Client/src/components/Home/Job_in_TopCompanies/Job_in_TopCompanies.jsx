@@ -9,12 +9,15 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
+// Import component styles
+import "./Job_in_TopCompanies.css";
+
 // import required modules
 import { FreeMode, Pagination } from "swiper/modules";
 const Job_in_TopCompanies = () => {
   return (
     <>
-      <div className="h-dvh flex items-center bg-[#F4F2F6] ">
+      <div className="flex items-center bg-[#F4F2F6] ">
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
@@ -23,7 +26,7 @@ const Job_in_TopCompanies = () => {
             clickable: true,
           }}
           modules={[FreeMode, Pagination]}
-          className="mySwiper  "
+          className="mySwiper"
         >
 
           <SwiperSlide className="F4F2F6 w-fit flex items-center justify-center group py-6">

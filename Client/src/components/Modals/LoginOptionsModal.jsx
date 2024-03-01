@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const LoginOptionsModal = ({ isModalOpen, setIsModalOpen }) => {
   const { isUserLoggedIn } = useSelector((store) => store.auth);
-  console.log("This is isuser logged in", isUserLoggedIn);
   return (
     <div
       class={`fixed left-0 top-0 flex h-full w-full items-center justify-center gap-3 bg-black bg-opacity-50 pb-10 z-50 ${
