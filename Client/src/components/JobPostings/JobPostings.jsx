@@ -109,7 +109,7 @@ const JobPostings = ({data, setJobData}) => {
     <>
       <div className="mt-4">
         <div className="w-full text-xl font-bold text-center ">
-          Jobs Found: 1
+          Jobs Found: {data.length}
         </div>
         <div className="w-full flex justify-center">
           {windowWidth > 950 && (
