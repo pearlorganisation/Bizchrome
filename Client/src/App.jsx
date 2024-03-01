@@ -20,8 +20,9 @@ import useAuth from "./helper/authHelper";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 //importing job postings
-import JobPostings from "./components/Jobs/JobPostings";
-
+import JobPostings from "./components/JobPostings/JobPostings";
+import JobDetails from "./components/JobDetails/JobDetails";
+import Jobs from "./pages/Jobs/Jobs";
 
 const App = () => {
   const { isUserLoggedIn } = useAuth();
@@ -89,7 +90,12 @@ const App = () => {
         // job posting path
         {
           path: "/jobs/:jobType",
-          element: <JobPostings />
+          element: <Jobs />
+        },
+
+        {
+          path: "/jobs/:jobType/:jobid",
+          element: <Jobs />
         },
 
         {
