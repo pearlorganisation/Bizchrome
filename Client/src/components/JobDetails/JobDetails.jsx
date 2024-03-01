@@ -1,18 +1,48 @@
 import React, { useState } from "react";
 import "./JobDetails.css";
-import { redirect, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-const JobDetails = ({ data }) => {
+const JobDetails = ({ data, jobType, setJobData }) => {
   if (!data) {
-    const { jobType } = useParams();
     window.location.href = `/jobs/${jobType}`;
   }
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // let similarJobsData = [
+  let similarJobsData = [
+    {
+      id: "1",
+      position: "similar job 1",
+      company: "Pearl Org",
+      companyImg: "/no-image.png",
+      type: "Fresher",
+      minSalary: 100000,
+      maxSalary: 500000,
+      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
+    },
 
-  // ]
+    {
+      id: "2",
+      position: "similar job 2",
+      company: "Pearl Org",
+      companyImg: "/no-image.png",
+      type: "Fresher",
+      minSalary: 100000,
+      maxSalary: 500000,
+      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
+    },
+
+    {
+      id: "3",
+      position: "similar job 3",
+      company: "Pearl Org",
+      companyImg: "/no-image.png",
+      type: "Fresher",
+      minSalary: 100000,
+      maxSalary: 500000,
+      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
+    },
+  ];
 
   // Function to toggle the accordion content visibility
   const toggleAccordion = () => {
@@ -537,24 +567,27 @@ const JobDetails = ({ data }) => {
         </divName>
         <div className="mb-[16px] flex h-full w-full flex-col space-y-[12px] md:mb-0 md:w-[335px]">
           {/* steps to apply */}
-          <div className="relative mx-[12px] md:m-0 md:p-0">
-            <img
-              src="/ApplicationSteps.avif"
-              alt=""
-              className="h-auto w-auto"
-            />
+          <div className="rounded-xl border border-solid bg-white p-[16px]">
+            <div className="relative mx-[12px] md:m-0 md:p-0 border rounded-[18px]">
+              <img
+                src="/ApplicationSteps.avif"
+                alt=""
+                className="h-auto w-auto"
+              />
+            </div>
           </div>
 
           {/* similar jobs */}
 
-          <div className="rounded-0 border-[#E8E7EA] bg-[#EBF3FE] md:rounded-xl md:border md:border-solid md:bg-white md:p-[16px]">
+          <div className="flex flex-col gap-2 rounded-xl border border-solid bg-white p-[16px] ">
             <h3 className="text-green-800 font-bold">Similar jobs</h3>
 
-            {similarJobsData && similarJobsData?.map((item) => {
+            {similarJobsData &&
+              similarJobsData?.map((item) => {
                 return (
-                  <Link to={`${item?.id}`}>
+                  <Link to={`/jobs/${jobType}/${item?.id}`}>
                     <div
-                      className="m-3 p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
+                      className="p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
                       onClick={() => setJobData(item)}
                     >
                       <div className="w-full flex justify-between ">
@@ -637,9 +670,11 @@ const JobDetails = ({ data }) => {
                 );
               })}
 
-            <p className="m-0 mt-[16px] hidden cursor-pointer rounded border border-solid bg-[#EAF8F4] px-[16px] py-[8px] text-center text-sm font-semibold text-[#1F8268] md:block">
-              Show more
-            </p>
+            <Link to>
+              <p className="m-0 mt-[16px] hidden cursor-pointer rounded border border-solid bg-[#EAF8F4] px-[16px] py-[8px] text-center text-sm font-semibold text-[#1F8268] md:block">
+                Show more
+              </p>
+            </Link>
           </div>
         </div>
       </div>
