@@ -19,7 +19,7 @@ export const findLocation = async (req, res) => {
             component.types.includes("country")
           ).long_name;
 
-          console.log(`City: ${cityName}, Country: ${countryName}`);
+          // console.log(`City: ${cityName}, Country: ${countryName}`);
           payload.cityName = cityName;
           payload.countryName = countryName;
           //  console.log("This is payload", payload);
@@ -31,7 +31,6 @@ export const findLocation = async (req, res) => {
         console.error(`Error fetching location data: ${error}`);
       });
 
-    console.log("This is payload", payload);
     res.status(200).json({
       success: true,
       message: "Fetched the location successfully",

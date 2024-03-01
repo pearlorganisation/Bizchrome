@@ -11,7 +11,7 @@ import BusinessLogin from "./pages/Authentication/Business/BusinessLogin.jsx";
 import LoginAsInvestor from "./pages/Authentication/Investor/LoginAsInvestor.jsx";
 import Forget from "./pages/Authentication/Candidate/Forget.jsx";
 import { Provider } from "react-redux";
-import OtpVarfication from "./pages/Authentication/Candidate/OtpVarfication.jsx";
+import OtpVerification from "./pages/Authentication/Candidate/OtpVerification.jsx";
 import store from "./Store/configureStore.js";
 
 

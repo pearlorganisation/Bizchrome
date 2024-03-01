@@ -10,6 +10,7 @@ import cors from "cors";
 const app = express();
 
 //CORS handling
+
 app.use(
   cors(
     process.env.NODE_ENV === "development"

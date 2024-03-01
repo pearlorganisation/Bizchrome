@@ -29,7 +29,7 @@ const locationSlice = createSlice({
       state.isFetchLocationError = true;
 
       //some toast msg will come here
-      toast.error(action?.payload || "Please try again");
+      toast.error(action?.payload?.message || "Please try again");
     });
     //All sign up fns ends here.
   },

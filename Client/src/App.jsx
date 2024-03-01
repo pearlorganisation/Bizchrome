@@ -12,7 +12,7 @@ import BusinessSignup from "./pages/Authentication/Business/BusinessSignup";
 import BusinessLogin from "./pages/Authentication/Business/BusinessLogin";
 import LoginAsInvestor from "./pages/Authentication/Investor/LoginAsInvestor";
 import Forget from "./pages/Authentication/Candidate/Forget";
-import OtpVarfication from "./pages/Authentication/Candidate/OtpVarfication";
+import OtpVerification from "./pages/Authentication/Candidate/OtpVerification";
 import SendOtp from "./pages/Authentication/Candidate/SendOtp";
 import Pricing from "./components/Home/Pricing/Pricing";
 import useAuth from "./helper/authHelper";
@@ -63,10 +63,9 @@ const App = () => {
         },
 
         {
-          path: "/otpVarfication",
-          element: <OtpVarfication />,
+          path: "/otpVerification",
+          element: <OtpVerification />,
         },
-
         {
           path: "/sendOtp",
           element: <SendOtp />,
