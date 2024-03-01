@@ -13,7 +13,7 @@ export const findLocation = createAsyncThunk(
       });
       return response?.data;
     } catch (error) {
-      console.log("Error in otp", error);
+      console.log("Error in location", error);
       return rejectWithValue(error);
     }
   }

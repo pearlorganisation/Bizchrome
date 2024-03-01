@@ -39,7 +39,7 @@ const SendOtp = () => {
 
                   <div class="flex flex-col space-y-5">
                     <div>
-                        <Link to="/OtpVarfication">
+                        <Link to="/OtpVerification">
                         <button class="flex flex-row items-center justify-center text-center w-full 
                         border rounded-xl outline-none py-5 bg-[#3ACABE] border-none text-white text-sm shadow-sm">
                         Send Otp
