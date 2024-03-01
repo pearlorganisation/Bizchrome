@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./JobPostings.css";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const JobPostings = () => {
-  const { jobType } = useParams();
-  console.log(jobType);
+const JobPostings = ({data, setJobData}) => {
+
   // State to manage the open/closed state of each accordion item
   const [isOpen, setIsOpen] = useState(true);
   const [isOpen2, setIsOpen2] = useState(false);
@@ -13,6 +13,9 @@ const JobPostings = () => {
   const [isOpen5, setIsOpen5] = useState(false);
   const [isOpen6, setIsOpen6] = useState(false);
   const [isOpen7, setIsOpen7] = useState(false);
+
+  //jobDetail state
+  const [isJobViewed, setIsJobViewd] = useState(false);
 
   //filters count state
   const [filtersCount, setFiltersCount] = useState(5);
@@ -74,100 +77,9 @@ const JobPostings = () => {
     setExperienceValue(parseInt(event.target.value));
   };
 
-  let postingData = [
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-
-    {
-      position: "Front end dev",
-      company: "Pearl Org",
-      companyImg: "/no-image.png",
-      type: "Fresher",
-      minSalary: 100000,
-      maxSalary: 500000,
-      tags: ["Fresher role", "Full Time", "Basic English", "JavaScript"],
-    },
-  ];
+ 
 
   // useEffect for window width
-
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -185,6 +97,13 @@ const JobPostings = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+
+  //open job details
+
+  // const openDetails = (jobid) => {
+    
+  // }
 
   return (
     <>
@@ -998,10 +917,13 @@ const JobPostings = () => {
             style={{ maxWidth: "650px", width: "100%" }}
           >
             {/* card */}
-            {postingData &&
-              postingData.map((item) => {
+            {data &&
+              data?.map((item) => {
                 return (
-                  <div className="m-3 p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer">
+                  <Link to={`${item?.id}`}>
+                  <div className="m-3 p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
+                   onClick={() => setJobData(item) }
+                   >
                     <div className="w-full flex justify-between ">
                       <div className="flex">
                         <div className="flex flex-col justify-center">
@@ -1076,6 +998,8 @@ const JobPostings = () => {
                         })}
                     </div>
                   </div>
+
+                  </Link>
                 );
               })}
           </div>
