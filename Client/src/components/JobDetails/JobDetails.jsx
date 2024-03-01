@@ -10,6 +10,10 @@ const JobDetails = ({ data }) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  // let similarJobsData = [
+
+  // ]
+
   // Function to toggle the accordion content visibility
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
@@ -18,7 +22,7 @@ const JobDetails = ({ data }) => {
   return (
     <>
       <div className="flex w-full max-w-5xl flex-col md:mx-auto md:flex-row md:justify-center md:gap-[16px] md:py-6">
-        <div
+        <divName
           className="md:space-y-[12px]"
           style={{ maxWidth: "650px", width: "100%" }}
         >
@@ -87,6 +91,27 @@ const JobDetails = ({ data }) => {
               </div>
             </div>
 
+            <div
+              className="flex gap-2 no-scrollbar"
+              style={{
+                maxWidth: "100%",
+                overflowX: "auto",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {data?.tags &&
+                data?.tags.map((tag) => {
+                  return (
+                    <div
+                      className="bg-gray-300 text-gray-700 rounded-sm px-2"
+                      style={{ minWidth: "auto" }}
+                    >
+                      {tag}
+                    </div>
+                  );
+                })}
+            </div>
+
             <div className="flex w-full items-center gap-[16px] md:text-sm">
               <div className="w-full">
                 <a href="javascript:void(0)">
@@ -114,27 +139,6 @@ const JobDetails = ({ data }) => {
                 </svg>
                 Share
               </div>
-            </div>
-
-            <div
-              className="flex gap-2 no-scrollbar"
-              style={{
-                maxWidth: "100%",
-                overflowX: "auto",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {data?.tags &&
-                data?.tags.map((tag) => {
-                  return (
-                    <div
-                      className="bg-gray-300 text-gray-700 rounded-sm px-2"
-                      style={{ minWidth: "auto" }}
-                    >
-                      {tag}
-                    </div>
-                  );
-                })}
             </div>
           </div>
 
@@ -446,18 +450,196 @@ const JobDetails = ({ data }) => {
             </div>
 
             {/* Interview & address details */}
+            <div className="bg-white p-[16px] md:py-0">
+              <div>
+                <p className="mb-[16px] text-md font-semibold md:mb-[12px] md:text-xl md:font-bold">
+                  Interview & address details
+                </p>
+                <div className="flex flex-col gap-[12px]">
+                  <div className="flex w-full space-x-[8px]">
+                    <div className="mt-[2px] md:mt-[3px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <g clip-path="url(#clip0_1601_75488)">
+                          <path
+                            fill="#8C8594"
+                            fill-rule="evenodd"
+                            d="M13.25 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8.75h-4A1.75 1.75 0 0113.25 7V3zm5 4.25l-3.5-3.5V7a.25.25 0 00.25.25h3.25zm-9.25 4a.75.75 0 01.75.75v5a.75.75 0 01-1.5 0v-5a.75.75 0 01.75-.75zM12.75 16a.75.75 0 00-1.5 0v1a.75.75 0 001.5 0v-1zM15 13.25a.75.75 0 01.75.75v3a.75.75 0 01-1.5 0v-3a.75.75 0 01.75-.75z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_1601_75488">
+                            <path fill="#fff" d="M0 0H24V24H0z"></path>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="m-0 text-sm leading-[20px] text-[#8C8594] md:text-md md:leading-[24px]">
+                        Company Address
+                      </p>
+                      <p className="m-0 text-sm leading-[20px] text-[#190A28] md:text-md md:leading-[24px]">
+                        Salt Lake Road, DD Block, Sector 1, Bidhannagar,
+                        Kolkata, West Bengal, India
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex w-full space-x-[8px]">
+                    <div className="mt-[2px] md:mt-[3px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="25"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 25 24"
+                      >
+                        <path
+                          fill="#fff"
+                          d="M0 0H20V20H0z"
+                          transform="translate(2.5 2)"
+                        ></path>
+                        <path
+                          fill="#8C8594"
+                          d="M12.5 3.667A8.333 8.333 0 1020.832 12a8.343 8.343 0 00-8.334-8.333zm2.96 10.745l-3.333-1.666a.834.834 0 01-.461-.746V7.834a.833.833 0 111.667 0v3.651l2.872 1.437a.834.834 0 01-.745 1.49z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="m-0 text-sm leading-[20px] text-[#8C8594] md:text-md md:leading-[24px]">
+                        Interview mode
+                      </p>
+                      <p className="m-0 text-sm leading-[20px] text-[#190A28] md:text-md md:leading-[24px]">
+                        Online/Telephonic
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="my-[24px] hidden h-[1px] w-full bg-[#E8E7EA] md:block"></div>
+            </div>
 
             {/* Posted by */}
-            <div class="mb-[8px] bg-white p-[16px] rounded-lg border border-solid border-[#e6e6e6]"><p class="md:font-md m-0 text-sm text-[#8C8594] md:text-md md:leading-[24px]">Job posted by <span class="font-semibold text-[#190A28]">{data?.company}</span></p></div>
+            <div class="bg-white p-[16px] rounded-lg border border-solid border-[#e6e6e6]">
+              <p class="md:font-md m-0 text-sm text-[#8C8594] md:text-md md:leading-[24px]">
+                Job posted by{" "}
+                <span class="font-semibold text-[#190A28]">
+                  {data?.company}
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
+        </divName>
         <div className="mb-[16px] flex h-full w-full flex-col space-y-[12px] md:mb-0 md:w-[335px]">
+          {/* steps to apply */}
           <div className="relative mx-[12px] md:m-0 md:p-0">
             <img
               src="/ApplicationSteps.avif"
               alt=""
               className="h-auto w-auto"
             />
+          </div>
+
+          {/* similar jobs */}
+
+          <div className="rounded-0 border-[#E8E7EA] bg-[#EBF3FE] md:rounded-xl md:border md:border-solid md:bg-white md:p-[16px]">
+            <h3 className="text-green-800 font-bold">Similar jobs</h3>
+
+            {similarJobsData && similarJobsData?.map((item) => {
+                return (
+                  <Link to={`${item?.id}`}>
+                    <div
+                      className="m-3 p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
+                      onClick={() => setJobData(item)}
+                    >
+                      <div className="w-full flex justify-between ">
+                        <div className="flex">
+                          <div className="flex flex-col justify-center">
+                            <img
+                              src="/no-image.png"
+                              style={{ width: "32px", height: "32px" }}
+                              alt=""
+                            />
+                          </div>
+                          <div className="flex flex-col pl-2">
+                            <div className="text-lg font-semibold">
+                              {item?.position}
+                            </div>
+                            <div className="text-xs">{item?.company}</div>
+                          </div>
+                        </div>
+                        <span className="icon">
+                          <svg
+                            viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M312,256l-199-199a15,15 0 01 0-19l29-29a15,15 0 01 19,0l236,235a16,16 0 01 0,24l-236,235a15,15 0 01-19,0l-29-29a15,15 0 01 0-19z" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div className="w-full flex">
+                        <div className="flex flex-col justify-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
+                          </svg>
+                        </div>
+                        <span className="pl-2 text-gray-500 text-sm">
+                          {item?.type}
+                        </span>
+                      </div>
+                      <div className="w-full flex">
+                        <div className="flex flex-col justify-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
+                          </svg>
+                        </div>
+                        <span className="pl-2 text-gray-500 text-sm">
+                          {item?.minSalary} - {item?.maxSalary}
+                        </span>
+                      </div>
+                      <div
+                        className="flex gap-2 no-scrollbar"
+                        style={{
+                          maxWidth: "100%",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {item?.tags &&
+                          item?.tags.map((tag) => {
+                            return (
+                              <div
+                                className="bg-gray-300 text-gray-700 rounded-sm px-2"
+                                style={{ minWidth: "auto" }}
+                              >
+                                {tag}
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+
+            <p className="m-0 mt-[16px] hidden cursor-pointer rounded border border-solid bg-[#EAF8F4] px-[16px] py-[8px] text-center text-sm font-semibold text-[#1F8268] md:block">
+              Show more
+            </p>
           </div>
         </div>
       </div>
