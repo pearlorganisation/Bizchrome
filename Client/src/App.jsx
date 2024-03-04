@@ -17,10 +17,12 @@ import SendOtp from "./pages/Authentication/Candidate/SendOtp";
 import Pricing from "./components/Home/Pricing/Pricing";
 import useAuth from "./helper/authHelper";
 
-import WorkFromHomeJobs from "./components/Jobs/WorkFromHomeJobs";
 import UserProfile from "./components/UserProfile/UserProfile";
 
-
+//importing job postings
+import JobPostings from "./components/JobPostings/JobPostings";
+import JobDetails from "./components/JobDetails/JobDetails";
+import Jobs from "./pages/Jobs/Jobs";
 
 const App = () => {
   const { isUserLoggedIn } = useAuth();
@@ -84,10 +86,18 @@ const App = () => {
             <h2>Not logged in</h2>
           ),
         },
+    
+        // job posting path
         {
-          path: "/jobs/wfh-jobs",
-          element: <WorkFromHomeJobs />
+          path: "/jobs/:jobType",
+          element: <Jobs />
         },
+
+        {
+          path: "/jobs/:jobType/:jobid",
+          element: <Jobs />
+        },
+
         {
           path: "/test",
           element: <UserProfile />

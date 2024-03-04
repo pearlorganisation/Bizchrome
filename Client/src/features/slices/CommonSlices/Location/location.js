@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { toast } from "sonner";
-import { findLocation } from "../../actions/Common/findLocationAction";
+import { findLocation } from "../../../actions/Common/findLocationAction";
 const initialState = {
   isFetchLocationDataLoading: false,
   isFetchLocationError: false,
