@@ -115,7 +115,7 @@ const Jobs = () => {
   return (
     <>
         {!jobid && <JobPostings data={postingData} jobType={jobType} setJobData={setJobData} /> }
-        {jobid && <JobDetails data={jobData} /> }
+        {jobid && <JobDetails data={jobData} jobType={jobType} setJobData={setJobData}  /> }
     </>
   )
 }
