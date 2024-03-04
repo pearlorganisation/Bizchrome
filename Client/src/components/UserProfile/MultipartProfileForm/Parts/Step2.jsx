@@ -1,6 +1,31 @@
-import React from "react";
-
+import React, { useState } from "react";
+import Select from "react-select";
 export default function Step2({ navigateToFormStep, locationData }) {
+
+const {}
+
+
+
+  const [isSelected, SetIsSelected] = useState(0);
+  const [triggerNext, SetTriggerNext] = useState(0);
+  console.log("This is selected ", isSelected);
+
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+  const dropdowns = {
+    1: false,
+    2: false,
+    3: `Diploma`,
+    4: `ITI`,
+    5: `Graduation`,
+    6: `Post Graduation`,
+  };
+
+  //Make an api call for the courses form the data base.
+
   return (
     <div>
       <section id="step-2" class="form-step d-none">
@@ -8,7 +33,7 @@ export default function Step2({ navigateToFormStep, locationData }) {
         <div className="border-red-500">
           <div>
             <h4
-              className="font-roboto font-[600] "
+              className="font-roboto font-[600]  "
               style={{ color: `rgb(25 10 40` }}
             >
               Your Highest Education
@@ -18,64 +43,93 @@ export default function Step2({ navigateToFormStep, locationData }) {
               // style={{ border: "4px solid red" }}
             >
               <div
-                className={` flex justify-center rounded-2xl font-roboto border font-[40] w-full `}
+                className={` flex justify-center rounded-2xl font-roboto border font-[40] w-full leading-6`}
                 style={{
-                  color: ` rgba(0, 0, 0, 0.87) `,
+                  color: isSelected === 1 ? `white` : `#37283a`,
                   border: "2px solid grey",
-                  background
+                  background: isSelected === 1 ? `#37283a` : `white`,
                 }}
               >
-                <button>10th or Below 10th</button>
+                <button type="button" onClick={() => SetIsSelected(1)}>
+                  10th or Below 10th
+                </button>
               </div>
               <div
-                className="flex justify-center rounded-2xl font-roboto border font-[40]"
+                className="flex justify-center rounded-2xl font-roboto border font-[40] leading-6"
                 style={{
-                  color: ` rgba(0, 0, 0, 0.87) `,
+                  color: isSelected === 2 ? `white` : `#37283a`,
                   border: "2px solid grey",
+
+                  background: isSelected === 2 ? `#37283a` : `white`,
                 }}
               >
-                <button>12th Pass</button>
+                <button type="button" onClick={() => SetIsSelected(2)}>
+                  12th Pass
+                </button>
               </div>
               <div
-                className="flex justify-center rounded-2xl font-roboto border font-[40]"
+                className="flex justify-center rounded-2xl font-roboto border font-[40] leading-6"
                 style={{
-                  color: ` rgba(0, 0, 0, 0.87) `,
+                  color: isSelected === 3 ? `white` : `#37283a`,
                   border: "2px solid grey",
+                  background: isSelected === 3 ? `#37283a` : `white`,
                 }}
               >
-                <button>Diploma</button>
+                <button type="button" onClick={() => SetIsSelected(3)}>
+                  Diploma
+                </button>
               </div>
               <div
-                className="flex justify-center rounded-2xl font-roboto border font-[40]"
+                className="flex justify-center rounded-2xl font-roboto border font-[40] leading-6"
                 style={{
-                  color: ` rgba(0, 0, 0, 0.87) `,
+                  color: isSelected === 4 ? `white` : `#37283a`,
                   border: "2px solid grey",
+                  background: isSelected === 4 ? `#37283a` : `white`,
                 }}
               >
-                <button>ITI</button>
+                <button type="button" onClick={() => SetIsSelected(4)}>
+                  ITI
+                </button>
               </div>
               <div
-                className="flex justify-center rounded-2xl font-roboto border font-[40]"
+                className="flex justify-center rounded-2xl font-roboto border font-[40] leading-6"
                 style={{
-                  color: ` rgba(0, 0, 0, 0.87) `,
+                  color: isSelected === 5 ? `white` : `#37283a`,
                   border: "2px solid grey",
+                  background: isSelected === 5 ? `#37283a` : `white`,
                 }}
               >
-                <button>Graduate</button>
+                <button type="button" onClick={() => SetIsSelected(5)}>
+                  Graduate
+                </button>
               </div>
               <div
-                className="flex justify-center rounded-2xl font-roboto border font-[40]"
+                className="flex justify-center rounded-2xl font-roboto border font-[40] leading-6"
                 style={{
-                  color: ` rgba(0, 0, 0, 0.87) `,
+                  color: isSelected === 6 ? `white` : `#37283a`,
                   border: "2px solid grey",
+                  background: isSelected === 6 ? `#37283a` : `white`,
                 }}
               >
-                <button>Post Graduate</button>
+                <button type="button" onClick={() => SetIsSelected(6)}>
+                  Post Graduate
+                </button>
               </div>
             </div>
           </div>
         </div>
-
+        {(isSelected === 3 ||
+          isSelected === 4 ||
+          isSelected === 5 ||
+          isSelected === 6) && (
+          <div>
+            <Select
+              // defaultValue={selectedOption}
+              // onChange={setSelectedOption}
+              options={options}
+            />
+          </div>
+        )}
         <div
           class={`mt-3 flex justify-center font-medium align-center  ${
             locationData.length == 0 && "hidden"

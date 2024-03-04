@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { userModel } from "../../models/Authentication/userAuthModel.js";
-import { otpModel } from "../../models/Authentication/signupOtpMode.js";
+import { otpModel } from "../../models/Authentication/signupOtpModel.js";
 import { sendSignUpOtpMail } from "../../utils/MailTemplates/signupMail.js";
 import { saveAccessTokenToCookie } from "../../utils/TokenMangement/accessTokenManagement.js";
 import jwt from "jsonwebtoken";
