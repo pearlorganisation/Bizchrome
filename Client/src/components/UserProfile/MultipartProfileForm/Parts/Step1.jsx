@@ -7,6 +7,8 @@ export default function Step1({
   Loader,
   navigateToFormStep,
 }) {
+
+  
   return (
     <div>
       <section id="step-1" class="form-step">

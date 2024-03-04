@@ -13,7 +13,7 @@ export const getColleges = createAsyncThunk(
       });
       return response?.data;
     } catch (error) {
-      console.log("Error in location", error);
+      console.log("Error in get colleges", error);
       return rejectWithValue(error);
     }
   }
