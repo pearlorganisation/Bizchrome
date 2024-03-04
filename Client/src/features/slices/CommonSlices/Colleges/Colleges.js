@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "sonner";
-import { findLocation } from "../../../actions/Common/findLocationAction";
 import { getColleges } from "../../../actions/Common/getColleges";
 const initialState = {
   isFetchCollegeLoading: false,

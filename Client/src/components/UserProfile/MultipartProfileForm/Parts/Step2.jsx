@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import { getColleges } from "../../../../features/actions/Common/getColleges";
 export default function Step2({ navigateToFormStep, locationData }) {
-
-// const {}
-
-
+  const dispatch = useDispatch();
+  const { isFetchCollegeLoading, isFetchCollegeError, colleges } = useSelector(
+    (store) => store?.college
+  );
 
   const [isSelected, SetIsSelected] = useState(0);
   const [triggerNext, SetTriggerNext] = useState(0);
@@ -24,7 +26,15 @@ export default function Step2({ navigateToFormStep, locationData }) {
     6: `Post Graduation`,
   };
 
+  //UseEffect
+  useEffect(() => {
+    dispatch(getColleges());
+  }, []);
+
+  //
+
   //Make an api call for the courses form the data base.
+  console.log("Colleges", colleges);
 
   return (
     <div>
