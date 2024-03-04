@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 export default function Step2({ navigateToFormStep, locationData }) {
 
-const {}
+// const {}
 
 
 
