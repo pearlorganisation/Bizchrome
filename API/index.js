@@ -7,6 +7,7 @@ import locationRoutes from "./src/routes/Location/findLocation.js";
 import chalk from "chalk";
 import cors from "cors";
 import collegeRoutes from "./src/routes/Colleges/findCollegeRouter.js";
+import jobRoutes from "./src/routes/Job/jobRouter.js";
 
 const app = express();
 
@@ -51,6 +52,10 @@ app.use("/api/v1/location", locationRoutes);
 
 //Find Colleges Routes
 app.use("/api/v1/colleges", collegeRoutes);
+
+//Job routes
+app.use("/api/v1/job", jobRoutes);
+
 // allows us to access the env file data
 dotenv.config();
 
