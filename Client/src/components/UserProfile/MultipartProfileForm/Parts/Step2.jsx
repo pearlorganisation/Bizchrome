@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getColleges } from "../../../../features/actions/Common/getColleges";
 export default function Step2({ navigateToFormStep, locationData }) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const { isFetchCollegeLoading, isFetchCollegeError, colleges } = useSelector(
     (store) => store?.college
   );
 
   const [isSelected, SetIsSelected] = useState(0);
-  const [triggerNext, SetTriggerNext] = useState(0);
-  console.log("This is selected ", isSelected);
 
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -26,15 +31,15 @@ export default function Step2({ navigateToFormStep, locationData }) {
     6: `Post Graduation`,
   };
 
-  //UseEffect
-  useEffect(() => {
-    dispatch(getColleges());
-  }, []);
-
-  //
+  const onSubmit = async () => {
+    try {
+      console.log("ABCD");
+    } catch (error) {
+      console.log("ABCD");
+    }
+  };
 
   //Make an api call for the courses form the data base.
-  console.log("Colleges", colleges);
 
   return (
     <div>
@@ -132,13 +137,38 @@ export default function Step2({ navigateToFormStep, locationData }) {
           isSelected === 4 ||
           isSelected === 5 ||
           isSelected === 6) && (
-          <div>
-            <Select
-              // defaultValue={selectedOption}
-              // onChange={setSelectedOption}
-              options={options}
-            />
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div class="mb-6">
+              <label
+                for="course"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Course
+              </label>
+              <input
+                type="text"
+                id="course"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="e.g. B.Tech"
+                required
+              />
+            </div>
+            <div class="mb-6">
+              <label
+                for="password"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Specialization
+              </label>
+              <input
+                type="text"
+                id="specialization"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="e.g. Mechanical Engineering"
+                required
+              />
+            </div>
+          </form>
         )}
         <div
           class={`mt-3 flex justify-center font-medium align-center  ${

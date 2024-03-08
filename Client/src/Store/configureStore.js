@@ -12,6 +12,10 @@ const store = configureStore({
     location: locationReducer,
     college: collegeReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;
