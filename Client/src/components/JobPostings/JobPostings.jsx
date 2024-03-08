@@ -3,7 +3,11 @@ import "./JobPostings.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const JobPostings = ({data, setJobData}) => {
+const JobPostings = ({ data, setJobData }) => {
+  // console.log("the data is mysogynistic::", data);
+  
+  //job posting data state
+  const [postingsData, setPostingsData] = useState([])
 
   // State to manage the open/closed state of each accordion item
   const [isOpen, setIsOpen] = useState(true);
@@ -33,6 +37,38 @@ const JobPostings = ({data, setJobData}) => {
 
   //state for window width
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // useEffect for window width
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setWindowWidth(width);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Call handleResize once to set initial class
+    handleResize();
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('running this')
+    setPostingsData(data)
+    console.log(data)
+  }, [data])
+  
+  // useEffect for salary slider
+  useEffect(() => {
+    let newData =  data.filter((d) => salaryValue <= d?.maxSalary);
+    setPostingsData(newData)
+  }, [salaryValue])
+  
 
   // Function to toggle the accordion content visibility
   const toggleAccordion = () => {
@@ -77,39 +113,17 @@ const JobPostings = ({data, setJobData}) => {
     setExperienceValue(parseInt(event.target.value));
   };
 
- 
-
-  // useEffect for window width
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setWindowWidth(width);
-    };
-
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Call handleResize once to set initial class
-    handleResize();
-
-    // Remove event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-
   //open job details
 
   // const openDetails = (jobid) => {
-    
+
   // }
 
   return (
     <>
       <div className="mt-4">
         <div className="w-full text-xl font-bold text-center ">
-          Jobs Found: {data.length}
+          Jobs Found: {postingsData.length}
         </div>
         <div className="w-full flex justify-center">
           {windowWidth > 950 && (
@@ -166,9 +180,9 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M9 5 5 1 1 5"
                           />
                         </svg>
@@ -297,9 +311,9 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M9 5 5 1 1 5"
                           />
                         </svg>
@@ -361,9 +375,9 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M9 5 5 1 1 5"
                           />
                         </svg>
@@ -376,32 +390,32 @@ const JobPostings = ({data, setJobData}) => {
                     >
                       <div className="py-4 border-b border-gray-200 dark:border-gray-700">
                         {/* checkbox */}
-                        <div class="flex items-center mb-4">
+                        <div className="flex items-center mb-4">
                           <input
                             id="fulltimeCb"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="fulltimeCb"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="fulltimeCb"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Full Time
                           </label>
                         </div>
 
                         {/* checkbox */}
-                        <div class="flex items-center mb-4">
+                        <div className="flex items-center mb-4">
                           <input
                             id="parttimeCb"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="parttimeCb"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="parttimeCb"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Part Time
                           </label>
@@ -436,9 +450,9 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M9 5 5 1 1 5"
                           />
                         </svg>
@@ -451,32 +465,32 @@ const JobPostings = ({data, setJobData}) => {
                     >
                       <div className="py-4 border-b border-gray-200 dark:border-gray-700">
                         {/* checkbox */}
-                        <div class="flex items-center mb-4">
+                        <div className="flex items-center mb-4">
                           <input
                             id="dayShiftCb"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="dayShiftCb"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="dayShiftCb"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Day Shift
                           </label>
                         </div>
 
                         {/* checkbox */}
-                        <div class="flex items-center mb-4">
+                        <div className="flex items-center mb-4">
                           <input
                             id="nightShiftCb"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="nightShiftCb"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="nightShiftCb"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Night Shift
                           </label>
@@ -512,9 +526,9 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M9 5 5 1 1 5"
                           />
                         </svg>
@@ -527,80 +541,80 @@ const JobPostings = ({data, setJobData}) => {
                     >
                       <div className="py-4 border-b border-gray-200 dark:border-gray-700">
                         {/* checkbox */}
-                        <div class="flex items-center mb-3">
+                        <div className="flex items-center mb-3">
                           <input
                             id="department1"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="department1"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="department1"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Admin/ Back Office
                           </label>
                         </div>
 
                         {/* checkbox */}
-                        <div class="flex items-center mb-3">
+                        <div className="flex items-center mb-3">
                           <input
                             id="department2"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="department2"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="department2"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Admin/ Back Office
                           </label>
                         </div>
 
                         {/* checkbox */}
-                        <div class="flex items-center mb-3">
+                        <div className="flex items-center mb-3">
                           <input
                             id="department3"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="department3"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="department3"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Admin/ Back Office
                           </label>
                         </div>
 
                         {/* checkbox */}
-                        <div class="flex items-center mb-3">
+                        <div className="flex items-center mb-3">
                           <input
                             id="department4"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="department4"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="department4"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Admin/ Back Office
                           </label>
                         </div>
 
                         {/* checkbox */}
-                        <div class="flex items-center mb-3">
+                        <div className="flex items-center mb-3">
                           <input
                             id="department5"
                             type="checkbox"
                             value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                           <label
-                            for="department5"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="department5"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Admin/ Back Office
                           </label>
@@ -615,80 +629,80 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <div>
                             {/* checkbox */}
-                            <div class="flex items-center mb-3">
+                            <div className="flex items-center mb-3">
                               <input
                                 id="department1"
                                 type="checkbox"
                                 value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
-                                for="department1"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                htmlFor="department1"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Admin/ Back Office
                               </label>
                             </div>
 
                             {/* checkbox */}
-                            <div class="flex items-center mb-3">
+                            <div className="flex items-center mb-3">
                               <input
                                 id="department2"
                                 type="checkbox"
                                 value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
-                                for="department2"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                htmlFor="department2"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Admin/ Back Office
                               </label>
                             </div>
 
                             {/* checkbox */}
-                            <div class="flex items-center mb-3">
+                            <div className="flex items-center mb-3">
                               <input
                                 id="department3"
                                 type="checkbox"
                                 value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
-                                for="department3"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                htmlFor="department3"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Admin/ Back Office
                               </label>
                             </div>
 
                             {/* checkbox */}
-                            <div class="flex items-center mb-3">
+                            <div className="flex items-center mb-3">
                               <input
                                 id="department4"
                                 type="checkbox"
                                 value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
-                                for="department4"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                htmlFor="department4"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Admin/ Back Office
                               </label>
                             </div>
 
                             {/* checkbox */}
-                            <div class="flex items-center mb-3">
+                            <div className="flex items-center mb-3">
                               <input
                                 id="department5"
                                 type="checkbox"
                                 value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
-                                for="department5"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                htmlFor="department5"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Admin/ Back Office
                               </label>
@@ -737,9 +751,9 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M9 5 5 1 1 5"
                           />
                         </svg>
@@ -802,9 +816,9 @@ const JobPostings = ({data, setJobData}) => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M9 5 5 1 1 5"
                           />
                         </svg>
@@ -917,88 +931,90 @@ const JobPostings = ({data, setJobData}) => {
             style={{ maxWidth: "650px", width: "100%" }}
           >
             {/* card */}
-            {data &&
-              data?.map((item) => {
+            {postingsData &&
+              postingsData?.map((item) => {
                 return (
-                  <Link to={`${item?.id}`}>
-                  <div className="m-3 p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
-                   onClick={() => setJobData(item) }
-                   >
-                    <div className="w-full flex justify-between ">
-                      <div className="flex">
-                        <div className="flex flex-col justify-center">
-                          <img
-                            src="/no-image.png"
-                            style={{ width: "32px", height: "32px" }}
-                            alt=""
-                          />
-                        </div>
-                        <div className="flex flex-col pl-2">
-                          <div className="text-lg font-semibold">{item?.position}</div>
-                          <div className="text-xs">{item?.company}</div>
-                        </div>
-                      </div>
-                      <span className="icon">
-                        <svg
-                          viewBox="0 0 512 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M312,256l-199-199a15,15 0 01 0-19l29-29a15,15 0 01 19,0l236,235a16,16 0 01 0,24l-236,235a15,15 0 01-19,0l-29-29a15,15 0 01 0-19z" />
-                        </svg>
-                      </span>
-                    </div>
-                    <div className="w-full flex">
-                      <div className="flex flex-col justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
-                        </svg>
-                      </div>
-                      <span className="pl-2 text-gray-500 text-sm">
-                        {item?.type}
-                      </span>
-                    </div>
-                    <div className="w-full flex">
-                      <div className="flex flex-col justify-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
-                        </svg>
-                      </div>
-                      <span className="pl-2 text-gray-500 text-sm">
-                        {item?.minSalary} - {item?.maxSalary}
-                      </span>
-                    </div>
+                  <Link to={`${item?._id}`}>
                     <div
-                      className="flex gap-2 no-scrollbar"
-                      style={{
-                        maxWidth: "100%",
-                        overflowX: "auto",
-                        whiteSpace: "nowrap",
-                      }}
+                      className="m-3 p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
+                      onClick={() => setJobData(item)}
                     >
-                      {item?.tags &&
-                        item?.tags.map((tag) => {
-                          return (
-                            <div
-                              className="bg-gray-300 text-gray-700 rounded-sm px-2"
-                              style={{ minWidth: "auto" }}
-                            >
-                              {tag}
+                      <div className="w-full flex justify-between ">
+                        <div className="flex">
+                          <div className="flex flex-col justify-center">
+                            <img
+                              src="/no-image.png"
+                              style={{ width: "32px", height: "32px" }}
+                              alt=""
+                            />
+                          </div>
+                          <div className="flex flex-col pl-2">
+                            <div className="text-lg font-semibold">
+                              {item?.position}
                             </div>
-                          );
-                        })}
+                            <div className="text-xs">{item?.company}</div>
+                          </div>
+                        </div>
+                        <span className="icon">
+                          <svg
+                            viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M312,256l-199-199a15,15 0 01 0-19l29-29a15,15 0 01 19,0l236,235a16,16 0 01 0,24l-236,235a15,15 0 01-19,0l-29-29a15,15 0 01 0-19z" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div className="w-full flex">
+                        <div className="flex flex-col justify-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
+                          </svg>
+                        </div>
+                        <span className="pl-2 text-gray-500 text-sm">
+                          {item?.jobTypeName}
+                        </span>
+                      </div>
+                      <div className="w-full flex">
+                        <div className="flex flex-col justify-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
+                          </svg>
+                        </div>
+                        <span className="pl-2 text-gray-500 text-sm">
+                          {item?.minSalary} - {item?.maxSalary}
+                        </span>
+                      </div>
+                      <div
+                        className="flex gap-2 no-scrollbar"
+                        style={{
+                          maxWidth: "100%",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {item?.tags &&
+                          item?.tags?.map((tag) => {
+                            return (
+                              <div
+                                className="bg-gray-300 text-gray-700 rounded-sm px-2"
+                                style={{ minWidth: "auto" }}
+                              >
+                                {tag?.name}
+                              </div>
+                            );
+                          })}
+                      </div>
                     </div>
-                  </div>
-
                   </Link>
                 );
               })}
