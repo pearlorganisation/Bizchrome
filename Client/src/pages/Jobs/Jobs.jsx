@@ -6,7 +6,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const Jobs = () => {
-  const { jobType, jobid } = useParams();
+  const { jobType, jobId, postingId } = useParams();
 
   const [jobData, setJobData] = useState(undefined);
   // let [searchParams, setSearchParams] = useSearchParams();
@@ -15,7 +15,7 @@ const Jobs = () => {
   const getData = async () => {
     try {
       const result = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL_LOCAL}job/jobs/1`
+        `${import.meta.env.VITE_API_BASE_URL_LOCAL}job/jobs/${jobId}`
       );
       setPostingData(result.data.data);
     } catch (error) {
@@ -132,15 +132,15 @@ const Jobs = () => {
 
   return (
     <>
-      {!jobid && (
+      {!postingId && (
         <JobPostings
           data={postingData}
           jobType={jobType}
           setJobData={setJobData}
         />
       )}
-      {jobid && (
-        <JobDetails data={jobData} jobType={jobType} setJobData={setJobData} />
+      {postingId && (
+        <JobDetails data={jobData} jobType={jobType} jobId={jobId} setJobData={setJobData} />
       )}
     </>
   );
