@@ -17,14 +17,14 @@ app.use(
   cors(
     process.env.NODE_ENV === "development"
       ? {
-          origin: ["http://127.0.0.1:5173"],
+          origin: ["http://localhost:5173", "https://bizchrome.vercel.app"],
           credentials: true,
           methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
           allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
           exposedHeaders: ["*", "Authorization"],
         }
       : {
-          origin: ["http://127.0.0.1:5173"],
+          origin: ["http://localhost:5173", "https://bizchrome.vercel.app"],
           credentials: true,
           methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
           allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
