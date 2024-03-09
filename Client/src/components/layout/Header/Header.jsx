@@ -186,9 +186,8 @@ const Header = () => {
   return (
     <>
       <nav
-        className={`relative z-20 bg-white w-full md:static md:text-sm md:border-none ${
-          state ? "shadow-lg rounded-b-xl md:shadow-none" : ""
-        }`}
+        className={`relative z-20 bg-white w-full md:static md:text-sm md:border-none ${state ? "shadow-lg rounded-b-xl md:shadow-none" : ""
+          }`}
       >
         <div className="items-center gap-x-14 px-4 max-w-screen-xl mx-auto md:flex md:px-8">
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -231,9 +230,8 @@ const Header = () => {
             </div>
           </div>
           <div
-            className={`nav-menu flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-              state ? "block" : "hidden"
-            }`}
+            className={`nav-menu flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? "block" : "hidden"
+              }`}
           >
             <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
               {navigation.map((item, idx) => {
@@ -287,8 +285,8 @@ const Header = () => {
                       </a>
                     )}
                     {item.isDrapdown &&
-                    drapdownState.idx == idx &&
-                    drapdownState.isActive ? (
+                      drapdownState.idx == idx &&
+                      drapdownState.isActive ? (
                       <div className="mt-6 bg-white inset-x-0 top-20 w-full md:absolute md:border-y  md:mt-0 z-50">
                         <ul className="max-w-screen-xl mx-auto grid items-start gap-6 md:p-8 md:grid-cols-2 lg:grid-cols-3">
                           {item?.navs.map((dropdownItem, idx) => (
@@ -325,7 +323,7 @@ const Header = () => {
                   </li>
                 );
               })}
-              <div class="hidden lg:block">
+              {/* <div class="hidden lg:block">
                 <button
                   type="button"
                   class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -335,7 +333,7 @@ const Header = () => {
                 >
                   {isUserLoggedIn ? `Profile` : `Login/Register`}
                 </button>
-              </div>
+              </div> */}
             </ul>
           </div>
         </div>
