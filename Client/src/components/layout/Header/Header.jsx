@@ -153,7 +153,7 @@ const dropdownNavs = [
 ];
 
 const Header = () => {
-  const { isUserLoggedIn } = useSelector((store) => store.auth);
+  const { isUserLoggedIn, userMetaData } = useSelector((store) => store.auth);
   const [state, setState] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drapdownState, setDrapdownState] = useState({
@@ -233,108 +233,154 @@ const Header = () => {
             className={`nav-menu flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? "block" : "hidden"
               }`}
           >
-            <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
-              {navigation.map((item, idx) => {
-                return (
-                  <li key={idx} className="font-bold text-base">
-                    {item.isDrapdown ? (
-                      <button
-                        className="w-full flex items-center justify-between gap-1 text-gray-700 hover:text-indigo-600"
-                        onClick={() =>
-                          setDrapdownState({
-                            idx,
-                            isActive: !drapdownState.isActive,
-                          })
-                        }
-                      >
-                        {item.title}
-                        {drapdownState.idx == idx && drapdownState.isActive ? (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className="w-5 h-5"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            className="w-5 h-5"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        )}
-                      </button>
-                    ) : (
-                      <a
-                        href={item.path}
-                        className="block text-gray-700 hover:text-indigo-600"
-                      >
-                        {item.title}
-                      </a>
-                    )}
-                    {item.isDrapdown &&
-                      drapdownState.idx == idx &&
-                      drapdownState.isActive ? (
-                      <div className="mt-6 bg-white inset-x-0 top-20 w-full md:absolute md:border-y  md:mt-0 z-50">
-                        <ul className="max-w-screen-xl mx-auto grid items-start gap-6 md:p-8 md:grid-cols-2 lg:grid-cols-3">
-                          {item?.navs.map((dropdownItem, idx) => (
-                            <li key={idx}>
-                              <p className="text-indigo-600 text-sm">
-                                {dropdownItem.label}
-                              </p>
-                              <ul className="mt-5 space-y-6">
-                                {dropdownItem.navs.map((navItem, idx) => (
-                                  <li key={idx} className="group">
-                                    <a
-                                      href={navItem.path}
-                                      className="flex gap-3 items-center"
-                                    >
-                                      <div className="  rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center duration-150 group-hover:bg-indigo-600 group-hover:text-white md:w-6 md:h-6">
-                                        {navItem.icon}
-                                      </div>
-                                      <div>
-                                        <span className="text-gray-800 duration-200 group-hover:text-indigo-600 text-sm font-medium md:text-base">
-                                          {navItem.title}
-                                        </span>
-                                      </div>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                          ))}
-                        </ul>
+            <div className=" flex justify-between">
+              <ul className="items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+                {navigation.map((item, idx) => {
+                  return (
+                    <li key={idx} className="font-bold text-base">
+                      {item.isDrapdown ? (
+                        <button
+                          className="w-full flex items-center justify-between gap-1 text-gray-700 hover:text-indigo-600"
+                          onClick={() =>
+                            setDrapdownState({
+                              idx,
+                              isActive: !drapdownState.isActive,
+                            })
+                          }
+                        >
+                          {item.title}
+                          {drapdownState.idx == idx && drapdownState.isActive ? (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="w-5 h-5"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          ) : (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="w-5 h-5"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          )}
+                        </button>
+                      ) : (
+                        <a
+                          href={item.path}
+                          className="block text-gray-700 hover:text-indigo-600"
+                        >
+                          {item.title}
+                        </a>
+                      )}
+                      {item.isDrapdown &&
+                        drapdownState.idx == idx &&
+                        drapdownState.isActive ? (
+                        <div className="mt-6 bg-white inset-x-0 top-20 w-full md:absolute md:border-y  md:mt-0 z-50">
+                          <ul className="max-w-screen-xl mx-auto grid items-start gap-6 md:p-8 md:grid-cols-2 lg:grid-cols-3">
+                            {item?.navs.map((dropdownItem, idx) => (
+                              <li key={idx}>
+                                <p className="text-indigo-600 text-sm">
+                                  {dropdownItem.label}
+                                </p>
+                                <ul className="mt-5 space-y-6">
+                                  {dropdownItem.navs.map((navItem, idx) => (
+                                    <li key={idx} className="group">
+                                      <a
+                                        href={navItem.path}
+                                        className="flex gap-3 items-center"
+                                      >
+                                        <div className="  rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center duration-150 group-hover:bg-indigo-600 group-hover:text-white md:w-6 md:h-6">
+                                          {navItem.icon}
+                                        </div>
+                                        <div>
+                                          <span className="text-gray-800 duration-200 group-hover:text-indigo-600 text-sm font-medium md:text-base">
+                                            {navItem.title}
+                                          </span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </li>
+                  );
+                })}
+
+              </ul>
+              {
+                isUserLoggedIn ? <div className="relative group  "> <img class="h-8 cursor-pointer ring-4 ring-green-600/60 border-2 border-white w-8 rounded-full object-cover" src="https://componentland.com/images/y9s3xOJV6rnQPKIrdPYJy.png" alt="Simon Lewis" />
+                  <div class="mx-2 before:content-[''] before:h-[2rem] before:w-[2rem] before:bg-white before:border-t before:border-l  before:absolute before:top-[-1rem] before:left-[4rem] before:rounded-sm before:rotate-45 absolute top-[1.3rem] left-[-4rem] opacity-0 z-0 transition-all  group-hover:z-30 group-hover:opacity-100  my-10 rounded-xl border bg-white px-4 shadow-md sm:mx-auto sm:max-w-xl sm:px-8">
+                    <div class="mb-2 flex flex-col gap-y-6 border-b py-8 sm:flex-row sm:items-center sm:justify-between">
+                      <div class="flex items-center">
+                        <img class="h-14 w-14 rounded-full object-cover" src="https://componentland.com/images/y9s3xOJV6rnQPKIrdPYJy.png" alt="Simon Lewis" />
+                        <div class="ml-4 w-56">
+                          <p class="text-slate-800 text-xl font-extrabold">{userMetaData?.fullName}</p>
+                          <p class="text-slate-500">{userMetaData?.email}</p>
+                        </div>
                       </div>
-                    ) : (
-                      ""
-                    )}
-                  </li>
-                );
-              })}
-              {/* <div class="hidden lg:block">
-                <button
-                  type="button"
-                  class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  onClick={() => {
-                    return setIsModalOpen(true);
-                  }}
-                >
-                  {isUserLoggedIn ? `Profile` : `Login/Register`}
-                </button>
-              </div> */}
-            </ul>
+                      {/* <button class="flex items-center justify-center gap-1 rounded-lg border border-emerald-500 px-4 py-2 font-medium text-emerald-500 focus:outline-none focus:ring hover:bg-emerald-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+                          <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                        </svg>
+
+                        <span>Sponsor</span>
+                      </button> */}
+                    </div>
+                    <div class="mb-2 flex justify-between border-b py-8 text-sm sm:text-base">
+                      <div class="flex flex-col items-center">
+                        <p class="text-slate-700 mb-1 text-xl font-extrabold">14</p>
+                        <p class="text-slate-500 text-sm font-medium">Posts</p>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <p class="text-slate-700 mb-1 text-xl font-extrabold">1124</p>
+                        <p class="text-slate-500 text-sm font-medium">Followers</p>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <p class="text-slate-700 mb-1 text-xl font-extrabold">25</p>
+                        <p class="text-slate-500 text-sm font-medium">Sponsors</p>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <p class="text-slate-700 mb-1 text-xl font-extrabold">3</p>
+                        <p class="text-slate-500 text-sm font-medium">Awards</p>
+                      </div>
+                    </div>
+                    <div class="flex justify-between py-8">
+                      <button class="text-slate-500 hover:bg-slate-100 rounded-lg border-2 px-4 py-2 font-medium focus:outline-none focus:ring">Message</button>
+                      <button class="rounded-lg border-2 border-transparent bg-blue-600 px-4 py-2 font-medium text-white focus:outline-none focus:ring hover:bg-blue-700">Logout</button>
+                    </div>
+                  </div>
+                </div> : <div class="hidden lg:block">
+                  <button
+                    type="button"
+                    class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    onClick={() => {
+                      return setIsModalOpen(true);
+                    }}
+                  >
+                    Login/Register
+                  </button>
+                </div>
+              }
+            </div>
           </div>
         </div>
       </nav>

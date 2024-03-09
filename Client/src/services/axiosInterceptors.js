@@ -1,9 +1,9 @@
 import axios from "axios";
 
-// let store;
-// export const injectStore = (_store) => {
-//   store = _store;
-// };
+let store;
+export const injectStore = (_store) => {
+  store = _store;
+};
 
 // Creating new axios instance to perform DRY
 export const instance = axios.create({
