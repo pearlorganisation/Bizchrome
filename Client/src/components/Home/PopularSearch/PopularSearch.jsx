@@ -9,6 +9,7 @@ const PopularSearch = () => {
 
   const popularSearchData = [
     {
+      "_id": "1",
       "title": "Jobs for Freshers",
       "trendingSpot": 1,
       "groupHoverBtn": "group-hover:bg-orange-600 group-hover:text-white",
@@ -17,6 +18,7 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/jobs-for-freshers",
     },
     {
+      "_id": "2",
       "title": "Work from home jobs",
       "trendingSpot": 2,
       "groupHoverBtn": "group-hover:bg-purple-600 group-hover:text-white",
@@ -25,6 +27,7 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/wfh-jobs",
     },
     {
+      "_id": "3",
       "title": "Part time jobs",
       "trendingSpot": 3,
       "groupHoverBtn": "group-hover:bg-red-600 group-hover:text-white",
@@ -33,6 +36,7 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/part-time-jobs",
     },
     {
+      "_id": "4",
       "title": "Jobs for women",
       "trendingSpot": 4,
       "groupHoverBtn": "group-hover:bg-green-600 group-hover:text-white",
@@ -41,6 +45,7 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/jobs-for-women",
     },
     {
+      "_id": "5",
       "title": "International Jobs",
       "trendingSpot": 5,
       "groupHoverBtn": "group-hover:bg-cyan-600 group-hover:text-white",
@@ -88,7 +93,7 @@ const PopularSearch = () => {
             </div>
             <div>
               {" "}
-              <Link to={item?.targetUrl}
+              <Link to={`${item?.targetUrl}/${item?._id}`}
                 className={`rounded-lg px-10 py-3 border border-gray-600 active:scale-95 transition-all duration-300 ${item?.groupHoverBtn}`}
               >
                 View

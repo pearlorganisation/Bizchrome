@@ -934,7 +934,7 @@ const JobPostings = ({ data, setJobData }) => {
             {postingsData &&
               postingsData?.map((item) => {
                 return (
-                  <Link to={`${item?._id}`}>
+                  <Link to={`/${item?._id}`}>
                     <div
                       className="m-3 p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
                       onClick={() => setJobData(item)}

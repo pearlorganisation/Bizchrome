@@ -89,12 +89,12 @@ const App = () => {
 
         // job posting path
         {
-          path: "/jobs/:jobType",
+          path: "/jobs/:jobType/:jobId",
           element: <Jobs />
         },
 
         {
-          path: "/jobs/:jobType/:jobid",
+          path: "/jobs/:jobType/:jobId/:postingId",
           element: <Jobs />
         },
 
