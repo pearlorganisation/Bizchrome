@@ -89,7 +89,7 @@ export const userLogin = async (req, res) => {
   try {
     const { email, password } = req?.body;
     let user = await userModel.findOne({ email });
-    const verifyPassword = await bcrypt.compare(password, user?.password || '');
+    const verifyPassword = await bcrypt.compare(password, user?.password || "");
     if (!verifyPassword) {
       return res.status(400).json({
         message: "Email id and password combination is wrong",
@@ -127,6 +127,24 @@ export const userLogin = async (req, res) => {
     return res.status(400).json({
       message: error?.message || "Internal server error",
       status: false,
+    });
+  }
+};
+
+// @desc - to fetch the users data
+// @route - POST /auth/logout
+// @access - PUBLIC
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("BIZCHROME_ACCESS_TOKEN");
+    res.status(200).json({
+      success: true,
+      message: "Logged Out Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Internal Server Error! ${error.message}`,
     });
   }
 };
