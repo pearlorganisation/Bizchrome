@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./JobDetails.css";
 import { Link, useParams } from "react-router-dom";
 
-const JobDetails = ({ data, jobType, setJobData }) => {
+const JobDetails = ({ data, jobType, jobId, setJobData }) => {
   if (!data) {
-    window.location.href = `/jobs/${jobType}`;
+    window.location.href = `/jobs/${jobType}/${jobId}`;
   }
 
   const [isOpen, setIsOpen] = useState(false);
@@ -562,7 +562,7 @@ const JobDetails = ({ data, jobType, setJobData }) => {
             {similarJobsData &&
               similarJobsData?.map((item) => {
                 return (
-                  <Link to={`/jobs/${jobType}/${item?.id}`}>
+                  <Link to={`/jobs/${jobType}/${jobId}/${item?.id}`}>
                     <div
                       className="p-4 flex flex-col justify-evenly gap-2 border rounded-lg shadow-md cursor-pointer"
                       onClick={() => setJobData(item)}
@@ -647,7 +647,7 @@ const JobDetails = ({ data, jobType, setJobData }) => {
                 );
               })}
 
-            <Link to={`/jobs/${jobType}`}>
+            <Link to={`/jobs/${jobType}/${jobId}`}>
               <p className="m-0 mt-[16px] hidden cursor-pointer rounded border border-solid bg-[#EAF8F4] px-[16px] py-[8px] text-center text-sm font-semibold text-[#1F8268] md:block">
                 Show more
               </p>

@@ -1,16 +1,16 @@
 import React from "react";
 import style from "./style.module.css";
+import { Link } from "react-router-dom";
 
 const PopularSearch = () => {
 
-  const redirectTo = (url) => {
-    window.location.href = url
-  }
+
 
 
   const popularSearchData = [
     {
-      "title" : "Jobs for Freshers",
+      "_id": "1",
+      "title": "Jobs for Freshers",
       "trendingSpot": 1,
       "groupHoverBtn": "group-hover:bg-orange-600 group-hover:text-white",
       "hoverBg": "hover:bg-gradient-to-t from-orange-200 to-slate-50 hover:ring-bg-orange-700",
@@ -18,7 +18,8 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/jobs-for-freshers",
     },
     {
-      "title" : "Work from home jobs",
+      "_id": "2",
+      "title": "Work from home jobs",
       "trendingSpot": 2,
       "groupHoverBtn": "group-hover:bg-purple-600 group-hover:text-white",
       "hoverBg": "hover:bg-gradient-to-t from-purple-400 to-slate-50 hover:ring-bg-purple-700",
@@ -26,7 +27,8 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/wfh-jobs",
     },
     {
-      "title" : "Part time jobs",
+      "_id": "3",
+      "title": "Part time jobs",
       "trendingSpot": 3,
       "groupHoverBtn": "group-hover:bg-red-600 group-hover:text-white",
       "hoverBg": "hover:bg-gradient-to-t from-red-400 to-slate-50 hover:ring-bg-red-700",
@@ -34,7 +36,8 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/part-time-jobs",
     },
     {
-      "title" : "Jobs for women",
+      "_id": "4",
+      "title": "Jobs for women",
       "trendingSpot": 4,
       "groupHoverBtn": "group-hover:bg-green-600 group-hover:text-white",
       "hoverBg": "hover:bg-gradient-to-t from-green-300 to-slate-50 hover:ring-bg-green-700",
@@ -42,7 +45,8 @@ const PopularSearch = () => {
       "targetUrl": "/jobs/jobs-for-women",
     },
     {
-      "title" : "International Jobs",
+      "_id": "5",
+      "title": "International Jobs",
       "trendingSpot": 5,
       "groupHoverBtn": "group-hover:bg-cyan-600 group-hover:text-white",
       "hoverBg": "hover:bg-gradient-to-t from-cyan-200 to-slate-50 hover:ring-bg-cyan-700",
@@ -60,11 +64,11 @@ const PopularSearch = () => {
       </div>
 
       {popularSearchData.map((item) => {
-  return (
-    <div
-      className={`h-[22rem] card rounded-lg relative ring-2 ring-gray-200 overflow-x-hidden ${item?.hoverBg} transition-all duration-300 hover:cursor-pointer flex flex-col justify-between px-6 py-8 group`}
-    >
-      <style jsx>{`
+        return (
+          <div
+            className={`h-[22rem] card rounded-lg relative ring-2 ring-gray-200 overflow-x-hidden ${item?.hoverBg} transition-all duration-300 hover:cursor-pointer flex flex-col justify-between px-6 py-8 group`}
+          >
+            <style jsx>{`
         .stroke2 {
           font-size: 58px;
           -webkit-text-stroke-width: 1px;
@@ -78,31 +82,30 @@ const PopularSearch = () => {
           -webkit-text-stroke-width: 2px;
         }
       `}</style>
-      <p
-        className={`stroke2 absolute bottom-[7rem] strokeH group-hover:translate-x-[4rem] transition-all duration-300 translate-x-[10rem] text-nowrap overflow-hidden`}
-      >
-        {item?.title}
-      </p>
-      <div className="space-y-2">
-        <p>TRENDING AT #{item?.trendingSpot}</p>
-        <p className="text-xl font-bold">{item?.title}</p>
-      </div>
-      <div>
-        {" "}
-        <button 
-          className={`rounded-lg px-10 py-3 border border-gray-600 active:scale-95 transition-all duration-300 ${item?.groupHoverBtn}`}
-          onClick={() => redirectTo(item?.targetUrl)}
-        >
-          View 
-        </button>
-        {" "}
-      </div>
-      <div className="absolute right-0 bottom-1">
-        <img src={item?.imgUrl} alt={`${item?.title} image`} width="180px" />
-      </div>
-    </div>
-  );
-})}
+            <p
+              className={`stroke2 absolute bottom-[7rem] strokeH group-hover:translate-x-[4rem] transition-all duration-300 translate-x-[10rem] text-nowrap overflow-hidden`}
+            >
+              {item?.title}
+            </p>
+            <div className="space-y-2">
+              <p>TRENDING AT #{item?.trendingSpot}</p>
+              <p className="text-xl font-bold">{item?.title}</p>
+            </div>
+            <div>
+              {" "}
+              <Link to={`${item?.targetUrl}/${item?._id}` }
+                className={`rounded-lg px-10 py-3 border border-gray-600 active:scale-95 transition-all duration-300 ${item?.groupHoverBtn}`}
+              >
+                View
+              </Link>
+              {" "}
+            </div>
+            <div className="absolute right-0 bottom-1">
+              <img src={item?.imgUrl} alt={`${item?.title} image`} width="180px" />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
