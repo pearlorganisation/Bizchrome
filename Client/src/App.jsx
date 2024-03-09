@@ -86,15 +86,15 @@ const App = () => {
             <h2>Not logged in</h2>
           ),
         },
-    
+
         // job posting path
         {
-          path: "/jobs/:jobType",
+          path: "/jobs/:jobType/:jobId",
           element: <Jobs />
         },
 
         {
-          path: "/jobs/:jobType/:jobid",
+          path: "/jobs/:jobType/:jobId/:postingId",
           element: <Jobs />
         },
 
