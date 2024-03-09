@@ -39,11 +39,11 @@ const SignUp = () => {
   const onSubmit = (data) => {
     // e.preventDefault();
     try {
-      const { email, password, username } = data;
+      const { email, password, fullName } = data;
       const payload = {
         email,
         password,
-        username,
+        fullName,
       };
       setUserMetaData({ ...payload });
       dispatch(generateSignUpOTP(payload));
@@ -381,11 +381,11 @@ const SignUp = () => {
               {/* <input {...register("username")} /> */}
               <input
                 type="text"
-                id="username"
-                name="username"
+                id="fullName"
+                name="fullName"
                 class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                 disabled={signUpOtpGenerated}
-                {...register("username", { required: true })}
+                {...register("fullName", { required: true })}
               />
               {errors.username && (
                 <span className="text-red-500">This field is required</span>
@@ -446,7 +446,7 @@ const SignUp = () => {
                 type="submit"
                 class="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
                 disabled={signUpOtpGenerated}
-                // onClick={userSignUp}
+              // onClick={userSignUp}
               >
                 {isLoading ? (
                   !signUpOtpGenerated ? (
@@ -513,7 +513,7 @@ const SignUp = () => {
                 <button
                   type="submit"
                   class="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
-                  // onClick={userSignUp}
+                // onClick={userSignUp}
                 >
                   {isLoading ? (
                     <div
