@@ -15,7 +15,7 @@ const app = express();
 
 app.use(
   cors(
-    process.env.NODE_ENV === "development"
+    process.env.NODE_ENV === "production"
       ? {
           origin: ["http://localhost:5173", "https://bizchrome.vercel.app"],
           credentials: true,
