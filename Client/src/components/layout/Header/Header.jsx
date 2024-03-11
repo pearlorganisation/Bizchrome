@@ -2,7 +2,8 @@ import logo from "../../../assets/Images/Biz-chrome-logo.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoginOptionsModal from "../../Modals/LoginOptionsModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../features/actions/Auth/authActions";
 
 const dropdownNavs = [
   {
@@ -154,6 +155,7 @@ const dropdownNavs = [
 
 const Header = () => {
   const { isUserLoggedIn, userMetaData } = useSelector((store) => store.auth);
+  const dispatch = useDispatch()
   const [state, setState] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drapdownState, setDrapdownState] = useState({
@@ -365,7 +367,9 @@ const Header = () => {
                     </div>
                     <div class="flex justify-between py-8">
                       <button class="text-slate-500 hover:bg-slate-100 rounded-lg border-2 px-4 py-2 font-medium focus:outline-none focus:ring">Message</button>
-                      <button class="rounded-lg border-2 border-transparent bg-blue-600 px-4 py-2 font-medium text-white focus:outline-none focus:ring hover:bg-blue-700">Logout</button>
+                      <button onClick={() => {
+                        dispatch(userLogout())
+                      }} class="rounded-lg border-2 border-transparent bg-blue-600 px-4 py-2 font-medium text-white focus:outline-none focus:ring hover:bg-blue-700">Logout</button>
                     </div>
                   </div>
                 </div> : <div class="hidden lg:block">
