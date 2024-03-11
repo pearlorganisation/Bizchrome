@@ -15,7 +15,7 @@ const Jobs = () => {
   const getData = async () => {
     try {
       const result = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL_LOCAL}job/jobs/${jobId}`
+        `${import.meta.env.VITE_API_BASE_URL_PRODUCTION}job/jobs/${jobId}`
       );
       setPostingData(result.data.data);
     } catch (error) {
