@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  logout,
   sendSignUpOtp,
   signUp,
   userLogin,
@@ -9,4 +10,6 @@ const router = express.Router();
 router.route("/signup").post(signUp);
 router.route("/signupOtp").post(sendSignUpOtp);
 router.route("/userLogin").post(userLogin);
+router.route("/logout").post(logout);
+
 export default router;
