@@ -4,6 +4,7 @@ import { jobModel } from "../../models/Job/jobModel.js";
 export const getJobs = async (req, res) => {
   try {
     const { jobTypeId } = req?.params;
+    console.log("this is it ", jobTypeId);
     if (!jobTypeId)
       res.status(400).json({ message: "url parameter not provided" });
     const jobs = await jobModel.find({ jobTypeId });
