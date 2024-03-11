@@ -7,7 +7,7 @@ export const getJobs = async (req, res) => {
     console.log("this is it ", jobTypeId);
     if (!jobTypeId)
       res.status(400).json({ message: "url parameter not provided" });
-    const jobs = await jobModel.find({ jobTypeId });
+    const jobs = await jobModel.find({ jobTypeId: jobTypeId });
     if (jobs.length) {
       res.status(200).json({
         data: jobs,
