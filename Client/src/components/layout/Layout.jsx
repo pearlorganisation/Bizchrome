@@ -7,9 +7,9 @@ import { Toaster } from "sonner";
 const Layout = () => {
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
       <Toaster richColors />
     </div>
   );
