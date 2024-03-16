@@ -3,25 +3,32 @@ import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step3 from './steps/Step3'
 import Step4 from './steps/Step4'
+import { FaCircleCheck } from "react-icons/fa6";
+import { useSelector } from 'react-redux'
+
 
 const CreateJobStepForm = () => {
+    const { step1, step2, step3, step4 } = useSelector(state => state.business)
     const [step, setStep] = useState(1)
     const steps = [
         {
             name: 'Job Details',
+            isFilled: step1?.isFilled
 
         },
         {
             name: 'Candidate Requirement',
-
+            isFilled: step2?.isFilled
         }
         ,
         {
             name: 'Interview Information',
+            isFilled: step3?.isFilled
 
         },
         {
             name: 'Price Plans',
+            isFilled: step4?.isFilled
 
         }
     ]
@@ -33,11 +40,13 @@ const CreateJobStepForm = () => {
         <div className='w-full h-full bg-slate-100'>
             <div className='min-h-dvh container mx-auto px-4 py-3 space-y-6 '>
                 <div className='font-semibold text-2xl border-b-2 pb-3'>Post a New Job.</div>
-                <div className='flex container mx-auto justify-around'>
+                <div className='flex container mx-auto justify-around relative '>
                     {
                         steps?.map((item, ind) => {
                             return <div className='flex flex-col justify-center items-center relative'>
-                                <div className='cursor-pointer w-12 text-center px-4 py-2 bg-indigo-600 rounded-md text-white'> {ind + 1} </div>
+                                <div className='cursor-pointer w-12 h-12 text-center px-4 py-2 bg-indigo-600 rounded-md text-white grid place-items-center'>
+                                    {item?.isFilled ? <FaCircleCheck /> : ind + 1}
+                                </div>
                                 <p className=''>{item?.name}</p>
                             </div>
                         })
@@ -46,29 +55,20 @@ const CreateJobStepForm = () => {
                 </div>
                 <div className=''>
                     {
-                        step === 1 && <Step1 />
+                        step === 1 && <Step1 setStep={setStep} />
                     }
                     {
-                        step === 2 && <Step2 />
+                        step === 2 && <Step2 setStep={setStep} />
                     }
                     {
-                        step === 3 && <Step3 />
+                        step === 3 && <Step3 setStep={setStep} />
                     }
                     {
-                        step === 4 && <Step4 />
+                        step === 4 && <Step4 setStep={setStep} />
                     }
+
                 </div>
-                <div className='flex justify-around border-t-2 py-6'> <button onClick={() => {
-                    setStep(prev => {
-                        if (prev >= 2) return prev - 1
-                        else return prev
-                    })
-                }} className='px-4 py-2 rounded-md border-2 border-indigo-400 text-white bg-indigo-600'>Back</button> <button onClick={() => {
-                    setStep(prev => {
-                        if (prev <= 3) return prev + 1
-                        else return prev
-                    })
-                }} className='px-4 py-2 rounded-md border-2 border-indigo-400 text-white bg-indigo-600'>Next</button> </div>
+
             </div>
         </div>
     )

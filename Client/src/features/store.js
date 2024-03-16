@@ -7,6 +7,7 @@ import jobsReducer from "../features/slices/jobsSlice";
 import locationReducer from "../features/slices/CommonSlices/Location/location";
 import collegeReducer from "../features/slices/CommonSlices/Colleges/Colleges";
 import authReducer from "../features/slices/authSlice";
+import businessReducer from "../features/slices/businessSlice";
 
 // Combine your individual reducers here
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   location: locationReducer,
   college: collegeReducer,
+  business: businessReducer,
 });
 
 // Custom root reducer handling a clear action

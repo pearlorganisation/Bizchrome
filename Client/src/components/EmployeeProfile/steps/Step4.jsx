@@ -76,7 +76,7 @@ const Step4 = () => {
                             {
                                 pricePlans.map(item => {
                                     return <div class="group rounded-md bg-white p-2 text-left text-indigo-900 shadow-xl shadow-black/5 transition-transform hover:-translate-y-1">
-                                        <a href="#" target="_blank" rel="noreferrer noopener" class="flex h-full cursor-pointer select-none flex-col items-center rounded-md"
+                                        <a href="#" rel="noreferrer noopener" class="flex h-full cursor-pointer select-none flex-col items-center rounded-md"
                                         ><div class="w-full p-4">
                                                 <h3 class="text-2xl font-black text-indigo-700">
                                                     {item?.name}
@@ -104,115 +104,11 @@ const Step4 = () => {
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                                     </svg>
-                                                </p></div
-                                            ></a>
+                                                </p></div></a>
                                     </div>
                                 })
                             }
-                            {/* <div class="group rounded-md bg-white p-2 text-left text-indigo-900 shadow-xl shadow-black/5 transition-transform hover:-translate-y-1">
-                                <a href="#" target="_blank" rel="noreferrer noopener" class="flex h-full cursor-pointer select-none flex-col items-center rounded-md"
-                                ><div class="w-full p-4">
-                                        <h3 class="text-2xl font-black text-indigo-700">Team</h3>
-                                    </div>
-                                    <div class="w-full px-4 pb-2">
-                                        <p class="text-2xl font-black leading-none"><span class="text-xs">$</span>29<span class="text-base font-normal">/month</span></p>
-                                    </div>
-                                    <div class="w-full flex-1 p-4">
-                                        <ul class="list-inside list-disc divide-y text-sm">
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">View 5 profiles of Business for business connections.</p>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Connect 5 profiles of Business</p>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Total 2 Job posting</p>
-                                                <span class="whitespace-no-wrap inline-flex whitespace-nowrap rounded bg-gray-50 p-1 text-stone-500">add-on</span>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Connect total 5 candidates for Job</p>
-                                                <span class="whitespace-no-wrap inline-flex whitespace-nowrap rounded bg-gray-50 p-1 text-stone-500">add-on</span>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Canditate Alert</p>
-                                                <span class="whitespace-no-wrap inline-flex whitespace-nowrap rounded bg-gray-50 p-1 text-stone-500">add-on</span>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Duration: Lifetime</p>
-                                                <span class="whitespace-no-wrap inline-flex whitespace-nowrap rounded bg-gray-50 p-1 text-stone-500">add-on</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="w-full px-4 pb-4">
-                                        <p class="group flex w-full items-center justify-center rounded bg-indigo-700 py-1 text-center font-bold text-white transition">
-                                            Free Trial
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </p></div
-                                    ></a>
-                            </div>
-                            <div class="group rounded-md bg-white p-2 text-left text-indigo-900 shadow-xl shadow-black/5 transition-transform hover:-translate-y-1">
-                                <a href="#" target="_blank" rel="noreferrer noopener" class="flex h-full cursor-pointer select-none flex-col items-center rounded-md"
-                                ><div class="w-full p-4">
-                                        <h3 class="text-2xl font-black text-indigo-700">Company</h3>
-                                    </div>
-                                    <div class="w-full px-4 pb-2">
-                                        <p class="text-2xl font-black leading-none"><span class="text-xs">$</span>229<span class="text-base font-normal">/month</span></p>
-                                    </div>
-                                    <div class="w-full flex-1 p-4">
-                                        <ul class="list-inside list-disc divide-y text-sm">
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Invite up to 3 clients.</p>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">No contributors.</p>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">White-label.</p>
-                                                <span class="whitespace-no-wrap inline-flex whitespace-nowrap rounded bg-gray-50 p-1 text-stone-500">add-on</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="w-full px-4 pb-4">
-                                        <p class="group flex w-full items-center justify-center rounded py-1 text-center font-bold transition group-hover:bg-indigo-700 group-hover:text-white">
-                                            Free Trial
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </p></div
-                                    ></a>
-                            </div>
-                            <div class="group rounded-md bg-white p-2 text-left text-indigo-900 shadow-xl shadow-black/5 transition-transform hover:-translate-y-1">
-                                <a href="#" target="_blank" rel="noreferrer noopener" class="flex h-full cursor-pointer select-none flex-col items-center rounded-md"
-                                ><div class="w-full p-4">
-                                        <h3 class="text-2xl font-black text-indigo-700">Custom</h3>
-                                    </div>
-                                    <div class="w-full px-4 pb-2">
-                                        <p class="text-2xl font-black leading-none">Get a Quote</p>
-                                    </div>
-                                    <div class="w-full flex-1 p-4">
-                                        <ul class="list-inside list-disc divide-y text-sm">
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Invite up to 3 clients.</p>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">No contributors.</p>
-                                            </li>
-                                            <li class="flex items-start py-2 text-left">
-                                                <p class="w-full">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="w-full px-4 pb-4">
-                                        <p class="group flex w-full items-center justify-center rounded py-1 text-center font-bold transition group-hover:bg-indigo-700 group-hover:text-white">
-                                            Free Trial
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </p></div
-                                    ></a>
-                            </div> */}
+
                         </div>
                     </div>
                 </div>
