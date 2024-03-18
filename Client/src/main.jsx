@@ -2,27 +2,27 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home/Home.jsx";
-import Login from "./pages/Authentication/Candidate/Login.jsx";
-import SignUp from "./pages/Authentication/Candidate/SignUp.jsx";
-import BusinessSignup from "./pages/Authentication/Business/BusinessSignup.jsx";
-import BusinessLogin from "./pages/Authentication/Business/BusinessLogin.jsx";
-import LoginAsInvestor from "./pages/Authentication/Investor/LoginAsInvestor.jsx";
-import Forget from "./pages/Authentication/Candidate/Forget.jsx";
 import { Provider } from "react-redux";
-import OtpVerification from "./pages/Authentication/Candidate/OtpVerification.jsx";
-import store from "./Store/configureStore.js";
+import { persistStore } from "redux-persist";
+import { injectStore } from "./services/axiosInterceptors.js";
+import { PersistGate } from "redux-persist/integration/react";
+import store from "./features/store.js";
 
 
 //Simulation of context api
 // const { loggedInUserData, isUserLoggedIn } = useAuth();
+injectStore(store);
+let persistor = persistStore(store);
 //
 
 ReactDOM.createRoot(document.getElementById("root")).render(
- 
-    <Provider store={store}>
+
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+
       <App />
-    </Provider>
+
+    </PersistGate>
+  </Provider>
 
 );

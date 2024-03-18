@@ -4,14 +4,23 @@ import JobDetails from "../../components/JobDetails/JobDetails";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getJobs } from "../../features/actions/jobActions";
 
 const Jobs = () => {
+<<<<<<< HEAD
   const { jobType, jobId, postingId } = useParams();
+=======
+  const { jobsData } = useSelector(state => state.jobs)
+  const { jobType, jobId, postingId } = useParams();
+  const dispatch = useDispatch()
+>>>>>>> 25307c64219f193ccd0f0bc7cce3f029ec3f5a26
 
   const [jobData, setJobData] = useState(undefined);
   // let [searchParams, setSearchParams] = useSearchParams();
   const [postingData, setPostingData] = useState([]);
 
+<<<<<<< HEAD
   const getData = async () => {
     try {
       const result = await axios.get(
@@ -22,10 +31,28 @@ const Jobs = () => {
       console.log('error is::',error);
     }
   };
+=======
+  // const getData = async () => {
+
+  //   try {
+  //     const result = await axios.get(
+  //       `${import.meta.env.VITE_API_BASE_URL_PRODUCTION}job/jobs/${jobId}`
+  //     );
+  //     setPostingData(result.data.data);
+  //   } catch (error) {
+  //     console.log('error is::', error);
+  //   }
+  // };
+>>>>>>> 25307c64219f193ccd0f0bc7cce3f029ec3f5a26
 
   useEffect(() => {
-    getData();
+    dispatch(getJobs({ jobId: jobId }))
   }, []);
+
+  useEffect(() => {
+    setPostingData(jobsData);
+  }, [jobsData])
+
 
   // setPostingData(result)
 

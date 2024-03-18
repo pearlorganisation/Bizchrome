@@ -3,6 +3,7 @@ import {
   generateSignUpOTP,
   signUp,
   userLogin,
+  userLogout,
 } from "../actions/Auth/authActions";
 import { toast } from "sonner";
 const initialState = {
@@ -83,6 +84,34 @@ const authSlice = createSlice({
       toast.success(action?.payload?.message);
     });
     builder.addCase(userLogin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+
+      //some toast msg will come here
+      console.log("Action payla", action);
+      toast.error(action?.payload || "Please try again");
+    });
+
+    //  ToLogout
+    builder.addCase(userLogout.pending, (state, action) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isUserLoggedIn = false;
+      state.userMetaData = [];
+      localStorage.clear();
+      sessionStorage.clear();
+      localStorage.removeItem("persist:BizChrome");
+      toast.success("Logout Successfully", {
+        position: "top-center",
+      });
+
+      toast.success("Logout Successfully");
+    });
+    builder.addCase(userLogout.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
 

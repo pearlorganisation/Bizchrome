@@ -23,6 +23,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import JobPostings from "./components/JobPostings/JobPostings";
 import JobDetails from "./components/JobDetails/JobDetails";
 import Jobs from "./pages/Jobs/Jobs";
+import CreateJobStepForm from "./components/EmployeeProfile/CreateJobStepForm";
 
 const App = () => {
   const { isUserLoggedIn } = useAuth();
@@ -101,6 +102,10 @@ const App = () => {
         {
           path: "/test",
           element: <UserProfile />
+        },
+        {
+          path: "/stepForm",
+          element: <CreateJobStepForm />
         }
       ],
     },

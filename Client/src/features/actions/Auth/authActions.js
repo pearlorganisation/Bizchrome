@@ -54,3 +54,21 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
+
+// To Logout
+export const userLogout = createAsyncThunk(
+  "/logout",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await instance.post("/auth/logout", payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
