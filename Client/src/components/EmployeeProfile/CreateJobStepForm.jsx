@@ -40,7 +40,7 @@ const CreateJobStepForm = () => {
 
     return (
         <div className='w-full h-full bg-white'>
-            <div className='min-h-dvh container mx-auto px-4 py-3 space-y-6'>
+            <div className='min-h-dvh  mx-auto px-4 py-3 space-y-6'>
                 <div className='font-semibold text-2xl border-b-2 pb-3'>Post a New Job.</div>
                 <div className='flex container mx-auto justify-around relative '>
                     {

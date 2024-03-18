@@ -57,9 +57,9 @@ const PricePlans = () => {
         }
     ]
     return (
-        <div className='border-2 min-h-dvh w-full'>
-            <div class="h-screen">
-                <div class="relative mx-auto">
+        <div className='min-h-dvh w-full'>
+            <div class="h-screen  grid place-items-center">
+                <div class="relative">
                     <div class="absolute inset-0 bottom-32 bg-gradient-to-t from-blue-900 to-indigo-700 border-b-8 border-indigo-700"></div>
                     <div class="relative mx-auto w-full max-w-screen-xl px-2 pt-20 text-left sm:px-10">
                         <div class="mb-16">
