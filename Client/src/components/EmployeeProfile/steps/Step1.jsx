@@ -30,7 +30,7 @@ const Step1 = ({ setStep }) => {
 
     const onSubmit = (data) => {
         console.log("data::", data)
-        dispatch(addDataOfStepForm1({ isFilled: true, formData: data }))
+        dispatch(addDataOfStepForm1({ lable: 'Job Details', isFilled: true, formData: data }))
         setStep(prev => {
             if (prev <= 3) return prev + 1
             else return prev

@@ -22,7 +22,7 @@ const Step3 = ({ setStep }) => {
 
     const onSubmit = (data) => {
         console.log("data::", data)
-        dispatch(addDataOfStepForm3({ isFilled: true, formData: data }))
+        dispatch(addDataOfStepForm3({ lable: 'Interview Information', isFilled: true, formData: data }))
         setStep(prev => {
             if (prev <= 3) return prev + 1
             else return prev
