@@ -67,6 +67,44 @@ const Step4 = ({ setStep }) => {
         step3
     ]
 
+    const onSubmit = () => {
+        const {
+            typeOfInterview,
+            interviewAddress,
+            department,
+            typeOfJob,
+            role,
+            shift,
+            minimumExperience,
+            minimumEducation,
+            englishLevel,
+            jobTags,
+            companyName,
+            totalExperience,
+            ...rest
+        } = { ...step1?.formData, ...step2?.formData, ...step3?.formData }
+        console.log("form::", {
+            ...rest,
+            company: companyName,
+            tags: jobTags,
+            jobRequirements: {
+                experience: minimumExperience,
+                education: minimumEducation,
+                communicationLevel: englishLevel
+            },
+            jobRole: {
+                deparment: department,
+                employmentType: typeOfJob,
+                category: role,
+                shift: shift
+            }, interviewDetails: {
+                address: interviewAddress,
+                interviewMode: typeOfInterview
+            }
+        })
+    }
+
+    // console.log("form::", { ...step1?.formData, ...step2?.formData, ...step3?.formData })
     return (
         <section className="leading-relaxed max-w-screen-xl mt-12 mx-auto px-4 md:px-8 border">
             {/* <div className="space-y-3 text-center">
@@ -99,10 +137,11 @@ const Step4 = ({ setStep }) => {
                     className='px-4 py-2 rounded-md border-2 border-indigo-400 text-white bg-indigo-600'>Back</button>
 
                 <button type='button' onClick={() => {
-                    setStep(prev => {
-                        if (prev <= 4) return prev + 1
-                        else return prev
-                    })
+                    // setStep(prev => {
+                    //     if (prev <= 4) return prev + 1
+                    //     else return prev
+                    // })
+                    onSubmit()
                 }} className='px-4 py-2 rounded-md border-2 border-indigo-400 text-white bg-indigo-600'>Next</button> </div>
         </section>
     )
