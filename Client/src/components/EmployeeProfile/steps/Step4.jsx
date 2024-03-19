@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { MdModeEditOutline } from "react-icons/md";
+import { createJob, getJobs } from "../../../features/actions/jobActions";
 
 const FaqsCard = (props) => {
 
@@ -60,6 +61,7 @@ const FaqsCard = (props) => {
 
 const Step4 = ({ setStep }) => {
     const { step1, step2, step3, step4, step5 } = useSelector(state => state.business)
+    const dispatch = useDispatch()
 
     const faqsList = [
         step1,
@@ -81,9 +83,10 @@ const Step4 = ({ setStep }) => {
             jobTags,
             companyName,
             totalExperience,
+            jobTypeName,
             ...rest
         } = { ...step1?.formData, ...step2?.formData, ...step3?.formData }
-        console.log("form::", {
+        const payload = {
             ...rest,
             company: companyName,
             tags: jobTags,
@@ -101,7 +104,9 @@ const Step4 = ({ setStep }) => {
                 address: interviewAddress,
                 interviewMode: typeOfInterview
             }
-        })
+        }
+        console.log("form::", payload)
+        dispatch(createJob({ jobId: Number(jobTypeName), payload: payload }))
     }
 
     // console.log("form::", { ...step1?.formData, ...step2?.formData, ...step3?.formData })

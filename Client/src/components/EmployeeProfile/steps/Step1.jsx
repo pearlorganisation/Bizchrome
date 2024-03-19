@@ -23,7 +23,8 @@ const Step1 = ({ setStep }) => {
             location: step1?.formData?.location,
             minSalary: step1?.formData?.minSalary,
             maxSalary: step1?.formData?.maxSalary,
-            shift: step1?.formData?.shift
+            shift: step1?.formData?.shift,
+            jobTypeName: step1?.formData?.jobTypeName
 
         }
     } : {})
@@ -110,6 +111,26 @@ const Step1 = ({ setStep }) => {
                                     {...register("typeOfJob", { required: true })}
                                     class="peer hidden" value={item} type="radio" id={item} />
                                 <label class={`peer-checked:border-indigo-400 peer-checked:bg-indigo-200 peer-checked:ring-4 ring-indigo-500/30 absolute top-0 h-full w-full cursor-pointer rounded-xl border ${errors.typeOfJob ? 'ring-4 ring-red-500/30' : null}`} for={item}> </label>
+                                <div class="peer-checked:border-transparent peer-checked:bg-indigo-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-indigo-400 ring-offset-2"></div>
+                                <span class="pointer-events-none z-10">{item}</span>
+                            </div>
+                        })
+                    }
+
+
+                </div>
+            </div>
+
+            <div className=''>
+                <p class="font-medium mb-1 ">Jobs's For</p>
+                <div class="flex gap-x-4">
+                    {
+                        ['Freshers', 'Work From Home', `Part Time Jobs`, `Jobs For Women`, `International Jobs`]?.map((item, ind) => {
+                            return <div class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-700">
+                                <input
+                                    {...register("jobTypeName", { required: true })}
+                                    class="peer hidden" value={ind + 1} type="radio" id={item} />
+                                <label class={`peer-checked:border-indigo-400 peer-checked:bg-indigo-200 peer-checked:ring-4 ring-indigo-500/30 absolute top-0 h-full w-full cursor-pointer rounded-xl border ${errors.jobTypeName ? 'ring-4 ring-red-500/30' : null}`} for={item}> </label>
                                 <div class="peer-checked:border-transparent peer-checked:bg-indigo-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-indigo-400 ring-offset-2"></div>
                                 <span class="pointer-events-none z-10">{item}</span>
                             </div>

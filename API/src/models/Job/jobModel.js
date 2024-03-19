@@ -39,7 +39,6 @@ const jobSchema = new mongoose.Schema(
     },
     jobTypeName: {
       type: String,
-      required: [true, "Job type name is required"],
       default: null,
     },
     jobDescription: {
