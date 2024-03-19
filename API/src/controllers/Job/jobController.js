@@ -4,10 +4,39 @@ import { jobModel } from "../../models/Job/jobModel.js";
 export const getJobs = async (req, res) => {
   try {
     const { jobTypeId } = req?.params;
-    console.log("this is it ", jobTypeId);
+    const {minSalary, experience, whenPosted , workType , workShift, department } = req?.query
+    
+    let query = {jobTypeId: jobTypeId}
+    
+    
+    if(req?.query){
+      query = {
+        jobTypeId: Number(jobTypeId),
+        minSalary: {$gte: Number(minSalary) || 0},
+        "jobRequirements.experience":{$lte : Number(experience) || 100},
+      }
+      if(whenPosted) {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - whenPosted);
+        query['updatedAt'] = {$gte: daysAgo}
+      }
+      if(workType){
+        query['jobRole.employmentType'] = workType
+      }
+      if(workShift){
+        query['jobRole.shift'] = workShift
+      }
+      if(department){
+        query['jobRole.department'] = department
+      }
+    }
+
+    // console.log(query)
+
+    
     if (!jobTypeId)
       res.status(400).json({ message: "url parameter not provided" });
-    const jobs = await jobModel.find({ jobTypeId: jobTypeId });
+    const jobs = await jobModel.find(query);
     if (jobs.length) {
       res.status(200).json({
         data: jobs,

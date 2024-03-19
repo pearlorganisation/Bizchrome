@@ -78,13 +78,13 @@ const jobSchema = new mongoose.Schema(
       },
     },
     jobRole: {
-      deparment: {
+      department: {
         type: String,
-        default: null,
+        default: "",
       },
       employmentType: {
         type: String,
-        default: null,
+        default: "Full Time",
       },
       category: {
         type: String,
@@ -92,17 +92,17 @@ const jobSchema = new mongoose.Schema(
       },
       shift: {
         type: String,
-        default: null,
+        default: "Day Shift",
       },
     },
     interviewDetails: {
       address: {
         type: String,
-        default: null,
+        default: "",
       },
       interviewMode: {
         type: String,
-        default: null,
+        default: "",
       },
     },
   },
