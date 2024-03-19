@@ -43,26 +43,9 @@ const jobSchema = new mongoose.Schema(
       default: null,
     },
     jobDescription: {
-      headings: [
-        {
-          name: {
-            type: String,
-            default: null,
-          },
-        },
-      ],
-      description: [
-        {
-          headingName: {
-            type: String,
-            default: null,
-          },
-          content: {
-            type: String,
-            default: null,
-          },
-        },
-      ],
+      type: String,
+      required: [true, "Job description name is required"],
+      default: null,
     },
     tags: [
       {
@@ -95,13 +78,13 @@ const jobSchema = new mongoose.Schema(
       },
     },
     jobRole: {
-      deparment: {
+      department: {
         type: String,
-        default: null,
+        default: "",
       },
       employmentType: {
         type: String,
-        default: null,
+        default: "Full Time",
       },
       category: {
         type: String,
@@ -109,17 +92,17 @@ const jobSchema = new mongoose.Schema(
       },
       shift: {
         type: String,
-        default: null,
+        default: "Day Shift",
       },
     },
     interviewDetails: {
       address: {
         type: String,
-        default: null,
+        default: "",
       },
       interviewMode: {
         type: String,
-        default: null,
+        default: "",
       },
     },
   },
