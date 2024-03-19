@@ -43,26 +43,9 @@ const jobSchema = new mongoose.Schema(
       default: null,
     },
     jobDescription: {
-      headings: [
-        {
-          name: {
-            type: String,
-            default: null,
-          },
-        },
-      ],
-      description: [
-        {
-          headingName: {
-            type: String,
-            default: null,
-          },
-          content: {
-            type: String,
-            default: null,
-          },
-        },
-      ],
+      type: String,
+      required: [true, "Job description name is required"],
+      default: null,
     },
     tags: [
       {

@@ -93,11 +93,7 @@ const PopularSearch = () => {
             </div>
             <div>
               {" "}
-<<<<<<< HEAD
-              <Link to={`${item?.targetUrl}/${item?._id}` }
-=======
               <Link to={`${item?.targetUrl}/${item?._id}`}
->>>>>>> 25307c64219f193ccd0f0bc7cce3f029ec3f5a26
                 className={`rounded-lg px-10 py-3 border border-gray-600 active:scale-95 transition-all duration-300 ${item?.groupHoverBtn}`}
               >
                 View
