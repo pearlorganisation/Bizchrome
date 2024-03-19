@@ -5,37 +5,42 @@ import { useParams, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobs } from "../../features/actions/jobActions";
+// import { getJobs } from "../../features/actions/jobActions";
+
+import {Circles} from 'react-loader-spinner'
 
 const Jobs = () => {
-  const { jobsData } = useSelector(state => state.jobs)
+  const [postingData, setPostingData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  // const { jobsData } = useSelector(state => state.jobs)
   const { jobType, jobId, postingId } = useParams();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [jobData, setJobData] = useState(undefined);
   // let [searchParams, setSearchParams] = useSearchParams();
-  const [postingData, setPostingData] = useState([]);
 
-  // const getData = async () => {
-
-  //   try {
-  //     const result = await axios.get(
-  //       `${import.meta.env.VITE_API_BASE_URL_PRODUCTION}job/jobs/${jobId}`
-  //     );
-  //     setPostingData(result.data.data);
-  //   } catch (error) {
-  //     console.log('error is::', error);
-  //   }
-  // };
+  const getData = async () => {
+    
+    try {
+      await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL_LOCAL}job/jobs/${jobId}`
+      ).then((result) => {
+        setPostingData(result.data.data);
+        setIsLoading(false)
+      })
+    } catch (error) {
+      setIsLoading(false)
+      console.log("error is::", error);
+    }
+  };
 
   useEffect(() => {
-    dispatch(getJobs({ jobId: jobId }))
+    getData();
   }, []);
 
-  useEffect(() => {
-    setPostingData(jobsData);
-  }, [jobsData])
-
+  // useEffect(() => {
+  //   setPostingData(jobsData);
+  // }, [jobsData])
 
   // setPostingData(result)
 
@@ -142,15 +147,39 @@ const Jobs = () => {
 
   return (
     <>
-      {!postingId && (
-        <JobPostings
-          data={postingData}
-          jobType={jobType}
-          setJobData={setJobData}
-        />
-      )}
-      {postingId && (
-        <JobDetails data={jobData} jobType={jobType} jobId={jobId} setJobData={setJobData} />
+      {isLoading ? (
+        <>
+        <div className="h-[80vh] w-full flex flex-row justify-center pt-[10%]">
+          <Circles
+            height="100"
+            width="100"
+            color="#4d64e5"
+            ariaLabel="circles-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+        </>
+      ) : (
+        <>
+          {!postingId && (
+            <JobPostings
+              data={postingData}
+              setPostingData={postingData}
+              jobType={jobType}
+              setJobData={setJobData}
+            />
+          )}
+          {postingId && (
+            <JobDetails
+              data={jobData}
+              jobType={jobType}
+              jobId={jobId}
+              setJobData={setJobData}
+            />
+          )}
+        </>
       )}
     </>
   );

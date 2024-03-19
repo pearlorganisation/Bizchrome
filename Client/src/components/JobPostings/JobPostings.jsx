@@ -33,11 +33,11 @@ const JobPostings = ({ data, setJobData }) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("running this");
-    setPostingsData(data);
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   // console.log("running this");
+  //   setPostingsData(data);
+  //   // console.log(data);
+  // }, [data]);
 
   return (
     <>
