@@ -16,13 +16,15 @@ const Step1 = ({ setStep }) => {
     } = useForm(step1?.isFilled ? {
         defaultValues: {
             companyName: step1?.formData?.companyName,
-            jobTitle: step1?.formData?.jobTitle,
+            position: step1?.formData?.position,
             department: step1?.formData?.department,
             role: step1?.formData?.role,
             typeOfJob: step1?.formData?.typeOfJob,
             location: step1?.formData?.location,
             minSalary: step1?.formData?.minSalary,
             maxSalary: step1?.formData?.maxSalary,
+            shift: step1?.formData?.shift,
+            jobTypeName: step1?.formData?.jobTypeName
 
         }
     } : {})
@@ -60,12 +62,12 @@ const Step1 = ({ setStep }) => {
                         Job Title / Designation
                     </label>
                     <input
-                        {...register("jobTitle", { required: true })}
+                        {...register("position", { required: true })}
                         type="text"
                         placeholder=''
                         className="w-full focus:ring-4 ring-indigo-500/30 mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border-2 focus:border-indigo-500 transition-all shadow-sm rounded-lg"
                     />
-                    {errors.jobTitle && <span className='text-red-500'>Job Title field is required</span>}
+                    {errors.position && <span className='text-red-500'>Job Title field is required</span>}
                 </div>
             </div>
             <div className='grid grid-cols-2'>
@@ -120,6 +122,26 @@ const Step1 = ({ setStep }) => {
             </div>
 
             <div className=''>
+                <p class="font-medium mb-1 ">Jobs's For</p>
+                <div class="flex gap-x-4">
+                    {
+                        ['Freshers', 'Work From Home', `Part Time Jobs`, `Jobs For Women`, `International Jobs`]?.map((item, ind) => {
+                            return <div class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-700">
+                                <input
+                                    {...register("jobTypeName", { required: true })}
+                                    class="peer hidden" value={ind + 1} type="radio" id={item} />
+                                <label class={`peer-checked:border-indigo-400 peer-checked:bg-indigo-200 peer-checked:ring-4 ring-indigo-500/30 absolute top-0 h-full w-full cursor-pointer rounded-xl border ${errors.jobTypeName ? 'ring-4 ring-red-500/30' : null}`} for={item}> </label>
+                                <div class="peer-checked:border-transparent peer-checked:bg-indigo-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-indigo-400 ring-offset-2"></div>
+                                <span class="pointer-events-none z-10">{item}</span>
+                            </div>
+                        })
+                    }
+
+
+                </div>
+            </div>
+
+            <div className=''>
                 <p class="font-medium mb-1 ">Location</p>
                 <div class="flex gap-x-4">
                     {
@@ -130,6 +152,26 @@ const Step1 = ({ setStep }) => {
                                     value={item}
                                     class="peer hidden" type="radio" id={item} />
                                 <label class={`peer-checked:border-indigo-400 peer-checked:bg-indigo-200 peer-checked:ring-4 ring-indigo-500/30 absolute top-0 h-full w-full cursor-pointer rounded-xl border ${errors.location ? 'ring-4 ring-red-500/30' : null}`} for={item}> </label>
+                                <div class="peer-checked:border-transparent peer-checked:bg-indigo-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-indigo-400 ring-offset-2"></div>
+                                <span class="pointer-events-none z-10">{item}</span>
+                            </div>
+                        })
+                    }
+
+                </div>
+            </div>
+
+            <div className=''>
+                <p class="font-medium mb-1 ">Shift</p>
+                <div class="flex gap-x-4">
+                    {
+                        ['Day', 'Night']?.map(item => {
+                            return <div class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-700">
+                                <input
+                                    {...register("shift", { required: true })}
+                                    value={item}
+                                    class="peer hidden" type="radio" id={item} />
+                                <label class={`peer-checked:border-indigo-400 peer-checked:bg-indigo-200 peer-checked:ring-4 ring-indigo-500/30 absolute top-0 h-full w-full cursor-pointer rounded-xl border ${errors.shift ? 'ring-4 ring-red-500/30' : null}`} for={item}> </label>
                                 <div class="peer-checked:border-transparent peer-checked:bg-indigo-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-indigo-400 ring-offset-2"></div>
                                 <span class="pointer-events-none z-10">{item}</span>
                             </div>
