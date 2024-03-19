@@ -107,22 +107,24 @@ const App = () => {
           path: "/test",
           element: <UserProfile />
         },
-        {
-          path: "/business",
-          element: <Business />,
-          children: [
-            {
-              path: 'stepForm',
-              element: <CreateJobStepForm />
-            },
-            {
-              path: 'pricePlans',
-              element: <PricePlans />
-            }
-          ]
-        },
+
 
       ],
+
+    },
+    {
+      path: "/business",
+      element: <Business />,
+      children: [
+        {
+          path: 'stepForm',
+          element: <CreateJobStepForm />
+        },
+        {
+          path: 'pricePlans',
+          element: <PricePlans />
+        }
+      ]
     },
   ]);
 
