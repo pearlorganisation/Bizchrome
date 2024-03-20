@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "sonner";
-import { createJob, getJobs } from "../actions/jobActions";
+import { getJobs } from "../actions/jobActions";
 const initialState = {
   isLoading: false,
   isError: false,
@@ -27,21 +27,6 @@ const jobsSlice = createSlice({
     });
 
     // createJobs
-
-    builder.addCase(createJob.pending, (state, action) => {
-      state.isLoading = true;
-      state.isError = false;
-    });
-    builder.addCase(createJob.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.jobsData = action.payload;
-    });
-    builder.addCase(createJob.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      toast.error(action?.payload || "Something went wrong");
-    });
   },
 });
 

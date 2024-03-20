@@ -7,6 +7,7 @@ import { persistStore } from "redux-persist";
 import { injectStore } from "./services/axiosInterceptors.js";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./features/store.js";
+import { Toaster } from "sonner";
 
 
 //Simulation of context api
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <PersistGate loading={null} persistor={persistor}>
 
       <App />
+      <Toaster richColors />
 
     </PersistGate>
   </Provider>

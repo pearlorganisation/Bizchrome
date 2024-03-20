@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createJob } from "../actions/businessActions";
+import { toast } from "sonner";
 const initialState = {
   isLoading: false,
   isError: false,
@@ -22,7 +24,7 @@ const initialState = {
   businessData: [],
 };
 const businessSlice = createSlice({
-  name: "Jobs",
+  name: "businessSlice",
   initialState,
   reducers: {
     addDataOfStepForm1: (state, action) => {
@@ -35,7 +37,26 @@ const businessSlice = createSlice({
       state.step3 = action.payload;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    //Handles sign UP
+    builder.addCase(createJob.pending, (state, action) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(createJob.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.businessData = action.payload;
+      toast.success("Successfully Created....");
+    });
+    builder.addCase(createJob.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      toast.error(action?.payload || "Something went wrong");
+    });
+
+    // createJobs
+  },
 });
 
 export default businessSlice.reducer;

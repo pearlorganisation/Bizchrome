@@ -21,7 +21,7 @@ const Step2 = ({ setStep }) => {
             totalExperience: step2?.formData?.totalExperience,
             minimumExperience: step2?.formData?.minimumExperience,
             englishLevel: step2?.formData?.englishLevel,
-            description: step2?.formData?.description,
+            jobDescription: step2?.formData?.jobDescription,
 
         }
     } : {})
@@ -90,7 +90,7 @@ const Step2 = ({ setStep }) => {
                 <div class="flex gap-x-4">
 
                     {
-                        [`6 Months`, `1 Year`, `2 Year`, `3 Year`, `5 Year`]?.map((item, ind) => {
+                        [1, 2, 3, 4, 5, 6]?.map((item, ind) => {
                             return <div class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-2 font-medium text-gray-700">
                                 <input
                                     {...register("minimumExperience", { required: true })}
@@ -172,11 +172,11 @@ const Step2 = ({ setStep }) => {
                         Job Description
                     </label>
                     <textarea
-                        {...register("description", { required: true })}
+                        {...register("jobDescription", { required: true })}
 
                         className="w-full resize-none focus:ring-4 ring-indigo-500/30 mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border-2 focus:border-indigo-500 transition-all shadow-sm rounded-lg"
                         id="" cols="30" rows="10" />
-                    {errors.description && <span className='text-red-500'>This field is required</span>}
+                    {errors.jobDescription && <span className='text-red-500'>This field is required</span>}
 
                 </div>
             </div>
