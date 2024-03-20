@@ -28,7 +28,7 @@ const JobFilter = ({ setApiUrl }) => {
   const [workType, setWorkType] = useState([]);
 
   // state for work type
-  const [department, setDepartment] = useState([]);
+  // const [department, setDepartment] = useState([]);
 
   // state for work type
   const [workShift, setWorkShift] = useState([]);
@@ -84,35 +84,44 @@ const JobFilter = ({ setApiUrl }) => {
     const { value, checked } = event.target;
     // If checkbox is checked, add its value to the array state
     if (checked) {
-      setCheckedValues((prevValues) => [...prevValues, value]);
+      setWorkType((prevValues) => [...prevValues, value]);
     } else {
       // If checkbox is unchecked, remove its value from the array state
-      setCheckedValues((prevValues) =>
-        prevValues.filter((item) => item !== value)
-      );
+      setWorkType((prevValues) => prevValues.filter((item) => item !== value));
+    }
+  };
+
+  // function to handle checking box for work shifts
+  const handleWorkShifts = (event) => {
+    const { value, checked } = event.target;
+    // If checkbox is checked, add its value to the array state
+    if (checked) {
+      setWorkShift((prevValues) => [...prevValues, value]);
+    } else {
+      // If checkbox is unchecked, remove its value from the array state
+      setWorkShift((prevValues) => prevValues.filter((item) => item !== value));
     }
   };
 
   const applyFilters = () => {
     // if(department)
     // `&workType[]=${workType}&workShift=${workShift}&department=${department}`
-
     let wtSearchQuery = "";
-    workType.forEach((wt) => {
+    workType?.forEach((wt) => {
       wtSearchQuery += `&workType[]=${wt}`;
     });
 
     let wsSearchQuery = "";
-    workShift.forEach((ws) => {
+    workShift?.forEach((ws) => {
       wsSearchQuery += `&workShift[]=${ws}`;
     });
 
-    let depSearchQuery = "";
-    department.forEach((dep) => {
-      depSearchQuery += `&department[]=${dep}`;
-    });
+    // let depSearchQuery = "";
+    // department?.forEach((dep) => {
+    //   depSearchQuery += `&department[]=${dep}`;
+    // });
     setApiUrl(
-      `?minSalary=${salaryValue}&experience=${experienceValue}&whenPosted=${whenPosted}${wtSearchQuery}${wsSearchQuery}${depSearchQuery}`
+      `?minSalary=${salaryValue}&experience=${experienceValue}&whenPosted=${whenPosted}${wtSearchQuery}${wsSearchQuery}`
     );
   };
 
@@ -120,9 +129,9 @@ const JobFilter = ({ setApiUrl }) => {
     setExperienceValue(0);
     setSalaryValue(0);
     setWhenPosted(0);
-    setWorkShift("");
-    setWorkType("");
-    setDepartment("");
+    setWorkShift([]);
+    setWorkType([]);
+    // setDepartment([]);
     setApiUrl(`?minSalary=0`);
   };
 
@@ -422,7 +431,7 @@ const JobFilter = ({ setApiUrl }) => {
                     id="fulltimeCb"
                     type="checkbox"
                     value="Full Time"
-                    checked={checkedValues.includes("Full Time")}
+                    checked={workType.includes("Full Time")}
                     onChange={(e) => handleWorkTypes(e)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
@@ -440,7 +449,7 @@ const JobFilter = ({ setApiUrl }) => {
                     id="parttimeCb"
                     type="checkbox"
                     value="Part Time"
-                    checked={checkedValues.includes("Part Time")}
+                    checked={workType.includes("Part Time")}
                     onChange={handleWorkTypes}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
@@ -500,7 +509,9 @@ const JobFilter = ({ setApiUrl }) => {
                   <input
                     id="dayShiftCb"
                     type="checkbox"
-                    value=""
+                    value="Day Shift"
+                    checked={workShift.includes("Day Shift")}
+                    onChange={(e) => handleWorkShifts(e)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -516,7 +527,9 @@ const JobFilter = ({ setApiUrl }) => {
                   <input
                     id="nightShiftCb"
                     type="checkbox"
-                    value=""
+                    value="Night Shift"
+                    checked={workShift.includes("Night Shift")}
+                    onChange={(e) => handleWorkShifts(e)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -531,7 +544,7 @@ const JobFilter = ({ setApiUrl }) => {
           </div>
 
           {/* Department */}
-          <div
+          {/* <div
             id="accordion-flush"
             data-accordion="collapse"
             data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
@@ -571,7 +584,7 @@ const JobFilter = ({ setApiUrl }) => {
               aria-labelledby="accordion-flush-heading-1"
             >
               <div className="py-4 border-b border-gray-200 dark:border-gray-700">
-                {/* checkbox */}
+             
                 <div className="flex items-center mb-3">
                   <input
                     id="department1"
@@ -587,7 +600,7 @@ const JobFilter = ({ setApiUrl }) => {
                   </label>
                 </div>
 
-                {/* checkbox */}
+           
                 <div className="flex items-center mb-3">
                   <input
                     id="department2"
@@ -603,7 +616,7 @@ const JobFilter = ({ setApiUrl }) => {
                   </label>
                 </div>
 
-                {/* checkbox */}
+             
                 <div className="flex items-center mb-3">
                   <input
                     id="department3"
@@ -619,7 +632,7 @@ const JobFilter = ({ setApiUrl }) => {
                   </label>
                 </div>
 
-                {/* checkbox */}
+          
                 <div className="flex items-center mb-3">
                   <input
                     id="department4"
@@ -635,7 +648,7 @@ const JobFilter = ({ setApiUrl }) => {
                   </label>
                 </div>
 
-                {/* checkbox */}
+           
                 <div className="flex items-center mb-3">
                   <input
                     id="department5"
@@ -651,7 +664,7 @@ const JobFilter = ({ setApiUrl }) => {
                   </label>
                 </div>
 
-                {/* more departments listing */}
+              
 
                 <div
                   id="accordian-all-departments"
@@ -659,7 +672,7 @@ const JobFilter = ({ setApiUrl }) => {
                   aria-labelledby="accordion-flush-heading-1"
                 >
                   <div>
-                    {/* checkbox */}
+                   
                     <div className="flex items-center mb-3">
                       <input
                         id="department1"
@@ -675,7 +688,7 @@ const JobFilter = ({ setApiUrl }) => {
                       </label>
                     </div>
 
-                    {/* checkbox */}
+              
                     <div className="flex items-center mb-3">
                       <input
                         id="department2"
@@ -691,7 +704,7 @@ const JobFilter = ({ setApiUrl }) => {
                       </label>
                     </div>
 
-                    {/* checkbox */}
+              
                     <div className="flex items-center mb-3">
                       <input
                         id="department3"
@@ -707,7 +720,7 @@ const JobFilter = ({ setApiUrl }) => {
                       </label>
                     </div>
 
-                    {/* checkbox */}
+            
                     <div className="flex items-center mb-3">
                       <input
                         id="department4"
@@ -723,7 +736,7 @@ const JobFilter = ({ setApiUrl }) => {
                       </label>
                     </div>
 
-                    {/* checkbox */}
+               
                     <div className="flex items-center mb-3">
                       <input
                         id="department5"
@@ -753,7 +766,7 @@ const JobFilter = ({ setApiUrl }) => {
                 </a>
               </div>
             </div>
-          </div>
+          </div>  */}
 
           {/* Experience */}
           <div
@@ -803,7 +816,7 @@ const JobFilter = ({ setApiUrl }) => {
                   Minimum work experience
                 </span>
                 <span className="text-base">
-                  {experienceValue === 0 ? "Any" : `${experienceValue} years`}
+                  {experienceValue === 0 ? "Any" : `${experienceValue}+ years`}
                 </span>
               </div>
 
