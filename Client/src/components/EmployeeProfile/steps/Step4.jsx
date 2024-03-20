@@ -1,7 +1,8 @@
 import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { MdModeEditOutline } from "react-icons/md";
-import { createJob, getJobs } from "../../../features/actions/jobActions";
+import { createJob } from "../../../features/actions/businessActions";
+
 
 const FaqsCard = (props) => {
 
@@ -89,7 +90,9 @@ const Step4 = ({ setStep }) => {
         const payload = {
             ...rest,
             company: companyName,
-            tags: jobTags,
+            tags: jobTags?.map(item => {
+                return { name: item }
+            }),
             jobRequirements: {
                 experience: minimumExperience,
                 education: minimumEducation,
@@ -105,21 +108,14 @@ const Step4 = ({ setStep }) => {
                 interviewMode: typeOfInterview
             }
         }
+
         console.log("form::", payload)
         dispatch(createJob({ jobId: Number(jobTypeName), payload: payload }))
     }
 
-    // console.log("form::", { ...step1?.formData, ...step2?.formData, ...step3?.formData })
+
     return (
         <section className="leading-relaxed max-w-screen-xl mt-12 mx-auto px-4 md:px-8 border">
-            {/* <div className="space-y-3 text-center">
-                <h1 className="text-3xl text-gray-800 font-semibold">
-                    Frequently Asked Questions
-                </h1>
-                <p className="text-gray-600 max-w-lg mx-auto text-lg">
-                    Answered all frequently asked questions, Still confused? feel free to contact us.
-                </p>
-            </div> */}
             <div className="mt-14 w-full mx-auto">
                 {
                     faqsList.map((item, idx) => (

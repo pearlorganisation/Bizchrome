@@ -17,18 +17,3 @@ export const getJobs = createAsyncThunk(
     }
   }
 );
-
-export const createJob = createAsyncThunk(
-  "job/createJob",
-  async ({ jobId, payload }, { rejectWithValue }) => {
-    try {
-      const { data } = await instance.post(`job/jobs/${jobId}`, payload, {
-        withCredentials: true,
-      });
-      console.log("data::", data);
-      return data?.data;
-    } catch (error) {
-      return rejectWithValue(error?.message);
-    }
-  }
-);
