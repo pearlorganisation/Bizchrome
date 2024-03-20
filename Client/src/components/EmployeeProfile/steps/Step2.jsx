@@ -8,6 +8,8 @@ import { addDataOfStepForm2 } from '../../../features/slices/businessSlice';
 const Step2 = ({ setStep }) => {
     const dispatch = useDispatch()
     const { step2 } = useSelector(state => state.business)
+    const [jobTags, setJobTags] = useState(step2?.formData?.jobTags || [])
+    const [title, setTitle] = useState('')
     const {
         register,
         handleSubmit,
@@ -26,14 +28,13 @@ const Step2 = ({ setStep }) => {
 
     const onSubmit = (data) => {
         console.log("data::", data)
-        dispatch(addDataOfStepForm2({ lable: 'Job Candidate Requirements', isFilled: true, formData: data }))
+        dispatch(addDataOfStepForm2({ lable: 'Job Candidate Requirements', isFilled: true, formData: { ...data, jobTags: jobTags } }))
         setStep(prev => {
             if (prev <= 3) return prev + 1
             else return prev
         })
     }
-    const [titles, setJobTitles] = useState([])
-    const [title, setTitle] = useState('')
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='min-h-[70vh] w-full space-y-5 '>
             <div className='text-lg font-medium'>
@@ -112,10 +113,10 @@ const Step2 = ({ setStep }) => {
                     <div className='space-y-3'>
                         <div className='flex gap-3'>
                             {
-                                titles?.map((item, indexToRemove) => {
+                                jobTags?.map((item, indexToRemove) => {
                                     return <div className='px-4 py-1 rounded-3xl bg-indigo-100 border-2 ring-4 ring-indigo-500/40 border-indigo-500 relative group cursor-pointer'    >{item} <span onClick={() => {
-                                        setJobTitles(prev => {
-                                            const temp = titles.filter((_, idx) => idx != indexToRemove)
+                                        setJobTags(prev => {
+                                            const temp = jobTags.filter((_, idx) => idx != indexToRemove)
                                             return temp
                                         })
                                     }} className='hidden group-hover:block absolute bg-red-400 border-2  border-red-500 rounded-full text-white top-[-0.6rem] right-0'><IoMdClose /></span></div>
@@ -132,7 +133,7 @@ const Step2 = ({ setStep }) => {
                                 className="w-full focus:ring-4 ring-indigo-500/30 px-3 py-2 text-gray-500 bg-transparent outline-none border-2 focus:border-indigo-500 transition-all shadow-sm rounded-lg"
                             />
                             <button type='button' onClick={() => {
-                                title.length != 0 ? setJobTitles(prev => {
+                                title.length != 0 ? setJobTags(prev => {
                                     return [...prev, title]
                                 }) : null
                                 setTitle('')

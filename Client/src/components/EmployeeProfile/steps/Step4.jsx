@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { MdModeEditOutline } from "react-icons/md";
+import { createJob, getJobs } from "../../../features/actions/jobActions";
 
 const FaqsCard = (props) => {
 
@@ -60,6 +61,7 @@ const FaqsCard = (props) => {
 
 const Step4 = ({ setStep }) => {
     const { step1, step2, step3, step4, step5 } = useSelector(state => state.business)
+    const dispatch = useDispatch()
 
     const faqsList = [
         step1,
@@ -67,6 +69,47 @@ const Step4 = ({ setStep }) => {
         step3
     ]
 
+    const onSubmit = () => {
+        const {
+            typeOfInterview,
+            interviewAddress,
+            department,
+            typeOfJob,
+            role,
+            shift,
+            minimumExperience,
+            minimumEducation,
+            englishLevel,
+            jobTags,
+            companyName,
+            totalExperience,
+            jobTypeName,
+            ...rest
+        } = { ...step1?.formData, ...step2?.formData, ...step3?.formData }
+        const payload = {
+            ...rest,
+            company: companyName,
+            tags: jobTags,
+            jobRequirements: {
+                experience: minimumExperience,
+                education: minimumEducation,
+                communicationLevel: englishLevel
+            },
+            jobRole: {
+                deparment: department,
+                employmentType: typeOfJob,
+                category: role,
+                shift: shift
+            }, interviewDetails: {
+                address: interviewAddress,
+                interviewMode: typeOfInterview
+            }
+        }
+        console.log("form::", payload)
+        dispatch(createJob({ jobId: Number(jobTypeName), payload: payload }))
+    }
+
+    // console.log("form::", { ...step1?.formData, ...step2?.formData, ...step3?.formData })
     return (
         <section className="leading-relaxed max-w-screen-xl mt-12 mx-auto px-4 md:px-8 border">
             {/* <div className="space-y-3 text-center">
@@ -99,10 +142,11 @@ const Step4 = ({ setStep }) => {
                     className='px-4 py-2 rounded-md border-2 border-indigo-400 text-white bg-indigo-600'>Back</button>
 
                 <button type='button' onClick={() => {
-                    setStep(prev => {
-                        if (prev <= 4) return prev + 1
-                        else return prev
-                    })
+                    // setStep(prev => {
+                    //     if (prev <= 4) return prev + 1
+                    //     else return prev
+                    // })
+                    onSubmit()
                 }} className='px-4 py-2 rounded-md border-2 border-indigo-400 text-white bg-indigo-600'>Next</button> </div>
         </section>
     )
