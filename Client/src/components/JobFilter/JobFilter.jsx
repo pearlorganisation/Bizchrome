@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
 
-const JobFilter = ({setPostingsData, data}) => {
+const JobFilter = ({ setApiUrl }) => {
+  // State to manage the open/closed state of each accordion item
+  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpen3, setIsOpen3] = useState(false);
+  const [isOpen4, setIsOpen4] = useState(false);
+  const [isOpen5, setIsOpen5] = useState(false);
+  const [isOpen6, setIsOpen6] = useState(false);
+  const [isOpen7, setIsOpen7] = useState(false);
 
-// State to manage the open/closed state of each accordion item
-const [isOpen, setIsOpen] = useState(true);
-const [isOpen2, setIsOpen2] = useState(false);
-const [isOpen3, setIsOpen3] = useState(false);
-const [isOpen4, setIsOpen4] = useState(false);
-const [isOpen5, setIsOpen5] = useState(false);
-const [isOpen6, setIsOpen6] = useState(false);
-const [isOpen7, setIsOpen7] = useState(false);
+  //filters count state
+  const [filtersCount, setFiltersCount] = useState(2);
 
-//filters count state
-const [filtersCount, setFiltersCount] = useState(5);
+  // State to manage the value of the salary slider
+  const [salaryValue, setSalaryValue] = useState(100000);
+  const [maxSalaryValue, setMaxSalaryValue] = useState(500000);
 
-// State to manage the value of the salary slider
-const [salaryValue, setSalaryValue] = useState(100000);
-const [maxSalaryValue, setMaxSalaryValue] = useState(500000);
+  // State to manage the value of the experience slider
+  const [experienceValue, setExperienceValue] = useState(0);
+  const [maxExperienceValue, setMaxExperienceValue] = useState(20);
 
-// State to manage the value of the experience slider
-const [experienceValue, setExperienceValue] = useState(0);
-const [maxExperienceValue, setMaxExperienceValue] = useState(20);
+  // state for date posted
+  const [whenPosted, setWhenPosted] = useState(0);
 
-// state to manage all department accordian
-const [isAllDepartmentsOpen, setIsAllDepartmentsOpen] = useState(false);
+  // state for work type
+  const [workType, setWorkType] = useState([]);
 
+  // state for work type
+  const [department, setDepartment] = useState([]);
 
-// useEffect for salary slider
-useEffect(() => {
-    let newData =  data.filter((d) => salaryValue <= d?.maxSalary);
-    setPostingsData(newData)
-  }, [salaryValue])
-  
+  // state for work type
+  const [workShift, setWorkShift] = useState([]);
+
+  // state to manage all department accordian
+  const [isAllDepartmentsOpen, setIsAllDepartmentsOpen] = useState(false);
 
   // Function to toggle the accordion content visibility
   const toggleAccordion = () => {
@@ -76,14 +79,73 @@ useEffect(() => {
     setExperienceValue(parseInt(event.target.value));
   };
 
+  // function to handle checking box for work types
+  const handleWorkTypes = (event) => {
+    const { value, checked } = event.target;
+    // If checkbox is checked, add its value to the array state
+    if (checked) {
+      setCheckedValues((prevValues) => [...prevValues, value]);
+    } else {
+      // If checkbox is unchecked, remove its value from the array state
+      setCheckedValues((prevValues) =>
+        prevValues.filter((item) => item !== value)
+      );
+    }
+  };
+
+  const applyFilters = () => {
+    // if(department)
+    // `&workType[]=${workType}&workShift=${workShift}&department=${department}`
+
+    let wtSearchQuery = "";
+    workType.forEach((wt) => {
+      wtSearchQuery += `&workType[]=${wt}`;
+    });
+
+    let wsSearchQuery = "";
+    workShift.forEach((ws) => {
+      wsSearchQuery += `&workShift[]=${ws}`;
+    });
+
+    let depSearchQuery = "";
+    department.forEach((dep) => {
+      depSearchQuery += `&department[]=${dep}`;
+    });
+    setApiUrl(
+      `?minSalary=${salaryValue}&experience=${experienceValue}&whenPosted=${whenPosted}${wtSearchQuery}${wsSearchQuery}${depSearchQuery}`
+    );
+  };
+
+  const removeFilters = () => {
+    setExperienceValue(0);
+    setSalaryValue(0);
+    setWhenPosted(0);
+    setWorkShift("");
+    setWorkType("");
+    setDepartment("");
+    setApiUrl(`?minSalary=0`);
+  };
 
   return (
     <>
       {/* desktop filter section */}
+
       <div
         className={`w-72 p-3`}
         style={{ maxHeight: "1200px", maxWidth: "330px" }}
       >
+        <button
+          className="w-1/2 px-4 py-1 text-white rounded-md mb-1 bg-blue-600 hover:bg-blue-800 shadow-md"
+          onClick={applyFilters}
+        >
+          Apply Filters
+        </button>
+        <button
+          className="w-1/2 px-4 py-1 text-black rounded-md mb-1 bg-yellow-500 hover:bg-yellow-600 shadow-md"
+          onClick={removeFilters}
+        >
+          Remove Filters
+        </button>
         <div className="border rounded-lg shadow-md px-6">
           <div className="mt-3 font-medium flex">
             <span className="flex flex-col justify-center">
@@ -100,9 +162,7 @@ useEffect(() => {
                 ></path>
               </svg>
             </span>
-            <span className="pl-2">
-              Filters {filtersCount > 0 && `(${filtersCount})`}
-            </span>
+            <span className="pl-2">Filters</span>
           </div>
           {/* date posted */}
           <div
@@ -154,6 +214,10 @@ useEffect(() => {
                       type="radio"
                       name="date-posted"
                       value={0}
+                      onChange={(e) => {
+                        setWhenPosted(Number(e.target.value));
+                      }}
+                      checked={whenPosted === 0}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
                     />
                   </div>
@@ -176,6 +240,10 @@ useEffect(() => {
                       type="radio"
                       name="date-posted"
                       value={1}
+                      onChange={(e) => {
+                        setWhenPosted(Number(e.target.value));
+                      }}
+                      checked={whenPosted === 1}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
                     />
                   </div>
@@ -198,6 +266,10 @@ useEffect(() => {
                       type="radio"
                       name="date-posted"
                       value={3}
+                      onChange={(e) => {
+                        setWhenPosted(Number(e.target.value));
+                      }}
+                      checked={whenPosted === 3}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
                     />
                   </div>
@@ -220,6 +292,10 @@ useEffect(() => {
                       type="radio"
                       name="date-posted"
                       value={7}
+                      onChange={(e) => {
+                        setWhenPosted(Number(e.target.value));
+                      }}
+                      checked={whenPosted === 7}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
                     />
                   </div>
@@ -345,7 +421,9 @@ useEffect(() => {
                   <input
                     id="fulltimeCb"
                     type="checkbox"
-                    value=""
+                    value="Full Time"
+                    checked={checkedValues.includes("Full Time")}
+                    onChange={(e) => handleWorkTypes(e)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -361,7 +439,9 @@ useEffect(() => {
                   <input
                     id="parttimeCb"
                     type="checkbox"
-                    value=""
+                    value="Part Time"
+                    checked={checkedValues.includes("Part Time")}
+                    onChange={handleWorkTypes}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -739,8 +819,8 @@ useEffect(() => {
             </div>
           </div>
 
-          {/* Sort By */}
-          <div
+          {/* sort by */}
+          {/* <div
             id="accordion-flush"
             data-accordion="collapse"
             data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
@@ -780,7 +860,7 @@ useEffect(() => {
               aria-labelledby="accordion-flush-heading-1"
             >
               <div className="py-4 border-b border-gray-200 dark:border-gray-700">
-                {/* radio button */}
+              
                 <div className="flex">
                   <div className="flex items-center h-5">
                     <input
@@ -802,7 +882,7 @@ useEffect(() => {
                   </div>
                 </div>
 
-                {/* radio button */}
+            
                 <div className="flex">
                   <div className="flex items-center h-5">
                     <input
@@ -824,7 +904,7 @@ useEffect(() => {
                   </div>
                 </div>
 
-                {/* radio button */}
+         
                 <div className="flex">
                   <div className="flex items-center h-5">
                     <input
@@ -846,7 +926,7 @@ useEffect(() => {
                   </div>
                 </div>
 
-                {/* radio button */}
+      
                 <div className="flex">
                   <div className="flex items-center h-5">
                     <input
@@ -869,7 +949,7 @@ useEffect(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

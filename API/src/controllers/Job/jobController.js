@@ -8,27 +8,33 @@ export const getJobs = async (req, res) => {
     
     let query = {jobTypeId: jobTypeId}
     
+    console.log(workType, workShift, department)
     
     if(req?.query){
       query = {
         jobTypeId: Number(jobTypeId),
-        minSalary: {$gte: Number(minSalary) || 0},
         "jobRequirements.experience":{$lte : Number(experience) || 100},
+        maxSalary: {$gte: Number(minSalary)}
       }
-      if(whenPosted) {
+      
+      if(Number(whenPosted) > 0) {
         let daysAgo = new Date();
         daysAgo.setDate(daysAgo.getDate() - whenPosted);
         query['updatedAt'] = {$gte: daysAgo}
       }
-      if(workType){
-        query['jobRole.employmentType'] = workType
-      }
-      if(workShift){
-        query['jobRole.shift'] = workShift
-      }
-      if(department){
-        query['jobRole.department'] = department
-      }
+
+      // if(workType?.length > 0){
+      //   query["jobRole.employmentType"] = workType
+      // }
+
+      // if(department?.length > 0){
+      //   query["jobRole.department"] = department
+      // }
+
+      // if(workShift?.length > 0){
+      //   query["jobRole.shift"] = workShift
+      // }
+      
     }
 
     // console.log(query)
