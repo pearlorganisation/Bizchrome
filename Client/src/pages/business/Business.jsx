@@ -17,7 +17,7 @@ export default function Business() {
     },
     {
         label: 'MyJobs',
-        path: '',
+        path: 'myJobs',
         icon: ''
     }
         , {

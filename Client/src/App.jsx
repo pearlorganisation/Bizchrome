@@ -24,9 +24,10 @@ import JobPostings from "./components/JobPostings/JobPostings";
 import JobDetails from "./components/JobDetails/JobDetails";
 import Jobs from "./pages/Jobs/Jobs";
 import CreateJobStepForm from "./components/EmployeeProfile/CreateJobStepForm";
-import Businnes from "./components/layout/Business";
-import Business from "./components/layout/Business";
+
 import PricePlans from "./components/EmployeeProfile/steps/PricePlans";
+import Business from "./pages/business/Business";
+import MyJobs from "./pages/business/MyJobs";
 
 const App = () => {
   const { isUserLoggedIn } = useAuth();
@@ -119,6 +120,10 @@ const App = () => {
         {
           path: 'stepForm',
           element: <CreateJobStepForm />
+        },
+        {
+          path: 'myJobs',
+          element: <MyJobs />
         },
         {
           path: 'pricePlans',
