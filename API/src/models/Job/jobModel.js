@@ -8,10 +8,14 @@ const jobSchema = new mongoose.Schema(
       minLength: [2, "Position must contain at least 2 characters"],
       maxLength: [40, "Position should contain maximum 40 characters"],
     },
+    companyId: {
+      type: String,
+      required: [true, "Company ID is required"],
+      trim: true,
+    },
     company: {
       type: String,
       required: [true, "Company name is required"],
-      trim: true,
       trim: true,
       minLength: [2, "Company name must contain at least 2 characters"],
       maxLength: [100, "Company name should contain maximum 100 characters"],

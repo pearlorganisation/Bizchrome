@@ -12,12 +12,12 @@ export const getJobs = async (req, res) => {
     
     if(req?.query){
       query = {
-        jobTypeId: Number(jobTypeId),
-        "jobRequirements.experience":{$gte : Number(experience) || 0},
-        maxSalary: {$gte: Number(minSalary)}
+        jobTypeId: parseInt(jobTypeId),
+        "jobRequirements.experience":{$gte : parseInt(experience) || 0},
+        maxSalary: {$gte: parseInt(minSalary) || 0}
       }
       
-      if(Number(whenPosted) > 0) {
+      if(parseInt(whenPosted) > 0) {
         let daysAgo = new Date();
         daysAgo.setDate(daysAgo.getDate() - whenPosted);
         query['updatedAt'] = {$gte: daysAgo}
@@ -78,6 +78,41 @@ export const addJobs = async (req, res) => {
       .status(200)
       .json({ status: true, data, message: "Job posted successfully" });
   } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error?.message,
+    });
+  }
+};
+
+
+// get all jobs posted by a comapany
+export const getPostedJobs = async (req, res) => {
+  try {
+    const { companyId } = req?.params;
+    
+    const query = {companyId: companyId} // case insensitive regex search for jobs posted according to company
+
+    if (!companyId)
+      res.status(400).json({ message: "Incorrect Url" });
+
+    const jobs = await jobModel.find(query);
+
+    if (jobs.length) {
+      res.status(200).json({
+        data: jobs,
+        success: true,
+        message: `Found jobs successfully`,
+      });
+    } else {
+      res.status(200).json({
+        data: jobs,
+        success: false,
+        message: `No job posting found`,
+      });
+    }
+  } catch (error) {
+    console.log(error);
     res.status(400).json({
       success: false,
       message: error?.message,
