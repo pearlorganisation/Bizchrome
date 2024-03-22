@@ -124,7 +124,7 @@ const JobDetails = ({ data, jobType, jobId, setJobData }) => {
             <div className="flex w-full items-center gap-[16px] md:text-sm">
               <div className="w-full">
                 <a href="javascript:void(0)">
-                  <div className="w-full rounded border border-solid bg-[#1F8268] px-[16px] py-[8px] text-center font-semibold text-white">
+                  <div className="w-full rounded border border-solid bg-[#275497] hover:bg-[#2a4875] px-[16px] py-[8px] text-center font-semibold text-white tranistion duration-300">
                     <div className="flex w-full cursor-pointer items-center justify-center space-x-[4px]">
                       <p className="m-0 whitespace-nowrap text-center text-sm">
                         Apply for job
