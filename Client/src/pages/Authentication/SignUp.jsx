@@ -1,63 +1,92 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "../../features/scrollToTop";
 
 const SignUp = () => {
+  // states
   const [showOtp, setShowOtp] = useState(false);
   const [userData, setUserData] = useState();
   const [isPassVisible, setPassVisible] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  //   refs
+  const otpRef = useRef(null);
 
+  const Navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-
+  const {
+    handleSubmit: handleSubmitOtp,
+    formState: { otpErrors },
+  } = useForm();
 
   const onSubmit = (data) => {
-    setUserData(data)
+    setErrorMsg("");
+    setUserData(data);
     console.log(`sending otp to ${data?.email} `);
 
-    axios.post(`${import.meta.env.VITE_API_BASE_URL_LOCAL}auth/signupotp`, 
-    {email: data?.email}
-    ).then((res) => {
-        if(res.status){
-            setShowOtp(true)
+    axios
+      .post(`${import.meta.env.VITE_API_BASE_URL_LOCAL}auth/signupotp`, {
+        email: data?.email,
+        mobile: data?.mobile
+      })
+      .then((res) => {
+        console.log(res);
+        if (res?.data?.status) {
+          setShowOtp(true);
+        } else {
+          // alert(res?.data?.message)
+          let msg = res?.data?.message;
+          setErrorMsg(msg);
+          scrollToTop();
         }
-    }).catch((err) => {
-        console.log(err?.message)
-    })
+      });
 
     // dispatch(generateSignUpOTP(data));
   };
 
-  const onOtpSubmit = (data) => {
-    console.log(data)
-    const postData = {
-        fullName: userData?.fullName,
-        mobile: userData?.mobile,
-        email: userData?.email,
-        otp: data?.otp,
-        password: userData?.password,
-        userType: userData?.userType
+  const onOtpSubmit = () => {
+    setErrorMsg("");
+    let otp = otpRef?.current?.value;
+    if (otp?.length <= 0) {
+      return;
     }
-    axios.post(`${import.meta.env.VITE_API_BASE_URL_LOCAL}auth/signup`, 
-    postData
-    ).then((res) => {
-        console.log(res)
-        // if(res.status){
-        // }
-    }).catch((err) => {
-        console.log(err?.message)
-    })
-
-};
-
+    console.log(otp);
+    const postData = {
+      fullName: userData?.fullName,
+      mobile: userData?.mobile,
+      email: userData?.email,
+      otp: otp,
+      password: userData?.password,
+      userType: userData?.userType,
+    };
+    axios
+      .post(`${import.meta.env.VITE_API_BASE_URL_LOCAL}auth/signup`, postData)
+      .then((res) => {
+        if (res?.data?.status) {
+          scrollToTop()
+          setSuccessMsg(res?.data?.message);
+          setTimeout(() => {
+            Navigate("/signIn");
+          }, 3000);
+        } else {
+          setErrorMsg(res?.data?.message);
+          scrollToTop();
+        }
+      })
+      .catch((err) => {
+        console.log(err?.message);
+      });
+  };
 
   return (
     <main className="w-full flex">
@@ -80,6 +109,17 @@ const SignUp = () => {
               </p>
             </div>
           </div>
+          {successMsg?.length > 0 && (
+            <div className="text-green-600 text-xl font-semibold text-center">
+              {successMsg}
+            </div>
+          )}
+
+          {errorMsg?.length > 0 && (
+            <div className="text-red-600 text-xl font-semibold text-center">
+              {errorMsg}
+            </div>
+          )}
           {!showOtp && (
             <>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -90,7 +130,7 @@ const SignUp = () => {
                     type="text"
                     className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   />
-                  {errors.fullname && (
+                  {errors.fullName && (
                     <span className="text-red-500">This field is required</span>
                   )}
                 </div>
@@ -135,7 +175,7 @@ const SignUp = () => {
                   />
                   <button
                     onClick={() => {
-                      setsetPassVisible(!isPassVisible);
+                      setPassVisible(!isPassVisible);
                     }}
                     className="absolute top-[2.8rem] right-[0.8rem]"
                     type="button"
@@ -154,7 +194,7 @@ const SignUp = () => {
                     return (
                       <div class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-2 font-medium text-gray-700">
                         <input
-                          {...register("role", { required: true })}
+                          {...register("userType", { required: true })}
                           class="peer hidden"
                           type="radio"
                           value={item}
@@ -176,47 +216,43 @@ const SignUp = () => {
                     );
                   })}
                 </div>
-                <button
-                  className="w-full px-4 py-2 text-white font-medium text-lg bg-yellow-600 hover:bg-indigo-500 active:bg-indigo-800 rounded-lg duration-150"
-                >
+                <button className="w-full px-4 py-2 text-white font-medium text-lg bg-yellow-600 hover:bg-indigo-500 active:bg-indigo-800 rounded-lg duration-150">
                   Send OTP
                 </button>
               </form>
             </>
           )}
           {showOtp && (
-            <form onSubmit={handleSubmit(onOtpSubmit)} className="space-y-5">
+            <div className="space-y-2">
               <div>
                 <label className="font-medium">OTP</label>
                 <div className="w-full">
                   <input
-                    {...register("otp", { required: true })}
-                    name="number"
+                    name="otp"
                     type="number"
                     placeholder="Enter your OTP"
+                    ref={otpRef}
                     className="w-full focus:ring-4 ring-indigo-500/30 mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border-2 focus:border-indigo-500 transition-all shadow-sm rounded-lg"
                   />
-                  {errors.otp && (
-                    <span className="text-red-500">This field is required</span>
-                  )}
                 </div>
               </div>
-                <div className="flex gap-1 justify-center">
-
-              <button
-                onClick={() => setShowOtp(false)}
-                className="w-[48%] px-4 py-2 text-white font-medium text-lg bg-red-600 hover:bg-red-600 active:bg-red-800 rounded-lg duration-150"
-              >
-                back
-              </button>
-              <button
-                type="submit"
-                className="w-[48%] px-4 py-2 text-white font-medium text-lg bg-indigo-600 hover:bg-yellow-600 active:bg-yellow-800 rounded-lg duration-150"
-              >
-                Submit
-              </button>
-                </div>
-            </form>
+              <div className="flex gap-1 justify-center">
+                <button
+                  onClick={() => setShowOtp(false)}
+                  className="w-[48%] px-4 py-2 text-white font-medium text-lg bg-red-600 hover:bg-red-600 active:bg-red-800 rounded-lg duration-150"
+                >
+                  back
+                </button>
+                <button
+                  onClick={() => {
+                    onOtpSubmit();
+                  }}
+                  className="w-[48%] px-4 py-2 text-white font-medium text-lg bg-indigo-600 hover:bg-yellow-600 active:bg-yellow-800 rounded-lg duration-150"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>

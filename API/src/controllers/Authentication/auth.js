@@ -19,7 +19,7 @@ export const signUp = async (req, res) => {
     //Verify the otp
 
     if (savedOtp.length == 0) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "Wrong OTP entered",
         status: false,
       });
@@ -37,8 +37,8 @@ export const signUp = async (req, res) => {
     });
     await newData.save();
     return res.status(200).json({
-      success: 1,
-      message: "Account created successfully, Continue with login",
+      status: true,
+      message: "Account created successfully, Redirecting to login",
     });
   } catch (error) {
     res.status(400).json({
@@ -50,11 +50,11 @@ export const signUp = async (req, res) => {
 
 export const sendSignUpOtp = async (req, res) => {
   try {
-    const { email } = req.body;
-    const isUserExisted = await userModel.find({ email });
+    const { email, mobile } = req.body;
+    const isUserExisted = await userModel.find({ $or : [{email: email}, {mobile: mobile}] });
     if (isUserExisted.length !== 0) {
-      return res.status(400).json({
-        message: "User already existed",
+      return res.status(200).json({
+        message: "User with this email or mobile already exists",
         status: false,
       });
     }
@@ -76,7 +76,7 @@ export const sendSignUpOtp = async (req, res) => {
     );
 
     return res.status(200).json({
-      message: "OTP sent successfully",
+      message: `OTP sent to ${email}`,
       status: true,
     });
   } catch (error) {
@@ -93,7 +93,7 @@ export const userLogin = async (req, res) => {
     let user = await userModel.findOne({ email });
     const verifyPassword = await bcrypt.compare(password, user?.password || "");
     if (!verifyPassword) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "Email id and password combination is wrong",
         status: false,
       });
@@ -144,7 +144,7 @@ export const logout = async (req, res) => {
       message: "Logged Out Successfully",
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       success: false,
       message: `Internal Server Error! ${error.message}`,
     });
