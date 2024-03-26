@@ -15,3 +15,18 @@ export const createJob = createAsyncThunk(
     }
   }
 );
+
+export const getAllJob = createAsyncThunk(
+  "business/getAllJob",
+  async ({ payload }, { rejectWithValue }) => {
+    try {
+      const { data } = await instance.post(`job/jobs/`, {
+        withCredentials: true,
+      });
+      console.log("data::", data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.message);
+    }
+  }
+);

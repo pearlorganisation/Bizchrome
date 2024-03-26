@@ -48,7 +48,6 @@ export const signUp = async (req, res) => {
 export const sendSignUpOtp = async (req, res) => {
   try {
     const { email } = req.body;
-
     const isUserExisted = await userModel.find({ email });
     if (isUserExisted.length !== 0) {
       return res.status(400).json({

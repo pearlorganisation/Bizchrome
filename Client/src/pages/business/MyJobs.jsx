@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { getAllJob } from '../../features/actions/businessActions'
 
 const MyJobs = () => {
-
+    const dispatch = useDispatch()
     useEffect(() => {
-
+        dispatch(getAllJob())
     }, [])
 
     return (

@@ -372,21 +372,20 @@ const Header = () => {
                       }} class="rounded-lg border-2 border-transparent bg-blue-600 px-4 py-2 font-medium text-white focus:outline-none focus:ring hover:bg-blue-700">Logout</button>
                     </div>
                   </div>
-                </div> : <div class="hidden lg:block">
-                  <button
-                    type="button"
-                    class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    onClick={() => {
-                      return setIsModalOpen(true);
-                    }}
-                  >
-                    Login/Register
-                  </button>
+                </div> : <div className='flex-1 items-center justify-end gap-x-6 space-y-3 md:flex md:space-y-0'>
+                  <Link to="/signIn" className="block py-3 text-center text-gray-700 hover:text-indigo-600 border rounded-lg md:border-none">
+                    Log in
+                  </Link>
+                  <Link to="signUp" className="block py-3 px-4 font-medium text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow md:inline">
+                    Sign in
+                  </Link>
                 </div>
               }
             </div>
           </div>
         </div>
+
+
       </nav>
       {state ? (
         <div
@@ -396,10 +395,7 @@ const Header = () => {
       ) : (
         ""
       )}
-      <LoginOptionsModal
-        setIsModalOpen={setIsModalOpen}
-        isModalOpen={isModalOpen}
-      />
+
     </>
   );
 };

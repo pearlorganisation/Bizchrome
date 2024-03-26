@@ -7,10 +7,7 @@ import { Toaster } from "sonner";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Authentication/Candidate/Login";
-import SignUp from "./pages/Authentication/Candidate/SignUp";
-import BusinessSignup from "./pages/Authentication/Business/BusinessSignup";
-import BusinessLogin from "./pages/Authentication/Business/BusinessLogin";
-import LoginAsInvestor from "./pages/Authentication/Investor/LoginAsInvestor";
+// import SignUp from "./pages/Authentication/Candidate/SignUp";
 import Forget from "./pages/Authentication/Candidate/Forget";
 import OtpVerification from "./pages/Authentication/Candidate/OtpVerification";
 import SendOtp from "./pages/Authentication/Candidate/SendOtp";
@@ -28,6 +25,8 @@ import CreateJobStepForm from "./components/EmployeeProfile/CreateJobStepForm";
 import PricePlans from "./components/EmployeeProfile/steps/PricePlans";
 import Business from "./pages/business/Business";
 import MyJobs from "./pages/business/MyJobs";
+import SignUp from "./pages/Authentication/SignUp";
+import SignIn from "./pages/Authentication/SignIn";
 
 const App = () => {
   const { isUserLoggedIn } = useAuth();
@@ -43,25 +42,14 @@ const App = () => {
 
         },
         {
-          path: "/candidate-login",
-          element: <Login />,
+          path: "/signIn",
+          element: <SignIn />,
         },
         {
-          path: "/candidate-signup",
+          path: "/signUp",
           element: <SignUp />,
         },
-        {
-          path: "/business-signup",
-          element: <BusinessSignup />,
-        },
-        {
-          path: "/business-login",
-          element: <BusinessLogin />,
-        },
-        {
-          path: "/investor-login",
-          element: <LoginAsInvestor />,
-        },
+
 
         {
           path: "/forget",
