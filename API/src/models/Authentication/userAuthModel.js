@@ -3,7 +3,7 @@ const userSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
-      // required:[true,"Name is required"],
+      required:[true,"Name is required"],
       trim: true,
       minLength: [2, "Name must contain at least 2 characters"],
       maxLength: [15, "Name should contain maximum 15 characters"],
@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema(
     },
     mobile: {
       default: null,
-
-      type: Number,
+      required: [true , "Mobile is required"],
+      type: Number
     },
     location: {
       type: String,
@@ -55,6 +55,10 @@ const userSchema = new mongoose.Schema(
         noticePeriod: { type: Number, default: null },
       },
     ],
+    userType: {
+      type: String, 
+      required: [true, "userType is required"]
+    },
     language: { type: String, default: null },
     workType: { type: String, default: null },
   },

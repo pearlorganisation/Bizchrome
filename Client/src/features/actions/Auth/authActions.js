@@ -48,6 +48,7 @@ export const userLogin = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
+      console.log('log for dispatch--->', response?.data)
       return response?.data;
     } catch (error) {
       return rejectWithValue(error);
