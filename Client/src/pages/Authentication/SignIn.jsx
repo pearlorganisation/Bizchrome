@@ -1,42 +1,82 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form';
+import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { signUp, userLogin } from "../../features/actions/Auth/authActions";
+
+import { useDispatch, useSelector } from "react-redux";
+
 const SignIn = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm();
+  const [isPassVisible, setsetPassVisible] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-    const [isPassVisible, setsetPassVisible] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-    const onSubmit = (data) => {
-        console.log("userData::", data)
-        // dispatch(generateSignUpOTP(data));
+  // redux
+  const dispatch = useDispatch();
 
-    };
-    return (
-        <main className="w-full flex">
+  const { userMetaData } = useSelector((state) => state.auth);
+  const onSubmit = (data) => {
+    dispatch(userLogin(data));
+    
+    // setSuccessMsg("");
+    // setErrorMsg("");
+    // axios
+    //   .post(`${import.meta.env.VITE_API_BASE_URL_LOCAL}auth/userLogin`, data)
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res?.data?.status) {
+    //       setSuccessMsg(res?.data?.message);
+    //       dispatch(signUp())
+    //     } else {
+    //       setErrorMsg(res?.data?.message);
+    //     }
+    //   });
+    // dispatch(generateSignUpOTP(data));
+  };
+  return (
+    <main className="w-full flex">
+      <div className="flex-1 flex items-center justify-center h-[90vh]">
+        <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
+          <div className="">
+            {/* <img src="https://floatui.com/logo.svg" width={150} className="lg:hidden" /> */}
+            <div className="mt-5 space-y-2">
+              <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
+                Sign In
+              </h3>
+              <p className="">
+                Don't have an account?{" "}
+                <Link
+                  to="/signUp"
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
+          </div>
+          {successMsg?.length > 0 && (
+            <div className="text-green-600 text-xl font-semibold text-center">
+              {successMsg}
+            </div>
+          )}
 
-            <div className="flex-1 flex items-center justify-center h-[90vh]">
-                <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-                    <div className="">
-                        {/* <img src="https://floatui.com/logo.svg" width={150} className="lg:hidden" /> */}
-                        <div className="mt-5 space-y-2">
-                            <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Sign In</h3>
-                            <p className="">Don't have an account? <Link to="/signUp" className="font-medium text-indigo-600 hover:text-indigo-500">Sign Up</Link></p>
-                        </div>
-                    </div>
+          {errorMsg?.length > 0 && (
+            <div className="text-red-600 text-xl font-semibold text-center">
+              {errorMsg}
+            </div>
+          )}
 
-                    <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        className="space-y-5"
-                    >
-
-                        {/* <div>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* <div>
                             <label className="font-medium">
                                 Mobile Number
                             </label>
@@ -54,40 +94,40 @@ const SignIn = () => {
 
                             </div>
                         </div> */}
-                        <div>
-                            <label className="font-medium">
-                                Email
-                            </label>
-                            <input
-                                {...register("email", { required: true })}
-                                type="email"
+            <div>
+              <label className="font-medium">Email</label>
+              <input
+                {...register("email", { required: true })}
+                type="email"
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+              />
+              {errors.email && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </div>
+            <div className="relative">
+              <label className="font-medium">Password</label>
+              <input
+                {...register("password", { required: true })}
+                type={isPassVisible ? "text" : "password"}
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+              />
+              <button
+                onClick={() => {
+                  setsetPassVisible(!isPassVisible);
+                }}
+                className="absolute top-[2.8rem] right-[0.8rem]"
+                type="button"
+              >
+                {" "}
+                {isPassVisible ? <FaEye /> : <FaEyeSlash />}
+              </button>
+              {errors.password && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </div>
 
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                            />
-                            {errors.email && (
-                                <span className="text-red-500">This field is required</span>
-                            )}
-                        </div>
-                        <div className='relative'>
-                            <label className="font-medium">
-                                Password
-                            </label>
-                            <input
-                                {...register("password", { required: true })}
-                                type={isPassVisible ? 'text' : 'password'}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                            />
-                            <button onClick={() => {
-                                setsetPassVisible(!isPassVisible)
-                            }} className='absolute top-[2.8rem] right-[0.8rem]' type="button"> {isPassVisible ? <FaEye /> : <FaEyeSlash />}</button>
-                            {errors.password && (
-                                <span className="text-red-500">This field is required</span>
-                            )}
-                        </div>
-
-
-
-                        {/* <p class="font-medium mb-1 text-gray-500">Looking for?</p>
+            {/* <p class="font-medium mb-1 text-gray-500">Looking for?</p>
                         <div class="flex gap-x-4">
 
                             {
@@ -125,18 +165,14 @@ const SignIn = () => {
                                 </div>
                             </div> : null
                         } */}
-                        <button
-                            className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
-                        >
-                            Sign In
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </main>
-    )
-}
+            <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+              Sign In
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  );
+};
 
-
-
-export default SignIn
+export default SignIn;

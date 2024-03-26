@@ -122,7 +122,7 @@ export const userLogin = async (req, res) => {
     //
     return res.status(200).json({
       message: `Logged in successfully`,
-      status: false,
+      status: true,
       data: user,
     });
   } catch (error) {
