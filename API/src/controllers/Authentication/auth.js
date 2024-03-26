@@ -29,7 +29,10 @@ export const signUp = async (req, res) => {
     //Hashing the password with bcrypt
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const newData = new userModel({
-      ...req.body,
+      fullName: req?.body?.fullName,
+      email: req?.body?.email,
+      mobile: req?.body?.mobile,
+      userType: req?.body?.userType,
       password: hashedPassword,
     });
     await newData.save();
@@ -74,7 +77,7 @@ export const sendSignUpOtp = async (req, res) => {
 
     return res.status(200).json({
       message: "OTP sent successfully",
-      status: false,
+      status: true,
     });
   } catch (error) {
     return res.status(400).json({
