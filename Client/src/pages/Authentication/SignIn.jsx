@@ -26,28 +26,13 @@ const SignIn = () => {
   const { userMetaData } = useSelector((state) => state.auth);
   const onSubmit = (data) => {
     dispatch(userLogin(data));
-    
-    // setSuccessMsg("");
-    // setErrorMsg("");
-    // axios
-    //   .post(`${import.meta.env.VITE_API_BASE_URL_LOCAL}auth/userLogin`, data)
-    //   .then((res) => {
-    //     console.log(res);
-    //     if (res?.data?.status) {
-    //       setSuccessMsg(res?.data?.message);
-    //       dispatch(signUp())
-    //     } else {
-    //       setErrorMsg(res?.data?.message);
-    //     }
-    //   });
-    // dispatch(generateSignUpOTP(data));
   };
   return (
     <main className="w-full flex">
       <div className="flex-1 flex items-center justify-center h-[90vh]">
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
           <div className="">
-            {/* <img src="https://floatui.com/logo.svg" width={150} className="lg:hidden" /> */}
+
             <div className="mt-5 space-y-2">
               <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
                 Sign In

@@ -1,8 +1,12 @@
 import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom"
+import { userLogout } from "../../features/actions/Auth/authActions";
 
 export default function Business() {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false)
+    const { isUserLoggedIn, userMetaData } = useSelector((store) => store.auth);
+    const dispatch = useDispatch()
 
     const sideBarItems = [{
         label: 'Dashboard',
@@ -17,12 +21,12 @@ export default function Business() {
     },
     {
         label: 'MyJobs',
-        path: 'myJobs',
+        path: `myJobs/${userMetaData?._id}`,
         icon: ''
     }
         , {
         label: 'Create Job',
-        path: 'stepForm',
+        path: `${userMetaData?._id}/createJob`,
         icon: ''
     }
         , {
@@ -79,7 +83,7 @@ export default function Business() {
                                 className="relative flex h-12 w-12 items-center justify-center rounded-full text-white"
                             >
                                 <img
-                                    src="https://i.pravatar.cc/40?img=7"
+                                    src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
                                     alt="user name"
                                     title="user name"
                                     width="48"
@@ -93,10 +97,10 @@ export default function Business() {
                         </div>
                         <div className="flex min-h-[2rem] w-full min-w-0 flex-col items-start justify-center gap-0 text-center">
                             <h4 className="w-full truncate text-base text-slate-700">
-                                Abhishek
+                                {userMetaData?.fullName}
                             </h4>
                             <p className="w-full truncate text-sm text-slate-500">
-                                xyz@gmail.com
+                                {userMetaData?.email}
                             </p>
                         </div>
                     </div>
@@ -143,98 +147,9 @@ export default function Business() {
                         </div>
                         <div>
                             <ul className="flex flex-1 flex-col gap-1 py-3">
-                                <li className="px-3">
-                                    <a
-                                        href="#"
-                                        className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500 "
-                                    >
-                                        <div className="flex items-center self-center">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth="1.5"
-                                                stroke="currentColor"
-                                                className="h-6 w-6"
-                                                aria-label="Dashboard icon"
-                                                role="graphics-symbol"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm">
-                                            Documents
-                                        </div>
-                                    </a>
-                                </li>
-                                <li className="px-3">
-                                    <a
-                                        href="#"
-                                        className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500 "
-                                    >
-                                        <div className="flex items-center self-center ">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth="1.5"
-                                                stroke="currentColor"
-                                                className="h-6 w-6"
-                                                aria-label="Dashboard icon"
-                                                role="graphics-symbol"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
-                                                />
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm">
-                                            Media & files
-                                        </div>
-                                    </a>
-                                </li>
-                                <li className="px-3">
-                                    <a
-                                        href="#"
-                                        className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500 "
-                                    >
-                                        <div className="flex items-center self-center ">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth="1.5"
-                                                stroke="currentColor"
-                                                className="h-6 w-6"
-                                                aria-label="Dashboard icon"
-                                                role="graphics-symbol"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm">
-                                            Storage
-                                        </div>
 
-                                    </a>
-                                </li>
                                 <li className="px-3">
-                                    <a
+                                    <div
                                         href="#"
                                         className="flex items-center gap-3 rounded p-3 text-slate-900 transition-colors hover:text-emerald-500 "
                                     >
@@ -256,10 +171,12 @@ export default function Business() {
                                                 />
                                             </svg>
                                         </div>
-                                        <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm font-medium">
+                                        <div onClick={() => {
+                                            dispatch(userLogout())
+                                        }} className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm font-medium">
                                             Logout
                                         </div>
-                                    </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

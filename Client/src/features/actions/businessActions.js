@@ -16,15 +16,16 @@ export const createJob = createAsyncThunk(
   }
 );
 
-export const getAllJob = createAsyncThunk(
-  "business/getAllJob",
-  async ({ payload }, { rejectWithValue }) => {
+export const getAllJobById = createAsyncThunk(
+  "business/getAllJobById",
+  async ({ companyId }, { rejectWithValue }) => {
     try {
-      const { data } = await instance.post(`job/jobs/`, {
+      console.log("companyId::", companyId);
+      const { data } = await instance.get(`job/jobs/company/${companyId}`, {
         withCredentials: true,
       });
       console.log("data::", data);
-      return data;
+      return data?.data;
     } catch (error) {
       return rejectWithValue(error?.message);
     }

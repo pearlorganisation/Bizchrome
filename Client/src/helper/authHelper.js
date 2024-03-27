@@ -2,14 +2,11 @@
 import { useSelector } from "react-redux";
 // -------------------------------------------------------------------------------------------------------
 const useAuth = () => {
-  const { isUserLoggedIn, loggedInUserData } = useSelector(
+  const { isUserLoggedIn, userMetaData } = useSelector(
     (state) => state?.auth || {}
   );
-  // const isUserLoggedIn = useSelector(
-  //   (state) => state?.auth?.isUserLoggedIn || ""
-  // );
-  console.log("These ae results", isUserLoggedIn, loggedInUserData);
-  return { isUserLoggedIn, loggedInUserData };
+  console.log("These ae results", isUserLoggedIn, userMetaData);
+  return { isUserLoggedIn, userMetaData };
 };
 
 export default useAuth;
