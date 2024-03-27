@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createJob, getAllJob } from "../actions/businessActions";
+import { createJob, getAllJobById } from "../actions/businessActions";
 import { toast } from "sonner";
 const initialState = {
   isLoading: false,
@@ -47,6 +47,22 @@ const businessSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.businessData = action.payload;
+      state.step1 = {
+        isFilled: false,
+        formData: null,
+      };
+      state.step2 = {
+        isFilled: false,
+        formData: null,
+      };
+      state.step3 = {
+        isFilled: false,
+        formData: null,
+      };
+      state.step4 = {
+        isFilled: false,
+        formData: null,
+      };
       toast.success("Successfully Created....");
     });
     builder.addCase(createJob.rejected, (state, action) => {
@@ -56,17 +72,16 @@ const businessSlice = createSlice({
     });
 
     // get jobs
-    builder.addCase(getAllJob.pending, (state, action) => {
+    builder.addCase(getAllJobById.pending, (state, action) => {
       state.isLoading = true;
       state.isError = false;
     });
-    builder.addCase(getAllJob.fulfilled, (state, action) => {
+    builder.addCase(getAllJobById.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isError = false;
       state.businessData = action.payload;
-      toast.success("Successfully Created....");
     });
-    builder.addCase(getAllJob.rejected, (state, action) => {
+    builder.addCase(getAllJobById.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       toast.error(action?.payload || "Something went wrong");

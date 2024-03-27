@@ -17,8 +17,7 @@ import useAuth from "./helper/authHelper";
 import UserProfile from "./components/UserProfile/UserProfile";
 
 //importing job postings
-import JobPostings from "./components/JobPostings/JobPostings";
-import JobDetails from "./components/JobDetails/JobDetails";
+
 import Jobs from "./pages/Jobs/Jobs";
 import CreateJobStepForm from "./components/EmployeeProfile/CreateJobStepForm";
 
@@ -27,13 +26,14 @@ import Business from "./pages/business/Business";
 import MyJobs from "./pages/business/MyJobs";
 import SignUp from "./pages/Authentication/SignUp";
 import SignIn from "./pages/Authentication/SignIn";
+import { Navigate } from "react-router-dom";
 
 const App = () => {
-  const { isUserLoggedIn } = useAuth();
+  const { isUserLoggedIn, userMetaData } = useAuth();
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: isUserLoggedIn && userMetaData?.userType === 'Business' ? <Navigate to='/business' /> : <Layout />,
 
       children: [
         {
@@ -43,11 +43,11 @@ const App = () => {
         },
         {
           path: "/signIn",
-          element: <SignIn />,
+          element: isUserLoggedIn ? <Navigate to='/' /> : <SignIn />,
         },
         {
           path: "/signUp",
-          element: <SignUp />,
+          element: isUserLoggedIn ? <Navigate to='/' /> : <SignUp />,
         },
 
 
@@ -103,14 +103,14 @@ const App = () => {
     },
     {
       path: "/business",
-      element: <Business />,
+      element: userMetaData?.userType === 'Business' ? <Business /> : <Navigate to="/" replace={true} />,
       children: [
         {
-          path: 'stepForm',
+          path: ':companyId/createJob',
           element: <CreateJobStepForm />
         },
         {
-          path: 'myJobs',
+          path: 'myJobs/:companyId',
           element: <MyJobs />
         },
         {

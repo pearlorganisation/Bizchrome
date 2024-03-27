@@ -2,6 +2,7 @@ import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { MdModeEditOutline } from "react-icons/md";
 import { createJob } from "../../../features/actions/businessActions";
+import { useParams } from "react-router-dom";
 
 
 const FaqsCard = (props) => {
@@ -45,7 +46,7 @@ const FaqsCard = (props) => {
                 style={state ? { height: answerH } : { height: '0px' }}
             >
                 <div className=" border-t-2 pt-1">
-                    {Object.entries(faqsList?.formData).map(([key, value]) => (
+                    {faqsList?.formData != null && Object.entries(faqsList?.formData)?.map(([key, value]) => (
                         <div key={key}>
                             <p className="text-gray-500 flex justify-between">
                                 <span className="capitalize px-1 tracking-widest">{key}</span> <span className="font-semibold text-gray-800"> {value} </span>
@@ -63,6 +64,8 @@ const FaqsCard = (props) => {
 const Step4 = ({ setStep }) => {
     const { step1, step2, step3, step4, step5 } = useSelector(state => state.business)
     const dispatch = useDispatch()
+
+    const { companyId } = useParams()
 
     const faqsList = [
         step1,
@@ -89,6 +92,7 @@ const Step4 = ({ setStep }) => {
         } = { ...step1?.formData, ...step2?.formData, ...step3?.formData }
         const payload = {
             ...rest,
+            companyId: companyId,
             company: companyName,
             tags: jobTags?.map(item => {
                 return { name: item }
