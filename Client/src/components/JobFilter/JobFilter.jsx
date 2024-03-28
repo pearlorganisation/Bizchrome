@@ -14,12 +14,12 @@ const JobFilter = ({ setApiUrl }) => {
   const [filtersCount, setFiltersCount] = useState(2);
 
   // State to manage the value of the salary slider
-  const [salaryValue, setSalaryValue] = useState(100000);
-  const [maxSalaryValue, setMaxSalaryValue] = useState(500000);
+  const [salaryValue, setSalaryValue] = useState(0);
+  const [maxSalaryValue, setMaxSalaryValue] = useState(10000000);
 
   // State to manage the value of the experience slider
   const [experienceValue, setExperienceValue] = useState(0);
-  const [maxExperienceValue, setMaxExperienceValue] = useState(20);
+  const [maxExperienceValue, setMaxExperienceValue] = useState(30);
 
   // state for date posted
   const [whenPosted, setWhenPosted] = useState(0);
@@ -155,7 +155,7 @@ const JobFilter = ({ setApiUrl }) => {
         >
           Remove Filters
         </button>
-        <div className="border rounded-lg shadow-md px-6">
+        <div className="border rounded-lg shadow-lg px-6">
           <div className="mt-3 font-medium flex">
             <span className="flex flex-col justify-center">
               <svg
@@ -177,13 +177,13 @@ const JobFilter = ({ setApiUrl }) => {
           <div
             id="accordion-flush"
             data-accordion="collapse"
-            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-            data-inactive-classes="text-gray-500 dark:text-gray-400"
+            data-active-classes="bg-white text-gray-900 "
+            data-inactive-classes="text-gray-500 "
           >
             <h2 id="accordion-flush-heading-1">
               <button
                 type="button"
-                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200  gap-3"
                 data-accordion-target="#accordion-flush-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-flush-body-1"
@@ -213,7 +213,7 @@ const JobFilter = ({ setApiUrl }) => {
               className={isOpen ? "" : "hidden"}
               aria-labelledby="accordion-flush-heading-1"
             >
-              <div className="py-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="py-4 border-b border-gray-200">
                 {/* radio button */}
                 <div className="flex">
                   <div className="flex items-center h-5">
@@ -227,13 +227,13 @@ const JobFilter = ({ setApiUrl }) => {
                         setWhenPosted(Number(e.target.value));
                       }}
                       checked={whenPosted === 0}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       All
                     </label>
@@ -253,13 +253,13 @@ const JobFilter = ({ setApiUrl }) => {
                         setWhenPosted(Number(e.target.value));
                       }}
                       checked={whenPosted === 1}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       Last 24 Hours
                     </label>
@@ -279,13 +279,13 @@ const JobFilter = ({ setApiUrl }) => {
                         setWhenPosted(Number(e.target.value));
                       }}
                       checked={whenPosted === 3}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       Last 3 Days
                     </label>
@@ -305,13 +305,13 @@ const JobFilter = ({ setApiUrl }) => {
                         setWhenPosted(Number(e.target.value));
                       }}
                       checked={whenPosted === 7}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       Last 7 Days
                     </label>
@@ -324,13 +324,13 @@ const JobFilter = ({ setApiUrl }) => {
           <div
             id="accordion-flush"
             data-accordion="collapse"
-            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-            data-inactive-classes="text-gray-500 dark:text-gray-400"
+            data-active-classes="bg-white text-gray-900 "
+            data-inactive-classes="text-gray-500 "
           >
             <h2 id="accordion-flush-heading-2">
               <button
                 type="button"
-                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200  gap-3"
                 data-accordion-target="#accordion-flush-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-flush-body-1"
@@ -364,7 +364,7 @@ const JobFilter = ({ setApiUrl }) => {
                 htmlFor="minmax-range"
                 className="flex flex-col justify-evenly py-1"
               >
-                <span className="text-base font-medium text-gray-900 dark:text-white">
+                <span className="text-base font-medium text-gray-900 ">
                   Salary range here
                 </span>
                 <span className="text-sm font-medium mb-2 text-gray-600">
@@ -380,7 +380,7 @@ const JobFilter = ({ setApiUrl }) => {
                 max={maxSalaryValue}
                 value={salaryValue}
                 onChange={handleSliderChange}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer "
               />
             </div>
           </div>
@@ -388,13 +388,13 @@ const JobFilter = ({ setApiUrl }) => {
           <div
             id="accordion-flush"
             data-accordion="collapse"
-            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-            data-inactive-classes="text-gray-500 dark:text-gray-400"
+            data-active-classes="bg-white text-gray-900 "
+            data-inactive-classes="text-gray-500 "
           >
             <h2 id="accordion-flush-heading-1">
               <button
                 type="button"
-                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200  gap-3"
                 data-accordion-target="#accordion-flush-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-flush-body-1"
@@ -424,7 +424,7 @@ const JobFilter = ({ setApiUrl }) => {
               className={isOpen3 ? "" : "hidden"}
               aria-labelledby="accordion-flush-heading-1"
             >
-              <div className="py-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="py-4 border-b border-gray-200">
                 {/* checkbox */}
                 <div className="flex items-center mb-4">
                   <input
@@ -433,11 +433,11 @@ const JobFilter = ({ setApiUrl }) => {
                     value="Full Time"
                     checked={workType.includes("Full Time")}
                     onChange={(e) => handleWorkTypes(e)}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="fulltimeCb"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Full Time
                   </label>
@@ -451,11 +451,11 @@ const JobFilter = ({ setApiUrl }) => {
                     value="Part Time"
                     checked={workType.includes("Part Time")}
                     onChange={handleWorkTypes}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="parttimeCb"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Part Time
                   </label>
@@ -467,13 +467,13 @@ const JobFilter = ({ setApiUrl }) => {
           <div
             id="accordion-flush"
             data-accordion="collapse"
-            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-            data-inactive-classes="text-gray-500 dark:text-gray-400"
+            data-active-classes="bg-white text-gray-900 "
+            data-inactive-classes="text-gray-500 "
           >
             <h2 id="accordion-flush-heading-1">
               <button
                 type="button"
-                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200  gap-3"
                 data-accordion-target="#accordion-flush-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-flush-body-1"
@@ -503,7 +503,7 @@ const JobFilter = ({ setApiUrl }) => {
               className={isOpen4 ? "" : "hidden"}
               aria-labelledby="accordion-flush-heading-1"
             >
-              <div className="py-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="py-4 border-b border-gray-200">
                 {/* checkbox */}
                 <div className="flex items-center mb-4">
                   <input
@@ -512,11 +512,11 @@ const JobFilter = ({ setApiUrl }) => {
                     value="Day Shift"
                     checked={workShift.includes("Day Shift")}
                     onChange={(e) => handleWorkShifts(e)}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="dayShiftCb"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Day Shift
                   </label>
@@ -530,11 +530,11 @@ const JobFilter = ({ setApiUrl }) => {
                     value="Night Shift"
                     checked={workShift.includes("Night Shift")}
                     onChange={(e) => handleWorkShifts(e)}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="nightShiftCb"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Night Shift
                   </label>
@@ -547,13 +547,13 @@ const JobFilter = ({ setApiUrl }) => {
           {/* <div
             id="accordion-flush"
             data-accordion="collapse"
-            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-            data-inactive-classes="text-gray-500 dark:text-gray-400"
+            data-active-classes="bg-white text-gray-900 "
+            data-inactive-classes="text-gray-500 "
           >
             <h2 id="accordion-flush-heading-1">
               <button
                 type="button"
-                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200  gap-3"
                 data-accordion-target="#accordion-flush-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-flush-body-1"
@@ -583,18 +583,18 @@ const JobFilter = ({ setApiUrl }) => {
               className={isOpen5 ? "" : "hidden"}
               aria-labelledby="accordion-flush-heading-1"
             >
-              <div className="py-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="py-4 border-b border-gray-200">
              
                 <div className="flex items-center mb-3">
                   <input
                     id="department1"
                     type="checkbox"
                     value=""
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="department1"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Admin/ Back Office
                   </label>
@@ -606,11 +606,11 @@ const JobFilter = ({ setApiUrl }) => {
                     id="department2"
                     type="checkbox"
                     value=""
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="department2"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Admin/ Back Office
                   </label>
@@ -622,11 +622,11 @@ const JobFilter = ({ setApiUrl }) => {
                     id="department3"
                     type="checkbox"
                     value=""
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="department3"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Admin/ Back Office
                   </label>
@@ -638,11 +638,11 @@ const JobFilter = ({ setApiUrl }) => {
                     id="department4"
                     type="checkbox"
                     value=""
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="department4"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Admin/ Back Office
                   </label>
@@ -654,11 +654,11 @@ const JobFilter = ({ setApiUrl }) => {
                     id="department5"
                     type="checkbox"
                     value=""
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                   />
                   <label
                     htmlFor="department5"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Admin/ Back Office
                   </label>
@@ -678,11 +678,11 @@ const JobFilter = ({ setApiUrl }) => {
                         id="department1"
                         type="checkbox"
                         value=""
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                       />
                       <label
                         htmlFor="department1"
-                        className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="ms-2 text-sm font-medium text-gray-900 "
                       >
                         Admin/ Back Office
                       </label>
@@ -694,11 +694,11 @@ const JobFilter = ({ setApiUrl }) => {
                         id="department2"
                         type="checkbox"
                         value=""
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                       />
                       <label
                         htmlFor="department2"
-                        className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="ms-2 text-sm font-medium text-gray-900 "
                       >
                         Admin/ Back Office
                       </label>
@@ -710,11 +710,11 @@ const JobFilter = ({ setApiUrl }) => {
                         id="department3"
                         type="checkbox"
                         value=""
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                       />
                       <label
                         htmlFor="department3"
-                        className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="ms-2 text-sm font-medium text-gray-900 "
                       >
                         Admin/ Back Office
                       </label>
@@ -726,11 +726,11 @@ const JobFilter = ({ setApiUrl }) => {
                         id="department4"
                         type="checkbox"
                         value=""
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                       />
                       <label
                         htmlFor="department4"
-                        className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="ms-2 text-sm font-medium text-gray-900 "
                       >
                         Admin/ Back Office
                       </label>
@@ -742,11 +742,11 @@ const JobFilter = ({ setApiUrl }) => {
                         id="department5"
                         type="checkbox"
                         value=""
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "
                       />
                       <label
                         htmlFor="department5"
-                        className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="ms-2 text-sm font-medium text-gray-900 "
                       >
                         Admin/ Back Office
                       </label>
@@ -772,13 +772,13 @@ const JobFilter = ({ setApiUrl }) => {
           <div
             id="accordion-flush"
             data-accordion="collapse"
-            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-            data-inactive-classes="text-gray-500 dark:text-gray-400"
+            data-active-classes="bg-white text-gray-900 "
+            data-inactive-classes="text-gray-500 "
           >
             <h2 id="accordion-flush-heading-2">
               <button
                 type="button"
-                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200  gap-3"
                 data-accordion-target="#accordion-flush-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-flush-body-1"
@@ -827,7 +827,7 @@ const JobFilter = ({ setApiUrl }) => {
                 max={maxExperienceValue}
                 value={experienceValue}
                 onChange={handleSliderChange2}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer "
               />
             </div>
           </div>
@@ -836,13 +836,13 @@ const JobFilter = ({ setApiUrl }) => {
           {/* <div
             id="accordion-flush"
             data-accordion="collapse"
-            data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-            data-inactive-classes="text-gray-500 dark:text-gray-400"
+            data-active-classes="bg-white text-gray-900 "
+            data-inactive-classes="text-gray-500 "
           >
             <h2 id="accordion-flush-heading-2">
               <button
                 type="button"
-                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-black border-b border-gray-200  gap-3"
                 data-accordion-target="#accordion-flush-body-1"
                 aria-expanded="true"
                 aria-controls="accordion-flush-body-1"
@@ -872,7 +872,7 @@ const JobFilter = ({ setApiUrl }) => {
               className={isOpen7 ? "" : "hidden"}
               aria-labelledby="accordion-flush-heading-1"
             >
-              <div className="py-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="py-4 border-b border-gray-200">
               
                 <div className="flex">
                   <div className="flex items-center h-5">
@@ -882,13 +882,13 @@ const JobFilter = ({ setApiUrl }) => {
                       type="radio"
                       name="date-posted"
                       value=""
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       All
                     </label>
@@ -904,13 +904,13 @@ const JobFilter = ({ setApiUrl }) => {
                       type="radio"
                       name="date-posted"
                       value=""
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       Last 24 Hours
                     </label>
@@ -926,13 +926,13 @@ const JobFilter = ({ setApiUrl }) => {
                       type="radio"
                       name="date-posted"
                       value=""
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       Last 3 Days
                     </label>
@@ -948,13 +948,13 @@ const JobFilter = ({ setApiUrl }) => {
                       type="radio"
                       name="date-posted"
                       value=""
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300   "
                     />
                   </div>
                   <div className="ms-2 text-sm">
                     <label
                       htmlFor="helper-radio"
-                      className="font-medium text-gray-900 dark:text-gray-300"
+                      className="font-medium text-gray-900 "
                     >
                       Last 7 Days
                     </label>

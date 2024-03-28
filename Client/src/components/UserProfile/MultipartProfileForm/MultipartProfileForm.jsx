@@ -119,41 +119,41 @@ export const MultipartProfileForm = () => {
     <div>
       <div id="multi-step-form-container" >
         {/* <!-- Form Steps / Progress Bar --> */}
-        <ul className="form-stepper mx-28 form-stepper-horizontal text-center mx-auto pl-0">
+        <ul className="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
           {/* <!-- Step 1 --> */}
           <li
             className="form-stepper-active text-center form-stepper-list"
             step="1"
           >
             <a className="mx-2">
-              <span class="form-stepper-circle">
+              <span className="form-stepper-circle">
                 <span>1</span>
               </span>
-              <div class="label">About me</div>
+              <div className="label">About me</div>
             </a>
           </li>
           {/* <!-- Step 2 --> */}
           <li
-            class="form-stepper-unfinished text-center form-stepper-list"
+            className="form-stepper-unfinished text-center form-stepper-list"
             step="2"
           >
-            <a class="mx-2">
-              <span class="form-stepper-circle text-muted">
+            <a className="mx-2">
+              <span className="form-stepper-circle text-muted">
                 <span>2</span>
               </span>
-              <div class="label text-muted">Education</div>
+              <div className="label text-muted">Education</div>
             </a>
           </li>
           {/* <!-- Step 3 --> */}
           <li
-            class="form-stepper-unfinished text-center form-stepper-list"
+            className="form-stepper-unfinished text-center form-stepper-list"
             step="3"
           >
-            <a class="mx-2">
-              <span class="form-stepper-circle text-muted">
+            <a className="mx-2">
+              <span className="form-stepper-circle text-muted">
                 <span>3</span>
               </span>
-              <div class="label text-muted">Experience</div>
+              <div className="label text-muted">Experience</div>
             </a>
           </li>
         </ul>
