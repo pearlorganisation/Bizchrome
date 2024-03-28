@@ -33,9 +33,9 @@ const JobDetails = ({ data, jobType, jobId, setJobData }) => {
 
   return (
     <>
-      {isApplying ? (
+      {!isApplying ? (
         <div className="flex w-full max-w-5xl flex-col md:mx-auto md:flex-row md:justify-center md:gap-[16px] md:py-6">
-          <divName
+          <div
             className="md:space-y-[12px]"
             style={{ maxWidth: "650px", width: "100%" }}
           >
@@ -135,7 +135,7 @@ const JobDetails = ({ data, jobType, jobId, setJobData }) => {
 
               <div className="flex w-full items-center gap-[16px] md:text-sm">
                 <div className="w-full">
-                  <div onClick={() => {isApplying(!isApplying)}}>
+                  <div onClick={() => {setIsApplying(!isApplying)}}>
                     <div className="w-full rounded border border-solid bg-[#275497] hover:bg-[#2a4875] px-[16px] py-[8px] text-center font-semibold text-white tranistion duration-300">
                       <div className="flex w-full cursor-pointer items-center justify-center space-x-[4px]">
                         <p className="m-0 whitespace-nowrap text-center text-sm">
@@ -560,7 +560,7 @@ const JobDetails = ({ data, jobType, jobId, setJobData }) => {
                 </p>
               </div>
             </div>
-          </divName>
+          </div>
           <div className="mb-[16px] flex h-full w-full flex-col space-y-[12px] md:mb-0 md:w-[335px]">
             {/* steps to apply */}
             <div className="rounded-xl border border-solid bg-white p-[16px]">

@@ -1,3 +1,4 @@
+import { jobApplicationModel } from "../../models/Job/jobApplicationModel.js";
 import { jobModel } from "../../models/Job/jobModel.js";
 
 // get all jobs data for the type
@@ -114,6 +115,70 @@ export const getPostedJobs = async (req, res) => {
         message: `No job posting found`,
       });
     }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: error?.message,
+    });
+  }
+};
+
+// authenticating if user applied to job earlier
+
+// export const authJobApplication = async (req, res) => {
+//   try {
+//     const { postingId, email, mobile } = req.body;
+
+//     if (!postingId && !email && !mobile) {
+//       res.status(400).json({
+//         status: false,
+//         message: "Incomplete data provided in headers",
+//       });
+//       return
+//     }
+
+//     const auth = jobApplicationModel.find({postingId: postingId, $or : [
+//       {email}, {mobile}
+//     ]})
+
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({
+//       status: false,
+//       message: error?.message,
+//     });
+//   }
+// };
+
+//  job application posting
+
+export const applyJob = async (req, res) => {
+  try {
+    const { postingId, fullName, email, mobile } = req?.body;
+
+    if (!req.file) {
+      res.status(400).json({ message: "No file uploaded" });
+      return;
+    }
+
+    console.log(JSON.stringify(req.file))
+    // if(!postingId || !fullName || !email || !mobile || !req.file) {
+    //   res.status(400).json({ message: "Incorrect/Incomplete form data provided" })
+    //   return
+    // }
+
+    console.log("uploaded");
+
+    const jobApplication = new jobApplicationModel({
+      postingId,
+      fullName,
+      email,
+      mobile,
+      resumePath: ""
+    });
+
+    // jobApplicationModel.save()
   } catch (error) {
     console.log(error);
     res.status(400).json({
