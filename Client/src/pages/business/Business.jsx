@@ -15,7 +15,7 @@ export default function Business() {
     },
     {
         label: 'Profile',
-        path: ''
+        path: 'profile'
         ,
         icon: ''
     },
@@ -73,7 +73,7 @@ export default function Business() {
                 <aside
                     id="nav-menu-4"
                     aria-label="Side navigation"
-                    className={`fixed top-0 bottom-0 left-0 lg:static  z-40 flex w-72 flex-col border-r border-r-slate-200 bg-white transition-transform lg:translate-x-0 ${isSideNavOpen ? "translate-x-0" : " -translate-x-full"
+                    className={`fixed top-0 bottom-0 left-0 lg:static  z-40 flex w-72 min-h-screen flex-col border-r border-r-slate-200 bg-white transition-transform lg:translate-x-0 ${isSideNavOpen ? "translate-x-0" : " -translate-x-full"
                         }`}
                 >
                     <div className="flex flex-col items-center gap-4 border-b border-slate-200 p-6">
@@ -182,11 +182,11 @@ export default function Business() {
                         </div>
                     </nav>
 
-                    <footer className="border-t border-slate-200 p-3">
+                    {/* <footer className="border-t border-slate-200 p-3">
 
-                    </footer>
+                    </footer> */}
                 </aside>
-                <div className="w-full">
+                <div className="w-full p-2">
                     <Outlet />
                 </div>
             </div>

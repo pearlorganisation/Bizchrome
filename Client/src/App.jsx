@@ -27,6 +27,8 @@ import MyJobs from "./pages/business/MyJobs";
 import SignUp from "./pages/Authentication/SignUp";
 import SignIn from "./pages/Authentication/SignIn";
 import { Navigate } from "react-router-dom";
+import BusinessDashboard from "./pages/business/BusinessDashboard";
+import BusinessProfile from "./pages/business/BusinessProfile";
 
 const App = () => {
   const { isUserLoggedIn, userMetaData } = useAuth();
@@ -106,9 +108,14 @@ const App = () => {
       element: userMetaData?.userType === 'Business' ? <Business /> : <Navigate to="/" replace={true} />,
       children: [
         {
+          path: '',
+          element: <BusinessDashboard />
+        },
+        {
           path: ':companyId/createJob',
           element: <CreateJobStepForm />
         },
+
         {
           path: 'myJobs/:companyId',
           element: <MyJobs />
@@ -116,6 +123,10 @@ const App = () => {
         {
           path: 'pricePlans',
           element: <PricePlans />
+        },
+        {
+          path: 'profile',
+          element: <BusinessProfile />
         }
       ]
     },
