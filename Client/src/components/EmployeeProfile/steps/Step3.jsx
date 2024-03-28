@@ -37,18 +37,18 @@ const Step3 = ({ setStep }) => {
                 </div>
 
                 <div className=''>
-                    <p class="font-medium mb-1 ">Type of Interview</p>
-                    <div class="flex gap-x-4">
+                    <p className="font-medium mb-1 ">Type of Interview</p>
+                    <div className="flex gap-x-4">
 
                         {
                             [`In-Person-Interview`, `Telephonic/Online`]?.map((item, ind) => {
-                                return <div class="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-2 font-medium text-gray-700">
+                                return <div className="relative flex w-56 items-center justify-center rounded-xl bg-gray-50 px-4 py-2 font-medium text-gray-700">
                                     <input
                                         {...register("typeOfInterview", { required: true })}
-                                        class="peer hidden" type="radio" value={item} id={`${item}`} />
-                                    <label class={`peer-checked:border-indigo-400 peer-checked:bg-indigo-200 peer-checked:ring-4 ring-indigo-500/30 absolute top-0 h-full w-full cursor-pointer rounded-xl border ${errors.typeOfInterview ? 'ring-4 ring-red-500/30' : null}`} for={`${item}`}> </label>
-                                    <div class="peer-checked:border-transparent peer-checked:bg-indigo-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-indigo-400 ring-offset-2"></div>
-                                    <span class="pointer-events-none z-10">{item}</span>
+                                        className="peer hidden" type="radio" value={item} id={`${item}`} />
+                                    <label className={`peer-checked:border-indigo-400 peer-checked:bg-indigo-200 peer-checked:ring-4 ring-indigo-500/30 absolute top-0 h-full w-full cursor-pointer rounded-xl border ${errors.typeOfInterview ? 'ring-4 ring-red-500/30' : null}`} for={`${item}`}> </label>
+                                    <div className="peer-checked:border-transparent peer-checked:bg-indigo-400 peer-checked:ring-2 absolute left-4 h-5 w-5 rounded-full border-2 border-gray-300 bg-gray-200 ring-indigo-400 ring-offset-2"></div>
+                                    <span className="pointer-events-none z-10">{item}</span>
                                 </div>
                             })
                         }

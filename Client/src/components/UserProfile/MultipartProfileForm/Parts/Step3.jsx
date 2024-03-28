@@ -3,10 +3,10 @@ import React from "react";
 export default function Step3({ navigateToFormStep, locationData }) {
   return (
     <div>
-      <section id="step-3" class="form-step d-none">
-        <h2 class="font-normal">Personal Details</h2>
+      <section id="step-3" className="form-step d-none">
+        <h2 className="font-normal">Personal Details</h2>
         {/* <!-- Step 3 input fields --> */}
-        <div class="mt-3">Step 3 input fields goes here..</div>
+        <div className="mt-3">Step 3 input fields goes here..</div>
         <div
           className={`mt-3 flex justify-center font-medium align-center  ${
             locationData.length == 0 && "hidden"

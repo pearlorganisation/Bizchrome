@@ -77,15 +77,15 @@ const SignUp = () => {
   // };
 
   return (
-    <div class="flex h-screen">
+    <div className="flex h-screen">
       {/* <!-- Left Pane --> */}
-      <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
-        <div class="max-w-md text-center">
+      <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+        <div className="max-w-md text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="524.67004"
             height="531.39694"
-            class="w-full"
+            className="w-full"
             alt="https://undraw.co/illustrations"
             title="https://undraw.co/illustrations"
             viewBox="0 0 524.67004 531.39694"
@@ -311,22 +311,22 @@ const SignUp = () => {
         </div>
       </div>
       {/* <!-- Right Pane --> */}
-      <div class="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
-        <div class="max-w-md w-full p-6">
-          <h1 class="text-3xl font-semibold mb-6 text-black text-center">
+      <div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
+        <div className="max-w-md w-full p-6">
+          <h1 className="text-3xl font-semibold mb-6 text-black text-center">
             Sign Up AS Candidate
           </h1>
 
-          <div class="mt-4 flex flex-col lg:flex-row items-center justify-between">
-            <div class="w-full lg:w-1/2 mb-2 lg:mb-0">
+          <div className="mt-4 flex flex-col lg:flex-row items-center justify-between">
+            <div className="w-full lg:w-1/2 mb-2 lg:mb-0">
               <button
                 type="button"
-                class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
+                className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
-                  class="w-4"
+                  className="w-4"
                   id="google"
                 >
                   <path
@@ -349,16 +349,16 @@ const SignUp = () => {
                 Sign Up with Google{" "}
               </button>
             </div>
-            <div class="w-full lg:w-1/2 ml-0 lg:ml-2">
+            <div className="w-full lg:w-1/2 ml-0 lg:ml-2">
               <button
                 type="button"
-                class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
+                className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
                   id="github"
-                  class="w-4"
+                  className="w-4"
                 >
                   <path d="M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z"></path>
                 </svg>{" "}
@@ -367,14 +367,14 @@ const SignUp = () => {
             </div>
           </div>
 
-          <div class="mt-4 text-sm text-gray-600 text-center">
+          <div className="mt-4 text-sm text-gray-600 text-center">
             <p>or with email</p>
           </div>
-          <form class="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label
                 for="username"
-                class="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700"
               >
                 Username
               </label>
@@ -383,7 +383,7 @@ const SignUp = () => {
                 type="text"
                 id="fullName"
                 name="fullName"
-                class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                 disabled={signUpOtpGenerated}
                 {...register("fullName", { required: true })}
               />
@@ -394,7 +394,7 @@ const SignUp = () => {
             <div>
               <label
                 for="email"
-                class="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700"
               >
                 Email
               </label>
@@ -402,7 +402,7 @@ const SignUp = () => {
                 type="email"
                 id="email"
                 name="email"
-                class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                 disabled={signUpOtpGenerated}
                 {...register("email", { required: true })}
               />
@@ -413,7 +413,7 @@ const SignUp = () => {
             <div>
               <label
                 for="password"
-                class="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700"
               >
                 Password
               </label>
@@ -444,7 +444,7 @@ const SignUp = () => {
             <div>
               <button
                 type="submit"
-                class="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
+                className="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
                 disabled={signUpOtpGenerated}
               // onClick={userSignUp}
               >
@@ -473,13 +473,13 @@ const SignUp = () => {
           {signUpOtpGenerated && (
             <form
               action=""
-              class="space-y-4"
+              className="space-y-4"
               onSubmit={handleSubmitOTP(onSubmitOTP)}
             >
               <div>
                 <label
                   for="username"
-                  class="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   OTP
                 </label>
@@ -489,7 +489,7 @@ const SignUp = () => {
                   id="username"
                   name="username"
                   placeholder="Fill in the OTP receive on mail"
-                  class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                  className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                   {...registerOTP("otp", {
                     min: {
                       value: 100000,
@@ -512,7 +512,7 @@ const SignUp = () => {
               <div>
                 <button
                   type="submit"
-                  class="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
+                  className="w-full bg-[#0EA89B] text-white p-2 rounded-md hover:bg-[#0EA89B]  focus:bg-[#0EA89B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0EA89B] transition-colors duration-300"
                 // onClick={userSignUp}
                 >
                   {isLoading ? (
@@ -533,10 +533,10 @@ const SignUp = () => {
           )}
 
           {/* OTP Forms ends here */}
-          <div class="mt-4 text-sm text-gray-600 text-center">
+          <div className="mt-4 text-sm text-gray-600 text-center">
             <p>
               Already have an account?{" "}
-              <Link to="/candidate-login" class="text-black hover:underline">
+              <Link to="/candidate-login" className="text-black hover:underline">
                 Login here
               </Link>
             </p>

@@ -11,7 +11,7 @@ export default function Step1({
   
   return (
     <div>
-      <section id="step-1" class="form-step">
+      <section id="step-1" className="form-step">
         <div>
           {/* <div ></div> */}
           {/* //Section MAP */}
@@ -262,7 +262,7 @@ export default function Step1({
           </div>
         </div>
         <div
-          class={`mt-3 flex justify-center font-medium align-center  ${
+          className={`mt-3 flex justify-center font-medium align-center  ${
             locationData.length == 0 && "hidden"
           }`}
         >

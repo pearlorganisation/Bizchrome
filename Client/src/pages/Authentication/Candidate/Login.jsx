@@ -35,15 +35,15 @@ const Login = () => {
   //
 
   return (
-    <div class="bg-gray-100 flex justify-center items-center h-screen">
+    <div className="bg-gray-100 flex justify-center items-center h-screen">
       {/* <!-- Left: Image --> */}
-      <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black h-screen">
-        <div class="max-w-md text-center">
+      <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black h-screen">
+        <div className="max-w-md text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="524.67004"
             height="531.39694"
-            class="w-full"
+            className="w-full"
             alt="https://undraw.co/illustrations"
             title="https://undraw.co/illustrations"
             viewBox="0 0 524.67004 531.39694"
@@ -269,19 +269,19 @@ const Login = () => {
         </div>
       </div>
       {/* <!-- Right: Login Form --> */}
-      <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
-        <h1 class="text-2xl font-semibold mb-4">Login As Candidate</h1>
+      <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+        <h1 className="text-2xl font-semibold mb-4">Login As Candidate</h1>
         <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
           {/* <!-- Username Input --> */}
-          <div class="mb-4">
-            <label for="username" class="block text-gray-600">
+          <div className="mb-4">
+            <label for="username" className="block text-gray-600">
               Username
             </label>
             <input
               type="email"
               id="username"
               name="username"
-              class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autocomplete="off"
               {...register("email", { required: true })}
             />
@@ -290,15 +290,15 @@ const Login = () => {
             )}
           </div>
           {/* <!-- Password Input --> */}
-          <div class="mb-4">
-            <label for="password" class="block text-gray-600">
+          <div className="mb-4">
+            <label for="password" className="block text-gray-600">
               Password
             </label>
             <input
               type="password"
               id="password"
               name="password"
-              class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
               autocomplete="off"
               {...register("password", { required: true })}
             />
@@ -307,27 +307,27 @@ const Login = () => {
             )}
           </div>
           {/* <!-- Remember Me Checkbox --> */}
-          <div class="mb-4 flex items-center">
+          <div className="mb-4 flex items-center">
             <input
               type="checkbox"
               id="remember"
               name="remember"
-              class="text-blue-500"
+              className="text-blue-500"
             />
-            <label for="remember" class="text-gray-600 ml-2">
+            <label for="remember" className="text-gray-600 ml-2">
               Remember Me
             </label>
           </div>
           {/* <!-- Forgot Password Link --> */}
-          <div class="mb-6 text-blue-500">
-            <a href="/SendOtp" class="hover:underline">
+          <div className="mb-6 text-blue-500">
+            <a href="/SendOtp" className="hover:underline">
               Forgot Password?
             </a>
           </div>
           {/* <!-- Login Button --> */}
           <button
             type="submit"
-            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
           >
             {isLoading ? (
               <div
@@ -344,8 +344,8 @@ const Login = () => {
           </button>
         </form>
         {/* <!-- Sign up  Link --> */}
-        <div class="mt-6 text-blue-500 text-center">
-          <Link to="/candidate-signUp" class="hover:underline">
+        <div className="mt-6 text-blue-500 text-center">
+          <Link to="/candidate-signUp" className="hover:underline">
             Sign up Here
           </Link>
         </div>

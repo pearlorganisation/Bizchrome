@@ -43,7 +43,7 @@ export default function Step2({ navigateToFormStep, locationData }) {
 
   return (
     <div>
-      <section id="step-2" class="form-step d-none">
+      <section id="step-2" className="form-step d-none">
         {/* <!-- Step 2 input fields --> */}
         <div className="border-red-500">
           <div>
@@ -138,32 +138,32 @@ export default function Step2({ navigateToFormStep, locationData }) {
           isSelected === 5 ||
           isSelected === 6) && (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div class="mb-6">
+            <div className="mb-6">
               <label
                 for="course"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Course
               </label>
               <input
                 type="text"
                 id="course"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="e.g. B.Tech"
                 required
               />
             </div>
-            <div class="mb-6">
+            <div className="mb-6">
               <label
                 for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Specialization
               </label>
               <input
                 type="text"
                 id="specialization"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="e.g. Mechanical Engineering"
                 required
               />
@@ -171,7 +171,7 @@ export default function Step2({ navigateToFormStep, locationData }) {
           </form>
         )}
         <div
-          class={`mt-3 flex justify-center font-medium align-center  ${
+          className={`mt-3 flex justify-center font-medium align-center  ${
             locationData.length == 0 && "hidden"
           }`}
         >

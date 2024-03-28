@@ -94,6 +94,10 @@ const App = () => {
           element: <Jobs />
         },
 
+        // job application
+
+      
+
         {
           path: "/test",
           element: <UserProfile />

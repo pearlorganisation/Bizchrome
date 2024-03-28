@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 
 const HeroSection = () => {
   return (
-    <section class="bg-[#F1F1F2] min-h-dvh dark:bg-gray-900 relative z-10">
+    <section className="bg-[#F1F1F2] min-h-dvh relative z-10">
       <div className="max-w-screen-xl mx-auto py-24 space-y-6">
         <div className="space-y-4">
           <p className="font-bold text-lg text-[#4F46E5]">INDIA'S #1 JOB PLATFORM</p>
@@ -22,11 +22,11 @@ const HeroSection = () => {
       <div className="absolute bottom-[10rem] w-screen">
         <Marquee speed={100}>
           {
-            Array(20).fill(true).map((item, indx) => <div class="flex cursor-pointer items-center gap-4 bg-white px-3 py-3 rounded mx-3">
-              <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e" alt="" />
-              <div class="font-medium dark:text-white">
+            Array(20).fill(true).map((item, indx) => <div className="flex cursor-pointer items-center gap-4 bg-white px-3 py-3 rounded mx-3">
+              <img className="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e" alt="" />
+              <div className="font-medium dark:text-white">
                 <div>Jese Leos</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Joined in January 2024</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Joined in January 2024</div>
               </div>
             </div>)
           }
