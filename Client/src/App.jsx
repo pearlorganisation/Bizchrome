@@ -29,6 +29,8 @@ import SignIn from "./pages/Authentication/SignIn";
 import { Navigate } from "react-router-dom";
 import BusinessDashboard from "./pages/business/BusinessDashboard";
 import BusinessProfile from "./pages/business/BusinessProfile";
+import CandidateProfile from "./pages/candidateProfile/CandidateProfile";
+import Updateprofile from "./pages/candidateProfile/Updateprofile";
 
 const App = () => {
   const { isUserLoggedIn, userMetaData } = useAuth();
@@ -96,7 +98,14 @@ const App = () => {
 
         // job application
 
-      
+        {
+          path: "/candidateProfile",
+          element: <CandidateProfile />
+        },
+        {
+          path: "/updateProfile",
+          element: <Updateprofile />
+        },
 
         {
           path: "/test",

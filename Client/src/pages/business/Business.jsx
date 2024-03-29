@@ -2,11 +2,14 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom"
 import { userLogout } from "../../features/actions/Auth/authActions";
+import { createPortal } from 'react-dom';
+import LogoutAlert from "../../components/Modals/LogoutAlert";
 
 export default function Business() {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false)
     const { isUserLoggedIn, userMetaData } = useSelector((store) => store.auth);
     const dispatch = useDispatch()
+    const [logoutAlert, setLogoutAlert] = useState(false)
 
     const sideBarItems = [{
         label: 'Dashboard',
@@ -172,7 +175,7 @@ export default function Business() {
                                             </svg>
                                         </div>
                                         <div onClick={() => {
-                                            dispatch(userLogout())
+                                            setLogoutAlert(true)
                                         }} className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm font-medium">
                                             Logout
                                         </div>
@@ -198,6 +201,9 @@ export default function Business() {
                 onClick={() => setIsSideNavOpen(false)}
             ></div>
             {/*  <!-- End Side navigation menu with user profile and alert message --> */}
+            {
+                logoutAlert && createPortal(<LogoutAlert setLogoutAlert={setLogoutAlert} logout={() => { dispatch(userLogout()) }} />, document.body)
+            }
         </>
     )
 }
