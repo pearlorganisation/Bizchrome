@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getJobApplicants } from '../../features/actions/jobActions'
+import { useParams } from 'react-router-dom'
 
 const JobApplicants = () => {
+    const { isLoading, jobId } = useParams()
+    const dispatch = useDispatch()
+    const { jobApplicants } = useSelector(state => state.business)
+    useEffect(() => {
+        dispatch(getJobApplicants({ jobId }))
+    }, [])
+
     const integrations = [
         {
             title: "Figma",
@@ -65,42 +75,46 @@ const JobApplicants = () => {
                         <h1 className="text-gray-800 text-xl font-extrabold sm:text-2xl text-left">Job Applicants</h1>
                         <p className="text-gray-600 mt-2">Extend and automate your workflow by using integrations for your favorite tools.</p>
                     </div>
-                    <ul className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                        {
-                            integrations.map((item, idx) => (
-                                <li className="border rounded-lg">
-                                    <div className="flex items-start justify-between p-4">
-                                        <div className="space-y-2">
-                                            <div className="shrink-0">
-                                                <a
-                                                    href="#"
-                                                    className="relative flex h-12 w-12 items-center justify-center rounded-full text-white"
-                                                >
-                                                    <img
-                                                        src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
-                                                        alt="user name"
-                                                        title="user name"
-                                                        width="48"
-                                                        height="48"
-                                                        className="max-w-full rounded-full"
-                                                    />
+                    {
+                        isLoading ? <div>Loading...</div> : <ul className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                            {
+                                jobApplicants?.map((item, idx) => (
+                                    <li className="border rounded-lg">
+                                        <div className="flex items-start justify-between p-4">
+                                            <div className="space-y-2">
+                                                <div className="shrink-0">
+                                                    <a
+                                                        href="#"
+                                                        className="relative flex h-12 w-12 items-center justify-center rounded-full text-white"
+                                                    >
+                                                        <img
+                                                            src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
+                                                            alt="user name"
+                                                            title="user name"
+                                                            width="48"
+                                                            height="48"
+                                                            className="max-w-full rounded-full"
+                                                        />
 
-                                                </a>
+                                                    </a>
+                                                </div>
+                                                <p className="text-gray-600 text-sm"> <span className='font-semibold'>Name : </span>{item?.fullName}</p>
+                                                <p className="text-gray-600 text-sm"> <span className='font-semibold'>Email : </span> {item?.email}</p>
+                                                <p className="text-gray-600 text-sm"> <span className='font-semibold'>Mobile Number : </span> {item?.mobile}</p>
                                             </div>
-                                            <h4 className="text-gray-800 font-semibold">{item.title}</h4>
-                                            <p className="text-gray-600 text-sm">{item.desc}</p>
+                                            <a href={`${item?.resumePath}`} target='_blank' className="text-gray-700 text-sm border rounded-lg px-3 py-2 duration-150 hover:bg-gray-100">Download</a>
                                         </div>
-                                        <button className="text-gray-700 text-sm border rounded-lg px-3 py-2 duration-150 hover:bg-gray-100">Resume</button>
-                                    </div>
-                                    <div className="py-5 px-4 border-t text-right">
-                                        <a href="javascript:void(0)" className="text-indigo-600 hover:text-indigo-500 text-sm font-medium">
-                                            View
-                                        </a>
-                                    </div>
-                                </li>
-                            ))
-                        }
-                    </ul>
+                                        <div className="py-5 px-4 border-t text-right">
+                                            <a href={`${item?.resumePath}`} target='_blank' className="text-indigo-600 hover:text-indigo-500 text-sm font-medium">
+                                                View
+                                            </a>
+                                        </div>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    }
+
                 </div>
             </section>
         </div>

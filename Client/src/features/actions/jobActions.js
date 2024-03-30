@@ -17,3 +17,18 @@ export const getJobs = createAsyncThunk(
     }
   }
 );
+
+export const getJobApplicants = createAsyncThunk(
+  "job/getJobApplicants",
+  async ({ jobId }, { rejectWithValue }) => {
+    try {
+      const { data } = await instance.get(`job/jobapplication/${jobId}`, {
+        withCredentials: true,
+      });
+      console.log("data::", data);
+      return data?.data;
+    } catch (error) {
+      return rejectWithValue(error?.message);
+    }
+  }
+);

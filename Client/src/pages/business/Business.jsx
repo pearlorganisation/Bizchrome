@@ -18,7 +18,7 @@ export default function Business() {
     },
     {
         label: 'Profile',
-        path: 'profile'
+        path: ''
         ,
         icon: ''
     },
@@ -32,11 +32,7 @@ export default function Business() {
         path: `${userMetaData?._id}/createJob`,
         icon: ''
     }
-        , {
-        label: 'Job Aplicants',
-        path: `jobApplicants`,
-        icon: ''
-    }
+
         , {
         label: 'Price Plans',
         path: 'pricePlans',

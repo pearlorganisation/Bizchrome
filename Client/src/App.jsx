@@ -143,7 +143,7 @@ const App = () => {
           element: <MyJobs />
         },
         {
-          path: 'jobApplicants',
+          path: ':jobId/jobApplicants',
           element: <JobApplicants />
         },
         {
