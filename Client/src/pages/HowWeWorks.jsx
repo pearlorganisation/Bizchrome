@@ -18,7 +18,7 @@
             </div>
 
             <p className='text-3xl font-semibold text-center'>For Jobs</p>
-            <div className='mx-32 flex gap-4'>
+            <div className='mx-32 sm:flex gap-4'>
         <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
         <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
         <div className='text-3xl font-semibold'>Create Your Profile :</div>
@@ -33,7 +33,7 @@
         <p className='text-[#77838f] p-2'>With the right investor by your side, secure the funding you need to transform your innovative idea into a thriving reality. </p>
         </div>
             </div>
-            <div className='mx-32 flex gap-4'>
+            <div className='mx-32 sm:flex gap-4'>
         <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
         <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
         <div className='text-3xl font-semibold'>Create Your Profile :</div>
@@ -49,7 +49,7 @@
         </div>
             </div>
             <p className='text-3xl font-semibold text-center'>For Jobs</p>
-            <div className='mx-32 flex gap-4'>
+            <div className='mx-32 sm:flex gap-4'>
         <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
         <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
         <div className='text-3xl font-semibold'>Create Your Profile :</div>
@@ -64,89 +64,8 @@
         <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium ipsum mollitia, sapiente est </p>
         </div>
             </div>
-            <div className='mx-32 flex gap-4'>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-        <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
-        <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicinIg elit. nventore accusantium ipsum mollitia, sapiente est </p>
-
-
-    </div>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-            
-    <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc2}/>
-    <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium ipsum mollitia, sapiente est </p>
-        </div>
-            </div>
-            <p className='text-3xl font-semibold text-center'>For Jobs</p>
-            <div className='mx-32 flex gap-4'>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-        <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
-        <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicinIg elit. nventore accusantium ipsum mollitia, sapiente est </p>
-
-
-    </div>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-            
-    <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc2}/>
-    <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium ipsum mollitia, sapiente est </p>
-        </div>
-            </div>
-            <div className='mx-32 flex gap-4'>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-        <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
-        <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicinIg elit. nventore accusantium ipsum mollitia, sapiente est </p>
-
-
-    </div>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-            
-    <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc2}/>
-    <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium ipsum mollitia, sapiente est </p>
-        </div>
-            </div>
-            <p className='text-3xl font-semibold text-center'>For Jobs</p>
-            <div className='mx-32 flex gap-4'>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-        <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
-        <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicinIg elit. nventore accusantium ipsum mollitia, sapiente est </p>
-
-
-    </div>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-            
-    <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc2}/>
-    <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium ipsum mollitia, sapiente est </p>
-        </div>
-            </div>
-            <div className='mx-32 flex gap-4'>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-        <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc1}/>
-        <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicinIg elit. nventore accusantium ipsum mollitia, sapiente est </p>
-
-
-    </div>
-        <div className='rounded-lg w-full bg-slate-50 flex flex-col space-y-5 justify-center items-center'>
-            
-    <img className='h-[300px] w-[350px] rounded-xl mt-3' src={imageSrc2}/>
-    <div className='text-3xl font-semibold'>Create Your Profile :</div>
-        <p className='text-[#77838f] p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium ipsum mollitia, sapiente est </p>
-        </div>
-            </div>
-       
-       
-       
-       
-       
-       
+    
+     
        
         </div>
     )
