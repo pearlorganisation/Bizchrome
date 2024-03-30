@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./JobApplication.css";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
+import { Circles } from "react-loader-spinner";
 
-const JobApplication = ({ data }) => {
+const JobApplication = ({ data, setIsApplying, setSuccessMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -14,6 +16,8 @@ const JobApplication = ({ data }) => {
 
   const onSubmit = async (formData) => {
     setErrorMsg("");
+    setSuccessMsg("");
+    setIsLoading(true);
     try {
       const allowedTypes = [
         "application/pdf",
@@ -30,8 +34,8 @@ const JobApplication = ({ data }) => {
       formDataToSend.append("email", formData?.email);
       formDataToSend.append("mobile", formData?.mobile);
       formDataToSend.append("resume", formData.resume[0]);
-  
-      console.log(formDataToSend)
+
+      console.log(formDataToSend);
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL_LOCAL}job/jobapplication`,
@@ -44,9 +48,14 @@ const JobApplication = ({ data }) => {
       );
 
       if (response.data.status) {
-        setSuccessMsg("Applied Successfully");
+        setIsLoading(false);
+        setSuccessMsg("Job Application sent Successfully!");
+        setTimeout(() => {
+          setIsApplying(false);
+        }, 3000);
       }
     } catch (error) {
+      setIsLoading(false);
       console.error("Error occurred while submitting job application:", error);
       setErrorMsg("Failed to submit job application. Please try again later.");
     }
@@ -131,11 +140,20 @@ const JobApplication = ({ data }) => {
           />
         </div>
         <div className="w-full h-10 mb-2 px-2 flex justify-center">
-          {successMsg?.length > 0 && (
-            <div className="text-green-600">{successMsg}</div>
+          {isLoading && (
+            <Circles
+              height="30"
+              width="30"
+              color="#4d64e5"
+              ariaLabel="circles-loading"
+              wrapperStyle={{}}
+              wrapperclassName=""
+              visible={true}
+            />
           )}
-
-          {errorMsg?.length > 0 && <div className="text-red-500">{errorMsg}</div>}
+          {errorMsg?.length > 0 && (
+            <div className="text-red-500">{errorMsg}</div>
+          )}
         </div>
         <button
           type="submit"

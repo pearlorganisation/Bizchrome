@@ -1,3 +1,4 @@
+import { uploadFile } from "../../configs/cloudinary.js";
 import { jobApplicationModel } from "../../models/Job/jobApplicationModel.js";
 import { jobModel } from "../../models/Job/jobModel.js";
 
@@ -124,61 +125,87 @@ export const getPostedJobs = async (req, res) => {
   }
 };
 
-// authenticating if user applied to job earlier
-
-// export const authJobApplication = async (req, res) => {
-//   try {
-//     const { postingId, email, mobile } = req.body;
-
-//     if (!postingId && !email && !mobile) {
-//       res.status(400).json({
-//         status: false,
-//         message: "Incomplete data provided in headers",
-//       });
-//       return
-//     }
-
-//     const auth = jobApplicationModel.find({postingId: postingId, $or : [
-//       {email}, {mobile}
-//     ]})
-
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).json({
-//       status: false,
-//       message: error?.message,
-//     });
-//   }
-// };
-
-//  job application posting
-
 export const applyJob = async (req, res) => {
   try {
     const { postingId, fullName, email, mobile } = req?.body;
+    // console.log(req.file)
 
     if (!req.file) {
       res.status(400).json({ message: "No file uploaded" });
       return;
     }
 
-    console.log(JSON.stringify(req.file))
-    // if(!postingId || !fullName || !email || !mobile || !req.file) {
-    //   res.status(400).json({ message: "Incorrect/Incomplete form data provided" })
-    //   return
-    // }
+    let result = await uploadFile(req.file)
 
-    console.log("uploaded");
+    // console.log(result)
+    if(result?.status){
+      const jobApplication = new jobApplicationModel({
+        postingId: postingId,
+        fullName: fullName,
+        email: email,
+        mobile: mobile,
+        resumePath: result?.result?.secure_url
+      });
+  
+      const saveJobApplicaiton = await jobApplication.save()
+  
+      console.log(saveJobApplicaiton)
 
-    const jobApplication = new jobApplicationModel({
-      postingId,
-      fullName,
-      email,
-      mobile,
-      resumePath: ""
+      if(saveJobApplicaiton){
+        res.status(200).json({
+          status: true, 
+          data: saveJobApplicaiton
+        })
+      } else {
+        res.status(400).json({
+          success: false,
+          message: "Save application to DB failed, please try again later",
+        });
+      }
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "File upload failed, please try again later",
+      });
+    }
+
+
+
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: error?.message,
     });
+  }
+};
 
-    // jobApplicationModel.save()
+
+
+// get all jobs applied posted by a candidate as per postingId
+export const getJobApplicants = async (req, res) => {
+  try {
+    const { postingId } = req?.params;
+
+    const query = { postingId: postingId }; // case insensitive regex search for jobs posted according to company
+
+    if (!postingId) res.status(400).json({ message: "Incorrect Url" });
+
+    const applicants = await jobApplicationModel.find(query);
+
+    if (applicants.length) {
+      res.status(200).json({
+        data: applicants,
+        success: true,
+        message: `Found applicants successfully`,
+      });
+    } else {
+      res.status(200).json({
+        data: applicants,
+        success: false,
+        message: `No job applicants found`,
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(400).json({
