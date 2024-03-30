@@ -31,6 +31,9 @@ import BusinessDashboard from "./pages/business/BusinessDashboard";
 import BusinessProfile from "./pages/business/BusinessProfile";
 import CandidateProfile from "./pages/candidateProfile/CandidateProfile";
 import Updateprofile from "./pages/candidateProfile/Updateprofile";
+import HowWeWorks from "./pages/howWeWorks/HowWeWorks";
+import ContactUs from "./pages/contactUs/ContactUs";
+import JobApplicants from "./pages/business/JobApplicants";
 
 const App = () => {
   const { isUserLoggedIn, userMetaData } = useAuth();
@@ -43,6 +46,12 @@ const App = () => {
         {
           path: "/",
           element: <Home />,
+
+        },
+
+        {
+          path: "/contact",
+          element: <ContactUs />,
 
         },
         {
@@ -132,6 +141,10 @@ const App = () => {
         {
           path: 'myJobs/:companyId',
           element: <MyJobs />
+        },
+        {
+          path: 'jobApplicants',
+          element: <JobApplicants />
         },
         {
           path: 'pricePlans',

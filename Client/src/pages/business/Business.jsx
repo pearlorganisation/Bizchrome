@@ -33,6 +33,11 @@ export default function Business() {
         icon: ''
     }
         , {
+        label: 'Job Aplicants',
+        path: `jobApplicants`,
+        icon: ''
+    }
+        , {
         label: 'Price Plans',
         path: 'pricePlans',
         icon: ''

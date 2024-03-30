@@ -22,8 +22,8 @@ const MyJobs = () => {
                                 <p className='font-medium text-xl'>{item?.jobRole?.category}</p>
                                 <p className='line-clamp-1'><span className='border-r-2 border-r-gray-400 pr-2 mr-2'>{item?.interviewDetails?.address}</span> <span className='border-r-2 border-r-gray-400 pr-2 mr-2'>Posted on: 18 Mar 2024</span> <span>Abhishek Bahuguna</span></p>
                             </div>
-                            <div className='rounded-lg bg-white px-4 py-2 grid place-items-center'> <span className='font-medium'>1</span> Action Pending </div>
-                            <div className='rounded-lg bg-white px-4 py-2 grid place-items-center'> <span className='font-medium'>0</span>  All Candidate </div>
+                            {/* <div className='rounded-lg bg-white px-4 py-2 grid place-items-center'> <span className='font-medium'>1</span> Action Pending </div> */}
+                            <div className='rounded-lg bg-white px-4 py-2 grid place-items-center'> <span className='font-medium'>0</span>  View Applicants  </div>
                         </div>
                     })
                 }
