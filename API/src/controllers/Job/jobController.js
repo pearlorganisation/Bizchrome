@@ -1,3 +1,4 @@
+import { uploadFile } from "../../configs/cloudinary.js";
 import { jobApplicationModel } from "../../models/Job/jobApplicationModel.js";
 import { jobModel } from "../../models/Job/jobModel.js";
 
@@ -156,29 +157,49 @@ export const getPostedJobs = async (req, res) => {
 export const applyJob = async (req, res) => {
   try {
     const { postingId, fullName, email, mobile } = req?.body;
+    // console.log(req.file)
 
     if (!req.file) {
       res.status(400).json({ message: "No file uploaded" });
       return;
     }
 
-    console.log(JSON.stringify(req.file))
-    // if(!postingId || !fullName || !email || !mobile || !req.file) {
-    //   res.status(400).json({ message: "Incorrect/Incomplete form data provided" })
-    //   return
-    // }
+    let result = await uploadFile(req.file)
 
-    console.log("uploaded");
+    // console.log(result)
+    if(result?.status){
+      const jobApplication = new jobApplicationModel({
+        postingId: postingId,
+        fullName: fullName,
+        email: email,
+        mobile: mobile,
+        resumePath: result?.result?.secure_url
+      });
+  
+      const saveJobApplicaiton = await jobApplication.save()
+  
+      console.log(saveJobApplicaiton)
 
-    const jobApplication = new jobApplicationModel({
-      postingId,
-      fullName,
-      email,
-      mobile,
-      resumePath: ""
-    });
+      if(saveJobApplicaiton){
+        res.status(200).json({
+          status: true, 
+          data: saveJobApplicaiton
+        })
+      } else {
+        res.status(400).json({
+          success: false,
+          message: "Save application to DB failed, please try again later",
+        });
+      }
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "File upload failed, please try again later",
+      });
+    }
 
-    // jobApplicationModel.save()
+
+
   } catch (error) {
     console.log(error);
     res.status(400).json({

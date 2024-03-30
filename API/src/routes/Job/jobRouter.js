@@ -5,7 +5,8 @@ import {
   getPostedJobs,
   applyJob,
 } from "../../controllers/Job/jobController.js";
-import { upload } from "../../configs/cloudinary.js";
+import { upload } from "../../configs/multer.js";
+
 
 const jobRoutes = express.Router();
 
