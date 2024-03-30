@@ -174,7 +174,7 @@ const Header = () => {
     { title: "Blog", path: "javascript:void(0)", isDrapdown: false },
     { title: "Services", path: "javascript:void(0)", isDrapdown: false },
     { title: "How We Works", path: "javascript:void(0)", isDrapdown: false },
-    { title: "Contact", path: "javascript:void(0)", isDrapdown: false },
+    { title: "Contact", path: "contact", isDrapdown: false },
   ];
 
   useEffect(() => {

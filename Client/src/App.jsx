@@ -27,6 +27,13 @@ import MyJobs from "./pages/business/MyJobs";
 import SignUp from "./pages/Authentication/SignUp";
 import SignIn from "./pages/Authentication/SignIn";
 import { Navigate } from "react-router-dom";
+import BusinessDashboard from "./pages/business/BusinessDashboard";
+import BusinessProfile from "./pages/business/BusinessProfile";
+import CandidateProfile from "./pages/candidateProfile/CandidateProfile";
+import Updateprofile from "./pages/candidateProfile/Updateprofile";
+import HowWeWorks from "./pages/howWeWorks/HowWeWorks";
+import ContactUs from "./pages/contactUs/ContactUs";
+import JobApplicants from "./pages/business/JobApplicants";
 
 const App = () => {
   const { isUserLoggedIn, userMetaData } = useAuth();
@@ -39,6 +46,12 @@ const App = () => {
         {
           path: "/",
           element: <Home />,
+
+        },
+
+        {
+          path: "/contact",
+          element: <ContactUs />,
 
         },
         {
@@ -94,7 +107,14 @@ const App = () => {
 
         // job application
 
-      
+        {
+          path: "/candidateProfile",
+          element: <CandidateProfile />
+        },
+        {
+          path: "/updateProfile",
+          element: <Updateprofile />
+        },
 
         {
           path: "/test",
@@ -110,16 +130,29 @@ const App = () => {
       element: userMetaData?.userType === 'Business' ? <Business /> : <Navigate to="/" replace={true} />,
       children: [
         {
+          path: '',
+          element: <BusinessDashboard />
+        },
+        {
           path: ':companyId/createJob',
           element: <CreateJobStepForm />
         },
+
         {
           path: 'myJobs/:companyId',
           element: <MyJobs />
         },
         {
+          path: ':jobId/jobApplicants',
+          element: <JobApplicants />
+        },
+        {
           path: 'pricePlans',
           element: <PricePlans />
+        },
+        {
+          path: 'profile',
+          element: <BusinessProfile />
         }
       ]
     },
