@@ -4,6 +4,7 @@ import {
   getJobs,
   getPostedJobs,
   applyJob,
+  getJobApplicants,
 } from "../../controllers/Job/jobController.js";
 import { upload } from "../../configs/multer.js";
 
@@ -17,5 +18,9 @@ jobRoutes.route("/jobs/company/:companyId").get(getPostedJobs);
 jobRoutes
   .route("/jobapplication")
   .post(upload.single("resume"), applyJob);
+
+// get job applicants as per postingId
+jobRoutes.route("/jobapplication/:postingId").get(getJobApplicants);
+
 
 export default jobRoutes;

@@ -125,35 +125,6 @@ export const getPostedJobs = async (req, res) => {
   }
 };
 
-// authenticating if user applied to job earlier
-
-// export const authJobApplication = async (req, res) => {
-//   try {
-//     const { postingId, email, mobile } = req.body;
-
-//     if (!postingId && !email && !mobile) {
-//       res.status(400).json({
-//         status: false,
-//         message: "Incomplete data provided in headers",
-//       });
-//       return
-//     }
-
-//     const auth = jobApplicationModel.find({postingId: postingId, $or : [
-//       {email}, {mobile}
-//     ]})
-
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).json({
-//       status: false,
-//       message: error?.message,
-//     });
-//   }
-// };
-
-//  job application posting
-
 export const applyJob = async (req, res) => {
   try {
     const { postingId, fullName, email, mobile } = req?.body;
@@ -200,6 +171,41 @@ export const applyJob = async (req, res) => {
 
 
 
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: error?.message,
+    });
+  }
+};
+
+
+
+// get all jobs applied posted by a candidate as per postingId
+export const getJobApplicants = async (req, res) => {
+  try {
+    const { postingId } = req?.params;
+
+    const query = { postingId: postingId }; // case insensitive regex search for jobs posted according to company
+
+    if (!postingId) res.status(400).json({ message: "Incorrect Url" });
+
+    const applicants = await jobApplicationModel.find(query);
+
+    if (applicants.length) {
+      res.status(200).json({
+        data: applicants,
+        success: true,
+        message: `Found applicants successfully`,
+      });
+    } else {
+      res.status(200).json({
+        data: applicants,
+        success: false,
+        message: `No job applicants found`,
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(400).json({

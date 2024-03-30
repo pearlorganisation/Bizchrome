@@ -24,13 +24,13 @@ export const uploadFile = async (file) => {
     });
 
     // Delete file from disk storage after successful upload to Cloudinary
-    // fs.unlink(file.path, (err) => {
-    //   if (err) {
-    //     console.error("Error deleting file from disk:", err);
-    //   } else {
-    //     console.log("File deleted from disk:", file.path);
-    //   }
-    // });
+    fs.unlink(file.path, (err) => {
+      if (err) {
+        console.error("Error deleting file from disk:", err);
+      } else {
+        console.log("File deleted from disk:", file.path);
+      }
+    });
 
     return { status: true, result: result };
   } catch (error) {
