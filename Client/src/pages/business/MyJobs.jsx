@@ -14,7 +14,7 @@ const MyJobs = () => {
     return (
         <div className='container mx-auto py-4 font-sans'>
             <div className='font-semibold py-2 '>All Jobs (20)</div>
-            <div className='space-y-3'>
+            <div className='grid gap-3'>
                 {
                     Array.isArray(businessData) && businessData?.length > 0 && businessData?.map(item => {
                         return <Link to={`/business/${item?._id}/jobApplicants`}>

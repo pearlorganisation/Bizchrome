@@ -17,10 +17,28 @@ import { FreeMode, Pagination } from "swiper/modules";
 const Job_in_TopCompanies = () => {
   return (
     <>
-      <div className="flex items-center bg-[#F4F2F6] ">
+      <div className="flex items-center bg-[#F4F2F6] p-2 ">
         <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
+          slidesPerView={1}
+          spaceBetween={10}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            1280: {
+              slidesPerView: 3,
+              spaceBetween: 50,
+            },
+          }}
           freeMode={true}
           pagination={{
             clickable: true,
@@ -42,7 +60,7 @@ const Job_in_TopCompanies = () => {
                 </div>
                 <div className=" py-10">
                   <div className="">
-                    <h1 className="text-xl font-bold md:text-2xl">
+                    <h1 className="text-xl text-left font-bold md:text-2xl">
                       Bajaj Allianz Life Insurance
                     </h1>
                     <div></div>
