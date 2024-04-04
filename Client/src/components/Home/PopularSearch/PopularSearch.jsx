@@ -56,9 +56,9 @@ const PopularSearch = () => {
   ]
 
   return (
-    <div className="grid grid-cols-3 gap-4 container mx-auto py-6">
-      <div className="h-[22rem] rounded-md p-4">
-        <p className={`font-extrabold tracking-widest text-7xl`}>
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 container mx-auto py-6 px-3">
+      <div className="h-[22rem] rounded-md p-4 flex justify-end items-end">
+        <p className={`font-extrabold tracking-widest h-fit text-4xl sm:text-5xl md:text-6xl lg:text-7xl`}>
           Popular Searches on Biz Chrome
         </p>
       </div>
