@@ -5,7 +5,7 @@ import { findLocation } from "../../../actions/Common/findLocationAction";
 const initialState = {
   isFetchLocationDataLoading: false,
   isFetchLocationError: false,
-  locationData: [],
+  locationData: null,
 };
 const locationSlice = createSlice({
   name: "Location",

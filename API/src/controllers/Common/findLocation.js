@@ -7,7 +7,7 @@ export const findLocation = async (req, res) => {
     const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
     let payload = {};
 
-   await fetch(apiUrl)
+    await fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "OK" && data.results.length > 0) {
