@@ -14,8 +14,7 @@ export const findLocation = createAsyncThunk(
       return response?.data;
     } catch (error) {
       console.log("Error in location", error);
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
-
