@@ -6,10 +6,10 @@ import { saveAccessTokenToCookie } from "../../utils/TokenMangement/accessTokenM
 import jwt from "jsonwebtoken";
 import { profileCalculations } from "../../utils/ProfileCalculations/profileCalculations.js";
 
-//Declarations
+// Declarations
 // const jwt = JsonWebTokenError
 
-//Ends here
+// Ends here
 
 export const signUp = async (req, res) => {
   try {
