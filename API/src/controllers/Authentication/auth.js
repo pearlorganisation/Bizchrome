@@ -51,7 +51,9 @@ export const signUp = async (req, res) => {
 export const sendSignUpOtp = async (req, res) => {
   try {
     const { email, mobile } = req.body;
-    const isUserExisted = await userModel.find({ $or : [{email: email}, {mobile: mobile}] });
+    const isUserExisted = await userModel.find({
+      $or: [{ email: email }, { mobile: mobile }],
+    });
     if (isUserExisted.length !== 0) {
       return res.status(200).json({
         message: "User with this email or mobile already exists",
@@ -147,6 +149,30 @@ export const logout = async (req, res) => {
     return res.status(400).json({
       success: false,
       message: `Internal Server Error! ${error.message}`,
+    });
+  }
+};
+
+export const userUpdate = async (req, res) => {
+  try {
+    const { gender, ...rest } = req.body;
+
+    const data = { gender: gender.toUpperCase(), ...rest };
+    console.log(data);
+    let user = await userModel.findByIdAndUpdate(data?._id, data, {
+      new: true,
+    });
+    res.status(200).json({
+      message: "Sucess",
+      status: true,
+      data: user,
+    });
+    //Verify the otp
+    // Deleting the otp from model
+  } catch (error) {
+    res.status(400).json({
+      message: error || "Internal server error",
+      status: false,
     });
   }
 };

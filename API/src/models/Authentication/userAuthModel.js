@@ -8,11 +8,20 @@ const userSchema = new mongoose.Schema(
       minLength: [2, "Name must contain at least 2 characters"],
       maxLength: [15, "Name should contain maximum 15 characters"],
     },
+    firstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
     email: {
       type: String,
       required: [true, "Email is required"],
       trim: true,
       lowercase: true,
+    },
+    profileDescription: {
+      type: String,
     },
     dob: {
       type: Date,
@@ -25,7 +34,7 @@ const userSchema = new mongoose.Schema(
       type: Number,
     },
     location: {
-      type: String,
+      type: Object,
       default: null,
     },
     password: {
@@ -35,7 +44,6 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       default: null,
-      // required:[true,"Gender is required"],
       enum: ["MALE", "FEMALE", "OTHERS"],
     },
     education: {
@@ -43,16 +51,17 @@ const userSchema = new mongoose.Schema(
       degree: { type: String, default: null },
       specialization: { type: String, default: null },
     },
-    experience: [
+    tagLine: {
+      type: String,
+    },
+    skillTags: [
       {
-        jobRole: { type: String, default: null },
-        jobTitle: { type: String, default: null },
-        department: { type: String, default: null },
-        role: { type: String, default: null },
-        company: { type: String, default: null },
-        skills: { type: String, default: null },
-        currentlyWorking: { type: Boolean, default: null },
-        noticePeriod: { type: Number, default: null },
+        type: String,
+      },
+    ],
+    experiences: [
+      {
+        type: Object,
       },
     ],
     userType: {

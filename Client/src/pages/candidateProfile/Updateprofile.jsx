@@ -52,9 +52,11 @@ const Updateprofile = () => {
     }, []);
     const onSubmit = (data) => {
         const { tagline, ...rest } = data
-        const temp = { tagline: jobTags, ...rest }
+        const temp = { skillTags: jobTags, ...rest, location: locationData }
         console.log("data::", temp)
     };
+
+
 
 
 
@@ -105,7 +107,7 @@ const Updateprofile = () => {
                         <input
                             type='number'
                             placeholder="Mobile Number"
-                            {...register('mobileNumber')}
+                            {...register('mobile')}
 
                             className="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
                         />
@@ -118,6 +120,34 @@ const Updateprofile = () => {
 
                             className="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
                         />
+                    </div>
+                    <div className="flex flex-col gap-4 border-b py-4">
+                        <p className="shrink-0 w-32 font-medium">Gender</p>
+                        <div className='flex gap-3'>
+                            {
+                                ['Male', 'Female', 'Others']?.map(item => {
+                                    return <>
+                                        <label className='themeSwitcherTwo border shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-white p-1'>
+                                            <input
+                                                className="peer hidden" type="radio" value={item} id={`${item}`}
+
+                                                {...register("gender", { required: true })}
+                                            // checked={isChecked}
+                                            // onChange={handleCheckboxChange}
+                                            />
+                                            <span
+                                                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium peer-checked:bg-indigo-100
+                                                    }`}
+                                            >
+
+                                                {item}
+                                            </span>
+
+                                        </label>
+                                    </>
+                                })
+                            }
+                        </div>
                     </div>
                     <div className="flex flex-col gap-4 py-4  lg:flex-row">
                         <div className="shrink-0 w-32  sm:py-4">
@@ -219,7 +249,7 @@ const Updateprofile = () => {
                         locationData ? <div className=''>
                             <p className="font-medium mb-1 ">Location</p>
                             <div>
-                                {locationData?.cityName},{locationData?.countryName}
+                                {`${locationData?.cityName} , ${locationData?.countryName}`}
                             </div>
                         </div> : <div>
                             {
@@ -244,7 +274,7 @@ const Updateprofile = () => {
                             {...register('profileDescription')}
 
                             className="w-full rounded-md border bg-white px-2 py-2 outline-none ring-blue-600 focus:ring-1"
-                            name="" id="" cols="30" rows="10"></textarea>
+                            cols="30" rows="10" />
 
                     </div>
                     <div className="flex flex-col gap-4">
