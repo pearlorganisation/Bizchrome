@@ -73,3 +73,22 @@ export const userLogout = createAsyncThunk(
     }
   }
 );
+
+//To login
+export const updateUser = createAsyncThunk(
+  "/updateUser",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await instance.patch("/auth/updateUser", payload, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("log for dispatch--->", response?.data);
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

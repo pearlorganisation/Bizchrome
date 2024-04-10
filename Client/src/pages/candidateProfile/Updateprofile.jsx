@@ -6,10 +6,12 @@ import { MdDelete } from "react-icons/md";
 import { FaLocationCrosshairs } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
 import { findLocation } from '../../features/actions/Common/findLocationAction';
+import { updateUser } from '../../features/actions/Auth/authActions';
 
 const Updateprofile = () => {
     const dispatch = useDispatch()
     const { locationData, isLoading } = useSelector(state => state.location)
+    const { userMetaData } = useSelector(state => state.auth)
     const {
         register,
         handleSubmit,
@@ -20,7 +22,18 @@ const Updateprofile = () => {
         setValue,
         formState: { errors },
     } = useForm({
-        defaultValues: { experiences: [{ companyName: "", designation: '' }] },
+        defaultValues: {
+            experiences: userMetaData?.experiences?.length > 0 ? userMetaData?.experiences : [{ companyName: "", designation: '' }],
+            fullName: userMetaData?.fullName,
+            mobile: userMetaData?.mobile,
+            email: userMetaData?.email,
+            gender: userMetaData?.gender,
+            firstName: userMetaData?.firstName,
+            lastName: userMetaData?.lastName,
+            profileDescription: userMetaData?.profileDescription,
+            tagLine: userMetaData?.tagLine
+
+        },
     });
 
     const { fields, append, remove } = useFieldArray({
@@ -29,7 +42,7 @@ const Updateprofile = () => {
     });
 
 
-    const [jobTags, setJobTags] = useState([])
+    const [jobTags, setJobTags] = useState(userMetaData?.skillTags?.length > 0 ? userMetaData?.skillTags : [])
     const [title, setTitle] = useState('')
 
     const [position, setPosition] = useState({ latitude: null, longitude: null });
@@ -54,6 +67,7 @@ const Updateprofile = () => {
         const { tagline, ...rest } = data
         const temp = { skillTags: jobTags, ...rest, location: locationData }
         console.log("data::", temp)
+        dispatch(updateUser({ ...temp, _id: userMetaData?._id }))
     };
 
 
@@ -125,13 +139,13 @@ const Updateprofile = () => {
                         <p className="shrink-0 w-32 font-medium">Gender</p>
                         <div className='flex gap-3'>
                             {
-                                ['Male', 'Female', 'Others']?.map(item => {
+                                ['MALE', 'FEMALE', 'OTHERS']?.map(item => {
                                     return <>
                                         <label className='themeSwitcherTwo border shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-white p-1'>
                                             <input
                                                 className="peer hidden" type="radio" value={item} id={`${item}`}
 
-                                                {...register("gender", { required: true })}
+                                                {...register("gender")}
                                             // checked={isChecked}
                                             // onChange={handleCheckboxChange}
                                             />
@@ -197,40 +211,38 @@ const Updateprofile = () => {
                 <div className="my-4 w-full space-y-4 border px-4 shadow-xl sm:mx-4 sm:rounded-xl sm:px-4 sm:py-4 md:mx-auto">
 
                     <div className=''>
-                        <div>
+                        <div className='space-y-2'>
                             <p className="font-medium mb-1 ">Skills</p>
-                            <div className="grid grid-cols-2 w-full">
-                                <div className='space-y-2'>
+                            {
+                                jobTags.length > 0 && <div className='flex justify-start items-center flex-wrap gap-3 pb-1'>
                                     {
-                                        jobTags.length > 0 && <div className='flex gap-3 pb-1'>
-                                            {
-                                                jobTags?.map((item, indexToRemove) => {
-                                                    return <div className='px-4 py-1 rounded-3xl bg-indigo-100 border-2 ring-4 ring-indigo-500/40 border-indigo-500 relative group cursor-pointer'    >{item} <span onClick={() => {
-                                                        setJobTags(prev => {
-                                                            const temp = jobTags.filter((_, idx) => idx != indexToRemove)
-                                                            return temp
-                                                        })
-                                                    }} className='hidden group-hover:block absolute bg-red-400 border-2  border-red-500 rounded-full text-white top-[-0.6rem] right-0'><IoMdClose /></span></div>
+                                        jobTags?.map((item, indexToRemove) => {
+                                            return <div className='px-4 py-1 rounded-3xl bg-indigo-100 border-2 ring-4 ring-indigo-500/40 border-indigo-500 relative group cursor-pointer'    >{item} <span onClick={() => {
+                                                setJobTags(prev => {
+                                                    const temp = jobTags.filter((_, idx) => idx != indexToRemove)
+                                                    return temp
                                                 })
-                                            }
-                                        </div>
+                                            }} className='hidden group-hover:block absolute bg-red-400 border-2  border-red-500 rounded-full text-white top-[-0.6rem] right-0'><IoMdClose /></span></div>
+                                        })
                                     }
-                                    <div className='flex justify-start  gap-3 '>
+                                </div>
+                            }
+                            <div className="grid grid-cols-2 w-full">
+                                <div className='flex justify-start  gap-3 '>
 
-                                        <input
-                                            type="text"
-                                            onChange={(e) => { setTitle(e.target.value) }}
-                                            value={title}
-                                            placeholder=''
-                                            className="w-full focus:ring-4 ring-indigo-500/30 px-3 py-2 text-gray-500 bg-transparent outline-none border-2 focus:border-indigo-500 transition-all shadow-sm rounded-lg"
-                                        />
-                                        <button type='button' onClick={() => {
-                                            title.length != 0 ? setJobTags(prev => {
-                                                return [...prev, title]
-                                            }) : null
-                                            setTitle('')
-                                        }} className='px-4 py-2 rounded-lg bg-indigo-500 text-white'><IoMdAdd /></button>
-                                    </div>
+                                    <input
+                                        type="text"
+                                        onChange={(e) => { setTitle(e.target.value) }}
+                                        value={title}
+                                        placeholder=''
+                                        className="w-full focus:ring-4 ring-indigo-500/30 px-3 py-2 text-gray-500 bg-transparent outline-none border-2 focus:border-indigo-500 transition-all shadow-sm rounded-lg"
+                                    />
+                                    <button type='button' onClick={() => {
+                                        title.length != 0 ? setJobTags(prev => {
+                                            return [...prev, title]
+                                        }) : null
+                                        setTitle('')
+                                    }} className='px-4 py-2 rounded-lg bg-indigo-500 text-white'><IoMdAdd /></button>
                                 </div>
 
                             </div>

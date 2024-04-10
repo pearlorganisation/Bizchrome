@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   generateSignUpOTP,
   signUp,
+  updateUser,
   userLogin,
   userLogout,
 } from "../actions/Auth/authActions";
@@ -112,6 +113,26 @@ const authSlice = createSlice({
       toast.success("Logout Successfully");
     });
     builder.addCase(userLogout.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+
+      //some toast msg will come here
+      console.log("Action payla", action);
+      toast.error(action?.payload || "Please try again");
+    });
+
+    builder.addCase(updateUser.pending, (state, action) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isUserLoggedIn = true;
+      state.userMetaData = action?.payload?.data;
+      toast.success(action?.payload?.message);
+    });
+    builder.addCase(updateUser.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
 

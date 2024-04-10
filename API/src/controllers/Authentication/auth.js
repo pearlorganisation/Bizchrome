@@ -171,7 +171,7 @@ export const userUpdate = async (req, res) => {
     // Deleting the otp from model
   } catch (error) {
     res.status(400).json({
-      message: error || "Internal server error",
+      message: error?.message || "Internal server error",
       status: false,
     });
   }
