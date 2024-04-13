@@ -81,18 +81,7 @@ const App = () => {
           path: "/pricing",
           element: <Pricing />,
         },
-        {
-          path: "/dashboard",
 
-          element: isUserLoggedIn ? (
-            <>
-              {" "}
-              <h2>Logged in</h2>{" "}
-            </>
-          ) : (
-            <h2>Not logged in</h2>
-          ),
-        },
 
         // job posting path
         {
@@ -109,11 +98,11 @@ const App = () => {
 
         {
           path: "/candidateProfile",
-          element: <CandidateProfile />
+          element: isUserLoggedIn && userMetaData?.userType === 'Candidate' ? <CandidateProfile /> : <Navigate to='/' />,
         },
         {
           path: "/updateProfile",
-          element: <Updateprofile />
+          element: isUserLoggedIn && userMetaData?.userType === 'Candidate' ? <Updateprofile /> : <Navigate to='/' />
         },
 
         {

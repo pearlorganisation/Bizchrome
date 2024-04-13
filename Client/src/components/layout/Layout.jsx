@@ -7,6 +7,7 @@ import Footer from "./Footer/Footer";
 const Layout = () => {
   return (
     <div>
+
       <Header />
       <Outlet />
       <Footer />

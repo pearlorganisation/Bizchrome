@@ -21,7 +21,32 @@ const JobApplicants = () => {
                         <p className="text-gray-600 mt-2">Extend and automate your workflow by using integrations for your favorite tools.</p>
                     </div>
                     {
-                        isLoading ? <div>Loading...</div> : <ul className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+
+                        isLoading ? <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                            {
+                                Array(6).fill(true).map(item => {
+                                    return <div class="border rounded-lg animate-pulse">
+                                        <div class="flex items-start justify-between p-4">
+                                            <div class="space-y-2">
+                                                <div class="shrink-0">
+                                                    <div class="relative flex h-12 w-12 items-center justify-center rounded-full bg-gray-200">
+
+                                                    </div>
+                                                </div>
+                                                <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+                                                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                                                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+
+                                            </div>
+                                            <div class="h-8 bg-gray-200 rounded mb-1 w-1/4"></div>
+                                        </div>
+                                        <div class="py-5 px-4 border-t text-right">
+                                            <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+                                        </div>
+                                    </div>
+                                })
+                            }
+                        </div> : <ul className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                             {
                                 Array.isArray(jobApplicants) && jobApplicants.length > 0 ?
                                     jobApplicants?.map((item, idx) => (
@@ -62,9 +87,9 @@ const JobApplicants = () => {
                         </ul>
                     }
 
-                </div>
-            </section>
-        </div>
+                </div >
+            </section >
+        </div >
     )
 }
 

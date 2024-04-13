@@ -70,6 +70,15 @@ const Updateprofile = () => {
         dispatch(updateUser({ ...temp, _id: userMetaData?._id }))
     };
 
+    const [avatarImage, setAvatarImage] = useState(null)
+
+    const setAvatar = (e) => {
+        console.log(e.target.files);
+        const avatarUrl = URL.createObjectURL(e.target.files[0])
+        setAvatarImage(avatarUrl)
+
+    }
+
 
 
 
@@ -83,10 +92,8 @@ const Updateprofile = () => {
                         <p className="font-medium">Profile Details</p>
                         <p className="text-sm text-gray-600">Edit your profile details</p>
                     </div>
-                    <button className="mr-2 rounded-lg border-2 px-4 py-2 font-medium text-gray-500 sm:inline focus:outline-none focus:ring hover:bg-gray-200">
-                        Cancel
-                    </button>
-                    <button className="rounded-lg border-2 border-transparent bg-blue-600 px-4 py-2 font-medium text-white sm:inline focus:outline-none focus:ring hover:bg-blue-700">
+
+                    <button type='submit' className="rounded-lg border-2 border-transparent bg-indigo-500 px-4 py-2 font-medium text-white sm:inline focus:outline-none focus:ring hover:bg-indigo-700">
                         Save
                     </button>
                 </div>
@@ -170,14 +177,14 @@ const Updateprofile = () => {
                         </div>
                         <div className="flex h-56 w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-gray-300 p-5 text-center">
                             <img
-                                src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
+                                src={avatarImage}
                                 className="h-16 w-16 rounded-full"
                             />
                             <p className="text-sm text-gray-600">
                                 Drop your desired image file here to start the upload
                             </p>
                             <input
-                                {...register('profilePic')}
+                                {...register('profilePic', { onChange: (e) => { setAvatar(e) } })}
 
                                 type="file"
                                 className="max-w-full rounded-lg px-2 font-medium text-blue-600 outline-none ring-blue-600 focus:ring-1"

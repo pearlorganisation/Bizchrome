@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const CandidateProfile = () => {
 
@@ -54,9 +55,9 @@ const CandidateProfile = () => {
                         </div>
                         <div className="space-y-2">
 
-                            <button className="inline-flex bg-indigo-500 text-white items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-indigo-500/90 h-10 px-4 py-2 w-full">
+                            <Link to='/updateProfile' className="inline-flex bg-indigo-500 text-white items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-indigo-500/90 h-10 px-4 py-2 w-full">
                                 Manage Profile
-                            </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-span-2 space-y-6">

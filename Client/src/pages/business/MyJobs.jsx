@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 
 const MyJobs = () => {
     const dispatch = useDispatch()
-    const { businessData } = useSelector(state => state.business)
+    const { isLoading, businessData } = useSelector(state => state.business)
     const { companyId } = useParams()
     useEffect(() => {
         dispatch(getAllJobById({ companyId }))
@@ -16,7 +16,20 @@ const MyJobs = () => {
             <div className='font-semibold py-2 '>All Jobs (20)</div>
             <div className='grid gap-3'>
                 {
-                    Array.isArray(businessData) && businessData?.length > 0 && businessData?.map(item => {
+                    isLoading ? <div class='animate-pulse flex justify-between bg-blue-100 px-6 py-4 rounded-md place-items-center'>
+                        <div>
+                            <div class='h-6 bg-gray-200 rounded w-1/3'></div>
+                            <div class="mt-1">
+                                <div class='inline-block h-4 bg-gray-200 rounded w-1/4 mr-1'></div>
+                                <div class='inline-block h-4 bg-gray-200 rounded w-1/4 mr-1'></div>
+                                <div class='inline-block h-4 bg-gray-200 rounded w-1/4'></div>
+                            </div>
+                        </div>
+
+                        <div class='rounded-lg bg-white px-4 py-2 grid place-items-center cursor-pointer font-medium'>
+                            <div class='h-4 bg-gray-200 rounded w-1/2'></div>
+                        </div>
+                    </div> : Array.isArray(businessData) && businessData?.length > 0 && businessData?.map(item => {
                         return <Link to={`/business/${item?._id}/jobApplicants`}>
 
                             <div className='flex justify-between bg-blue-100 px-6 py-4 rounded-md place-items-center'>
