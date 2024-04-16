@@ -1,0 +1,36 @@
+.icons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .icon {
+    flex: 0 0 auto;
+    padding: 5px;
+    display: block;
+    fill: #036e39;
+    stroke: #036e39;
+  }
+  
+  .icon svg { 
+    --size: 15px;
+    fill: inherit;
+    min-height: var(--size);
+    min-width:  var(--size);
+  }
+
+/* no scroll bar css below */
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+input[type="checkbox"], input[type="radio"]{
+  cursor:pointer;
+}

@@ -2,7 +2,7 @@ import React from "react";
 
 import { useForm } from "react-hook-form";
 
-const OtpVarfication = () => {
+const OtpVerification = () => {
   const {
     register,
     handleSubmit,
@@ -84,4 +84,4 @@ const OtpVarfication = () => {
   );
 };
 
-export default OtpVarfication;
+export default OtpVerification;

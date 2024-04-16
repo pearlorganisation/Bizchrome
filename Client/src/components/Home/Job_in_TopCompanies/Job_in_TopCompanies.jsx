@@ -9,13 +9,17 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
+// Import component styles
+import "./Job_in_TopCompanies.css";
+
 // import required modules
 import { FreeMode, Pagination } from "swiper/modules";
 const Job_in_TopCompanies = () => {
   return (
     <>
-      <div className="h-dvh flex items-center bg-[#F4F2F6] ">
+      <div className="flex items-center bg-[#F4F2F6] p-2 ">
         <Swiper
+<<<<<<< HEAD
           breakpoints={{
             320: {
               slidesPerView: 1, // Show 1 slide per view on screens wider than or equal to 320px (typically mobile phones)
@@ -28,6 +32,34 @@ const Job_in_TopCompanies = () => {
             },
           }}
           // Other Swiper settings...
+=======
+          slidesPerView={1}
+          spaceBetween={10}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            1280: {
+              slidesPerView: 3,
+              spaceBetween: 50,
+            },
+          }}
+          freeMode={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[FreeMode, Pagination]}
+          className="mySwiper"
+>>>>>>> 8a85e1c3637e32823b97e02b0a30c815e1c43270
         >
           <SwiperSlide className="F4F2F6 w-fit flex items-center justify-center group py-6">
             <div className="w-[400px] h-[25rem]  bg-[#fff] rounded-lg hover:cursor-pointer hover:shadow-lg  mx-auto transition-all">
@@ -42,7 +74,7 @@ const Job_in_TopCompanies = () => {
                 </div>
                 <div className=" py-10">
                   <div className="">
-                    <h1 className="text-xl font-bold md:text-2xl">
+                    <h1 className="text-xl text-left font-bold md:text-2xl">
                       Bajaj Allianz Life Insurance
                     </h1>
                     <div></div>

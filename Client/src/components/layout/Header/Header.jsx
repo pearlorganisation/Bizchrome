@@ -1,186 +1,23 @@
+import { useState, useRef, useEffect } from "react"
+import { Link } from "react-router-dom"
 import logo from "../../../assets/Images/Biz-chrome-logo.png";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import LoginOptionsModal from "../../Modals/LoginOptionsModal";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../../../features/actions/Auth/authActions";
 
-const dropdownNavs = [
-  {
-    label: "Jobs",
-    navs: [
-      {
-        title: "Work From Home Jobs",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-      {
-        title: "Part Time Jobs",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-      {
-        title: "Freshers Jobs",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-      {
-        title: "Full Time Jobs",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-      {
-        title: "International Jobs",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-    ],
-  },
-  {
-    label: "Other",
-    navs: [
-      {
-        title: "Job By City",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-      {
-        title: "Job By Department",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-      {
-        title: "Job By Company",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-      {
-        title: "Job By Qualification",
-        desc: "Duis aute irure dolor in reprehenderit",
-        path: "javascript:void(0)",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
-          </svg>
-        ),
-      },
-    ],
-  },
-];
+// Profile Dropdown
+const ProfileDropDown = (props) => {
+    const dispatch = useDispatch()
+    const [state, setState] = useState(false)
+    const profileRef = useRef()
 
-const Header = () => {
-  const [state, setState] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [drapdownState, setDrapdownState] = useState({
-    isActive: false,
-    idx: null,
-  });
+    const navigation = [
+        { title: "Dashboard", path: "javascript:void(0)" },
+        { title: "Profile", path: "/candidateProfile" },
 
-  // Replace javascript:void(0) paths with your paths
-  const navigation = [
-    {
-      title: "Jobs",
-      path: "javascript:void(0)",
-      isDrapdown: true,
-      navs: dropdownNavs,
-    },
-    { title: "Blog", path: "javascript:void(0)", isDrapdown: false },
-    { title: "Services", path: "javascript:void(0)", isDrapdown: false },
-    { title: "How We Works", path: "javascript:void(0)", isDrapdown: false },
-    { title: "Contact", path: "javascript:void(0)", isDrapdown: false },
-  ];
+    ]
 
-  useEffect(() => {
-    document.onclick = (e) => {
-      const target = e.target;
-      if (!target.closest(".nav-menu"))
-        setDrapdownState({ isActive: false, idx: null });
-    };
-  }, []);
 
+<<<<<<< HEAD
   return (
     <>
       <nav
@@ -329,46 +166,137 @@ const Header = () => {
                   type="button"
                   class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   onClick={() => setIsModalOpen(true)}
+=======
+    useEffect(() => {
+        const handleDropDown = (e) => {
+            if (!profileRef.current.contains(e.target)) setState(false)
+        }
+        document.addEventListener('click', handleDropDown)
+    }, [])
+
+    return (
+        <div className={`relative ${props.class} z-50`}>
+            <div className="flex items-center space-x-4">
+                <button ref={profileRef} className="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 lg:focus:ring-indigo-600"
+                    onClick={() => setState(!state)}
+>>>>>>> 8a85e1c3637e32823b97e02b0a30c815e1c43270
                 >
-                  Login / Register
+                    <img
+                        src="https://randomuser.me/api/portraits/men/46.jpg"
+                        className="w-full h-full rounded-full"
+                    />
                 </button>
-              </div>
+                <div className="lg:hidden">
+                    <span className="block">Micheal John</span>
+                    <span className="block text-sm text-gray-500">john@gmail.com</span>
+                </div>
+            </div>
+            <ul className={`bg-white top-12 right-0 mt-5 space-y-5 lg:absolute lg:border lg:rounded-md lg:text-sm lg:w-52 lg:shadow-md lg:space-y-0 lg:mt-0 ${state ? '' : 'lg:hidden'}`}>
+                {
+                    navigation.map((item, idx) => (
+                        <li>
+                            <Link key={idx} className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5" to={item.path}>
+                                {item.title}
+                            </Link>
+                        </li>
+                    ))
+                }
+                <li>
+                    <button
+                        onClick={() => {
+                            dispatch(userLogout())
+                        }}
+                        className="block text-gray-600 w-full text-left lg:hover:bg-gray-50 lg:p-2.5">
+                        Log out
+                    </button>
+                </li>
             </ul>
-          </div>
         </div>
-      </nav>
-      {state ? (
-        <div
-          className="z-10 fixed top-0 w-screen h-screen bg-black/20 backdrop-blur-sm md:hidden"
-          onClick={() => setState(false)}
-        ></div>
-      ) : (
-        ""
-      )}
-      <LoginOptionsModal
-        setIsModalOpen={setIsModalOpen}
-        isModalOpen={isModalOpen}
-      />
-    </>
-  );
-};
-
-export default Header;
-
-{
-  /* <div class="hidden lg:block">
-          <button
-            type="button"
-            class="rounded-md bg-[#3ACABE] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#27b0a5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            onClick={() => setIsModalOpen(true)}
-          >
-            Login / Register
-          </button>
-        </div>
-
-
-<LoginOptonsModal
-setIsModalOpen={setIsModalOpen}
-isModalOpen={isModalOpen}
-/> */
+    )
 }
+
+const TempHeader = () => {
+
+    const [menuState, setMenuState] = useState(false)
+    const { isUserLoggedIn, userMetaData } = useSelector((store) => store.auth);
+    const dispatch = useDispatch()
+
+    // Replace javascript:void(0) path with your path
+    const navigation = [
+        { title: "JOBS", path: "#" },
+        { title: "BLOGS", path: "#" },
+        { title: "SERVICES", path: "#" },
+        { title: "HOW WE WORKS", path: "#" },
+        { title: "CONTACT", path: "contact" },
+    ]
+    return (
+        <nav className="bg-white border-b">
+            <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
+                <div className="flex-none lg:flex-initial">
+                    <Link to="/">
+                        <img src={logo} alt="logo" height={39} width={65} />
+                    </Link>
+                </div>
+                <div className="flex-1 flex items-center justify-between">
+                    <div className={`bg-white absolute z-20 w-full top-16 left-0 p-4 border-b lg:static lg:block lg:border-none ${menuState ? '' : 'hidden'}`}>
+                        <ul className="mt-12 font-semibold font-sans space-y-5 lg:flex lg:space-x-6 lg:space-y-0 lg:mt-0">
+                            {
+                                navigation.map((item, idx) => (
+                                    <li key={idx} className="text-gray-600 hover:text-gray-900">
+                                        <a href={item.path}>
+                                            {item.title}
+                                        </a>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                        <ProfileDropDown
+                            class="mt-5 pt-5 border-t lg:hidden"
+                        />
+                    </div>
+
+                    <div className="w-full">
+                        {
+                            !isUserLoggedIn ? <div className='flex-1 w-full items-center justify-end gap-x-6 space-y-3 md:flex md:space-y-0'>
+                                <span>
+                                    <Link to="/signIn" className="block py-3 text-center text-gray-700 hover:text-indigo-600 border rounded-lg md:border-none">
+                                        Log In
+                                    </Link>
+                                </span>
+                                <span>
+                                    <Link to="/signUp" className="block py-3 px-4 font-medium text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow md:inline">
+                                        Sign Up
+                                    </Link>
+                                </span>
+                            </div> : <div className="flex-1 flex items-center justify-end space-x-2 sm:space-x-6">
+
+                                <ProfileDropDown
+                                    class="hidden lg:block"
+                                />
+                                <button
+                                    className="outline-none text-gray-400 block lg:hidden"
+                                    onClick={() => setMenuState(!menuState)}
+                                >
+                                    {
+                                        menuState ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                            </svg>
+                                        )
+                                    }
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+        </nav>
+    )
+}
+export default TempHeader
